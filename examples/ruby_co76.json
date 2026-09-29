@@ -1,0 +1,64 @@
+{
+  "_notes": [
+    "Real ALMA data: PLCK_G244.8+54.9 ('the Ruby', PJ105353), CO(7-6) at z = 3.005, 201.4 GHz.",
+    "The dataset is the pyuvimage test export (8 x 46.5 km/s channels, 81k visibilities, DATA column, not continuum-subtracted).",
+    "Caveats for interpreting the fit, not for running it:",
+    "  - the source is a strongly lensed Einstein ring ~1.6 arcsec across; pyuvkin has no lens model, so a disc is only a morphological stand-in;",
+    "  - the ~37 mJy continuum is still in the data (mstransform used douvcontsub=False);",
+    "  - the 8 channels cover v = -18..+308 km/s about the line, i.e. only the red half (the CASA mom1 spans -440..+640 km/s).",
+    "For a real kinematic test, re-export the full 12 km/s window (~/Work/ALMA_PASSAGES/Ruby_CO7-6_CI/Ruby_CO7-6_12kms.ms.tar)",
+    "after uvcontsub, with casa_export.py inside CASA, then point 'dataset' at that .npz and set velocity_window_kms to [-600, 700].",
+    "Paths are relative to this file. Keys starting with '_' are ignored by pyuvkin."
+  ],
+
+  "dataset": "../../pyuvimage/testing_data/Ruby_CO7-6/Ruby_CO7-6_48kms.npz",
+  "out": "ruby_co76_out",
+  "noise": "keep",
+
+  "spectral": {
+    "rest_frequency_ghz": 806.651806,
+    "redshift": 3.005,
+    "frame": "TOPOCENT"
+  },
+  "velocity_window_kms": null,
+
+  "fov": 4.0,
+  "pixel_scale": "auto",
+  "oversample": 2,
+  "image_centre": [2.0, -2.45],
+  "_image_centre_note": "ring centre in [dRA, dDec] arcsec from the phase centre; checked on the dirty image (CASA mom0 peak is at dRA +2.1, dDec -2.8)",
+  "primary_beam": {"enabled": true, "pb_factor": 1.13},
+
+  "model": {
+    "backend": "thindisk",
+    "rotation_curve": "arctan",
+    "options": {}
+  },
+  "surface_brightness": {"type": "analytic"},
+
+  "priors": {
+    "centre_ra":           {"type": "Uniform",    "lower": -0.5,  "upper": 0.5},
+    "centre_dec":          {"type": "Uniform",    "lower": -0.5,  "upper": 0.5},
+    "v_sys":               {"type": "Uniform",    "lower": -300,  "upper": 300},
+    "intensity":           {"type": "LogUniform", "lower": 1.0,   "upper": 200.0},
+    "scale_radius":        {"type": "Uniform",    "lower": 0.1,   "upper": 1.5},
+    "inclination":         {"type": "Uniform",    "lower": 10,    "upper": 80},
+    "phi":                 {"type": "Uniform",    "lower": -90,   "upper": 170},
+    "turnover_radius":     {"type": "Uniform",    "lower": 0.05,  "upper": 1.0},
+    "maximum_velocity":    {"type": "Uniform",    "lower": 50,    "upper": 600},
+    "velocity_dispersion": {"type": "Uniform",    "lower": 10,    "upper": 250}
+  },
+
+  "search": {
+    "method": "lbfgs",
+    "start": "centre",
+    "restarts": 4,
+    "maxiter": 500,
+    "number_of_cores": 1
+  },
+  "_search_note": "for posteriors replace search with {\"method\": \"nautilus\", \"n_live\": 200, \"number_of_cores\": 4}",
+
+  "write_cubes": true,
+  "write_plots": true,
+  "n_plot_channels": 8
+}

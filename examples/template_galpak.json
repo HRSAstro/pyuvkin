@@ -1,0 +1,64 @@
+{
+  "_notes": [
+    "GalPaK3D backend template (analytic surface brightness only — no freeform).",
+    "Install: pip install galpak==1.34.0. JSON does not allow // comments — use _keys for notes.",
+    "Copy this file, set dataset/out/spectral/priors, then: pyuvkin fit template_galpak.json"
+  ],
+
+  "dataset": "path/to/visibilities.npz",
+  "out": "galpak_fit_out",
+  "noise": "difference",
+
+  "spectral": {
+    "rest_frequency_ghz": 230.538,
+    "redshift": 0.0,
+    "frame": "TOPOCENT"
+  },
+  "velocity_window_kms": null,
+
+  "fov": 10.0,
+  "pixel_scale": "auto",
+  "oversample": 2,
+  "image_centre": [0, 0],
+  "_image_centre_note": "source offset [dRA, dDec] arcsec from the phase centre",
+  "primary_beam": {"enabled": true, "pb_factor": 1.13},
+
+  "model": {
+    "backend": "galpak",
+    "rotation_curve": "arctan",
+    "options": {
+      "aspect": 0.15,
+      "flux_profile": "exponential",
+      "thickness_profile": "gaussian",
+      "dispersion_profile": "thick"
+    }
+  },
+  "_model_note": "aspect = scale height / half-light radius (GalPaK default 0.15; 0.05 ~ thin disc). At default aspect, velocity_dispersion is the constant linewidth part; GalPaK also adds h_z v / r mixing. rotation_curve: arctan|tanh|exponential|isothermal",
+  "surface_brightness": {"type": "analytic"},
+  "_surface_brightness_note": "galpak does not support freeform maps",
+
+  "priors": {
+    "centre_ra":           {"type": "Uniform",    "lower": -0.5,  "upper": 0.5},
+    "centre_dec":          {"type": "Uniform",    "lower": -0.5,  "upper": 0.5},
+    "v_sys":               {"type": "Uniform",    "lower": -100,  "upper": 100},
+    "intensity":           {"type": "LogUniform", "lower": 0.1,   "upper": 200.0},
+    "scale_radius":        {"type": "Uniform",    "lower": 0.05,  "upper": 3.0},
+    "inclination":         {"type": "Uniform",    "lower": 10,    "upper": 80},
+    "phi":                 {"type": "Uniform",    "lower": -90,   "upper": 170},
+    "turnover_radius":     {"type": "Uniform",    "lower": 0.05,  "upper": 3.0},
+    "maximum_velocity":    {"type": "Uniform",    "lower": 50,    "upper": 400},
+    "velocity_dispersion": {"type": "Uniform",    "lower": 5,     "upper": 150}
+  },
+
+  "search": {
+    "method": "lbfgs",
+    "start": "centre",
+    "restarts": 4,
+    "maxiter": 500
+  },
+  "_search_note": "for posteriors: {\"method\": \"nautilus\", \"n_live\": 200, \"number_of_cores\": 4}",
+
+  "write_cubes": true,
+  "write_plots": true,
+  "n_plot_channels": 8
+}

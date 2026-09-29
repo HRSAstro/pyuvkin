@@ -1,0 +1,63 @@
+{
+  "_notes": [
+    "KinMS backend template (Monte Carlo cloudlets; supports freeform SB and finite thickness).",
+    "Install: pip install 'kinms>=3.0.14'. Likelihood is noisy — prefer a sampler, not lbfgs/bfgs.",
+    "JSON does not allow // comments — use _keys for notes.",
+    "Copy this file, set dataset/out/spectral/priors, then: pyuvkin fit template_kinms.json"
+  ],
+
+  "dataset": "path/to/visibilities.npz",
+  "out": "kinms_fit_out",
+  "noise": "difference",
+
+  "spectral": {
+    "rest_frequency_ghz": 230.538,
+    "redshift": 0.0,
+    "frame": "TOPOCENT"
+  },
+  "velocity_window_kms": null,
+
+  "fov": 10.0,
+  "pixel_scale": "auto",
+  "oversample": 2,
+  "image_centre": [0, 0],
+  "_image_centre_note": "source offset [dRA, dDec] arcsec from the phase centre",
+  "primary_beam": {"enabled": true, "pb_factor": 1.13},
+
+  "model": {
+    "backend": "kinms",
+    "rotation_curve": "arctan",
+    "options": {
+      "n_samples": 500000,
+      "scale_height_arcsec": 0.1,
+      "seed": 1
+    }
+  },
+  "_model_note": "more n_samples → smoother but slower. scale_height_arcsec 0 = thin. freeform also accepts clouds_per_pixel, cloud_seed, vlos_seed. rotation_curve: arctan|tanh|exponential|isothermal (no rings)",
+  "surface_brightness": {"type": "analytic"},
+  "_surface_brightness_note": "analytic: exponential disc. freeform: omit intensity/scale_radius priors (morphology from moment map)",
+
+  "priors": {
+    "centre_ra":           {"type": "Uniform",    "lower": -0.5,  "upper": 0.5},
+    "centre_dec":          {"type": "Uniform",    "lower": -0.5,  "upper": 0.5},
+    "v_sys":               {"type": "Uniform",    "lower": -100,  "upper": 100},
+    "intensity":           {"type": "LogUniform", "lower": 0.1,   "upper": 200.0},
+    "scale_radius":        {"type": "Uniform",    "lower": 0.05,  "upper": 3.0},
+    "inclination":         {"type": "Uniform",    "lower": 10,    "upper": 80},
+    "phi":                 {"type": "Uniform",    "lower": -90,   "upper": 170},
+    "turnover_radius":     {"type": "Uniform",    "lower": 0.05,  "upper": 3.0},
+    "maximum_velocity":    {"type": "Uniform",    "lower": 50,    "upper": 400},
+    "velocity_dispersion": {"type": "Uniform",    "lower": 5,     "upper": 150}
+  },
+
+  "search": {
+    "method": "nautilus",
+    "n_live": 200,
+    "number_of_cores": 4
+  },
+  "_search_note": "KinMS likelihood is stochastic — use nautilus/dynesty/emcee. Avoid lbfgs/bfgs",
+
+  "write_cubes": true,
+  "write_plots": true,
+  "n_plot_channels": 8
+}

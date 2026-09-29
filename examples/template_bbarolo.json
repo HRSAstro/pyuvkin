@@ -1,0 +1,65 @@
+{
+  "_notes": [
+    "BBarolo (pyBBarolo GalMod) backend template.",
+    "Supports freeform surface brightness and free tilted rings (rotation_curve: rings).",
+    "Install: see docs/install-bbarolo.md. JSON does not allow // comments — use _keys for notes.",
+    "Copy this file, set dataset/out/spectral/priors, then: pyuvkin fit template_bbarolo.json"
+  ],
+
+  "dataset": "path/to/visibilities.npz",
+  "out": "bbarolo_fit_out",
+  "noise": "difference",
+
+  "spectral": {
+    "rest_frequency_ghz": 230.538,
+    "redshift": 0.0,
+    "frame": "TOPOCENT"
+  },
+  "velocity_window_kms": null,
+
+  "fov": 10.0,
+  "pixel_scale": "auto",
+  "oversample": 2,
+  "image_centre": [0, 0],
+  "_image_centre_note": "source offset [dRA, dDec] arcsec from the phase centre",
+  "primary_beam": {"enabled": true, "pb_factor": 1.13},
+
+  "model": {
+    "backend": "bbarolo",
+    "rotation_curve": "rings",
+    "options": {
+      "n_rings": 6,
+      "rmax": 5.0,
+      "scale_height_arcsec": 0.1,
+      "free": ["vrot", "inclination", "phi", "velocity_dispersion"],
+      "twostage": true,
+      "regtype": "auto",
+      "adrift": false
+    }
+  },
+  "_model_note": "for a parametric curve use rotation_curve: arctan|tanh|exponential|isothermal and drop n_rings/free/twostage; set maximum_velocity + turnover_radius priors instead of vrot",
+  "surface_brightness": {"type": "freeform"},
+  "_surface_brightness_note": "freeform: morphology from uv-plane moment map (omit intensity/scale_radius priors). analytic: exponential disc — add those priors",
+
+  "priors": {
+    "centre_ra":           {"type": "Uniform", "lower": -0.5,  "upper": 0.5},
+    "centre_dec":          {"type": "Uniform", "lower": -0.5,  "upper": 0.5},
+    "v_sys":               {"type": "Uniform", "lower": -100,  "upper": 100},
+    "inclination":         {"type": "Uniform", "lower": 10,    "upper": 80},
+    "phi":                 {"type": "Uniform", "lower": -90,   "upper": 170},
+    "velocity_dispersion": {"type": "Uniform", "lower": 5,     "upper": 150},
+    "vrot":                {"type": "Uniform", "lower": 50,    "upper": 400}
+  },
+  "_priors_note": "one prior per base name broadcasts to every ring; override with vrot_3 etc.",
+
+  "search": {
+    "method": "lbfgs",
+    "start": "bbarolo",
+    "restarts": 4
+  },
+  "_search_note": "start=bbarolo|fitmod3d runs FitMod3D on the dirty cube then seeds uv-plane L-BFGS. Prefer nautilus/dynesty when many rings are free. rings defaults: eps=1, gtol=2.5e-3*n_rings",
+
+  "write_cubes": true,
+  "write_plots": true,
+  "n_plot_channels": 8
+}

@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: pyuvkin
+Version: 0.1.0
+Summary: Kinematic modelling of interferometric spectral-line data by forward modelling in the uv-plane
+Author: Hannah Stacey
+License: MIT
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: astropy
+Requires-Dist: matplotlib
+Requires-Dist: autofit
+Requires-Dist: autogalaxy
+Requires-Dist: autoarray
+Requires-Dist: pyuvimage
+Requires-Dist: corner
+Provides-Extra: kinms
+Requires-Dist: kinms; extra == "kinms"
+Provides-Extra: galpak
+Requires-Dist: galpak==1.34.0; extra == "galpak"
+Provides-Extra: jax
+Requires-Dist: jax; extra == "jax"
+Requires-Dist: nufftax<0.7.0,>=0.6.1; extra == "jax"
+Provides-Extra: ms
+Requires-Dist: python-casacore; extra == "ms"
+Provides-Extra: all
+Requires-Dist: kinms; extra == "all"
+Requires-Dist: galpak==1.34.0; extra == "all"

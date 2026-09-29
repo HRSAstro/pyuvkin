@@ -1,0 +1,52 @@
+{
+  "dataset": null,
+  "out": "pyuvkin_out",
+  "spw": null,
+  "channels": null,
+  "velocity_window_kms": null,
+  "noise": "keep",
+  "spectral": {
+    "rest_frequency_ghz": null,
+    "redshift": null,
+    "reference_frequency_ghz": null,
+    "frame": null
+  },
+  "fov": null,
+  "pixel_scale": "auto",
+  "oversample": 2,
+  "n_pixels": null,
+  "render_oversample": 1,
+  "image_centre": [
+    0.0,
+    0.0
+  ],
+  "transformer": "auto",
+  "primary_beam": {
+    "enabled": true,
+    "dish_diameter_m": null,
+    "pb_factor": 1.13
+  },
+  "model": {
+    "backend": "thindisk",
+    "rotation_curve": "arctan",
+    "options": {}
+  },
+  "surface_brightness": {
+    "type": "analytic",
+    "map_fits": null,
+    "uncertainty_fits": null,
+    "map_units": "jy_per_pixel_per_channel",
+    "snr_threshold": 0.5,
+    "pyuvimage": {},
+    "morphology_samples": 0
+  },
+  "priors": {},
+  "truth": null,
+  "search": {
+    "method": "nautilus",
+    "number_of_cores": 1
+  },
+  "write_cubes": true,
+  "write_plots": true,
+  "n_plot_channels": 12
+}

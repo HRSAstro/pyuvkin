@@ -1,0 +1,7 @@
+{
+  "phase_centre_ra_deg": 150.0,
+  "phase_centre_dec_deg": 2.0,
+  "dish_diameter_m": 12.0,
+  "telescope": "MOCK",
+  "noise_estimate": "mock"
+}
