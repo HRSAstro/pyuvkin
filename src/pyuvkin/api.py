@@ -314,6 +314,7 @@ def run(settings_or_path, **overrides) -> RunResult:
     fit_result = _run_search(
         search_cfg, model, analysis, name=model_cfg["backend"], tag="stage1",
         tilted_rings=tilted_rings, n_rings=n_rings,
+        discrete_clouds=model_cfg["backend"] in ("bbarolo", "kinms"),
     )
     logger.info(
         "stage 1 finished after %d likelihood evaluations",
@@ -368,6 +369,7 @@ def run(settings_or_path, **overrides) -> RunResult:
             fit_result2 = _run_search(
                 search2, model2, analysis, name=f"{model_cfg['backend']}_stage2", tag="stage2",
                 tilted_rings=True, n_rings=int(options["n_rings"]),
+                discrete_clouds=True,
             )
             logger.info(
                 "stage 2 finished after %d likelihood evaluations",
@@ -580,7 +582,8 @@ def _seed_dummy_instance(parameter_cls, model):
 
 
 def _run_search(search_cfg: dict, model, analysis, *, name: str, tag: str,
-                tilted_rings: bool = False, n_rings: int | None = None):
+                tilted_rings: bool = False, n_rings: int | None = None,
+                discrete_clouds: bool = False):
     """Run the configured search (with restarts); return the best PyAutoFit result."""
     method = search.method_of(search_cfg)
     sampler = search.is_sampler(method)
@@ -591,18 +594,28 @@ def _run_search(search_cfg: dict, model, analysis, *, name: str, tag: str,
         f", {restarts} starts" if restarts > 1 else "",
     )
     memory.log_memory(tag)
+
+    probe_starts = None
+    if discrete_clouds and not sampler:
+        probe_starts = search.pick_probe_starts(model, analysis, search_cfg, restarts)
+
     fit_result = None
-    for k in range(restarts):
-        cfg = search_cfg if k == 0 else {**search_cfg, "start": "prior"}
+    n_runs = len(probe_starts) if probe_starts is not None else restarts
+    for k in range(n_runs):
+        if probe_starts is not None:
+            cfg = {**search_cfg, "start": probe_starts[k]}
+        else:
+            cfg = search_cfg if k == 0 else {**search_cfg, "start": "prior"}
         nl_search, _ = search.build_search(
             cfg, name=name, model=model,
-            unique_tag=f"{tag}_start{k}" if restarts > 1 else tag,
+            unique_tag=f"{tag}_start{k}" if n_runs > 1 else tag,
             tilted_rings=tilted_rings, n_rings=n_rings,
+            discrete_clouds=discrete_clouds,
         )
         r = nl_search.fit(model=model, analysis=analysis)
         ll = float(r.samples.max_log_likelihood_sample.log_likelihood)
-        if restarts > 1:
-            logger.info("%s start %d/%d: max log likelihood %.2f", tag, k + 1, restarts, ll)
+        if n_runs > 1:
+            logger.info("%s start %d/%d: max log likelihood %.2f", tag, k + 1, n_runs, ll)
         if fit_result is None or ll > float(
             fit_result.samples.max_log_likelihood_sample.log_likelihood
         ):

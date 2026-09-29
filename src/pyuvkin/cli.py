@@ -137,6 +137,28 @@ def main(argv: list[str] | None = None) -> int:
             settings["surface_brightness"] = {"type": "freeform"}
             for name in ("intensity", "scale_radius"):
                 settings["priors"].pop(name, None)
+        # Cloud backends have a stepwise likelihood: seed L-BFGS from a cheap
+        # smooth thindisk fit so we land in the right basin.
+        if (
+            args.backend in ("bbarolo", "kinms")
+            and str(args.method).lower() in ("lbfgs", "bfgs")
+        ):
+            seed_out = out / "fit_thindisk_seed"
+            seed_settings = {
+                **settings,
+                "out": str(seed_out),
+                "model": {"backend": "thindisk", "rotation_curve": settings["model"].get("rotation_curve", "arctan")},
+                "search": {"method": "lbfgs", "start": "centre", "restarts": 2, "maxiter": 200},
+                "write_cubes": False,
+                "write_plots": False,
+            }
+            print(f"seeding {args.backend} from a quick thindisk L-BFGS -> {seed_out}")
+            seed = run(seed_settings)
+            settings["search"]["start"] = {
+                n: float(seed.best_fit_record["max_log_likelihood"][n])
+                for n in seed.best_fit_record["free_parameters"]
+            }
+            settings["search"]["restarts"] = 1
         (out / "settings.json").write_text(json.dumps(settings, indent=2) + "\n")
         result = run(settings)
         _print_best(result)

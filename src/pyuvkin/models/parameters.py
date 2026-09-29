@@ -46,7 +46,6 @@ PARAMETER_UNITS = {
     "maximum_velocity": "km/s",
     "velocity_dispersion": "km/s",
     "vmax_black_hole": "km/s",
-    "vrad": "km/s",
 }
 
 PARAMETER_NAMES = tuple(PARAMETER_UNITS)

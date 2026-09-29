@@ -24,6 +24,7 @@ import logging
 import os
 
 import autofit as af
+import numpy as np
 
 logger = logging.getLogger("pyuvkin")
 
@@ -52,13 +53,23 @@ _DEFAULTS = {
     "bfgs": {"eps": 1e-6},
 }
 
-#: GalMod / free-ring likelihoods are stepwise; larger FD steps and a
+#: GalMod / KinMS / free-ring likelihoods are stepwise; larger FD steps and a
 #: gradient tolerance that loosens with the number of rings (``2.5e-3 *
-#: n_rings``, so ``1e-2`` at 4 rings).
-_TILTED_RING_EPS = 1.0
+#: n_rings``, so ``1e-2`` at 4 rings). Parametric cloud backends use the
+#: same ``eps`` with a fixed ``gtol``.
+_CLOUD_EPS = 1.0
+_CLOUD_GTOL = 1e-3
+_TILTED_RING_EPS = _CLOUD_EPS
 _TILTED_RING_GTOL_PER_RING = 2.5e-3
 
-_NOT_KWARGS = {"method", "number_of_cores", "name", "path_prefix", "unique_tag", "start", "restarts"}
+#: Cheap prior draws to score before L-BFGS on cloud backends (per restart kept).
+_CLOUD_PROBES_PER_RESTART = 8
+_CLOUD_PROBES_MIN = 24
+
+_NOT_KWARGS = {
+    "method", "number_of_cores", "name", "path_prefix", "unique_tag",
+    "start", "restarts", "n_probe", "probe_seed",
+}
 #: search.auto_correlation (emcee only) is folded into AutoCorrelationsSettings
 
 
@@ -66,6 +77,13 @@ def tilted_ring_optimiser_defaults(n_rings: int | None = None) -> dict:
     """L-BFGS/BFGS defaults for free tilted-ring fits."""
     n = max(1, int(n_rings) if n_rings is not None else 1)
     return {"eps": _TILTED_RING_EPS, "gtol": _TILTED_RING_GTOL_PER_RING * n}
+
+
+def cloud_optimiser_defaults(n_rings: int | None = None) -> dict:
+    """L-BFGS/BFGS defaults for discrete-cloud backends (BBarolo, KinMS)."""
+    if n_rings is not None:
+        return tilted_ring_optimiser_defaults(n_rings)
+    return {"eps": _CLOUD_EPS, "gtol": _CLOUD_GTOL}
 
 
 def resolve_number_of_cores(search_cfg: dict) -> int:
@@ -97,6 +115,110 @@ def n_restarts(search_cfg: dict) -> int:
     if is_sampler(method_of(search_cfg)):
         return 1
     return max(1, int(search_cfg.get("restarts", 1)))
+
+
+def n_probe_starts(search_cfg: dict, restarts: int) -> int:
+    """How many prior draws to score before refining (0 = skip probing)."""
+    if "n_probe" in search_cfg:
+        return max(0, int(search_cfg["n_probe"]))
+    return max(_CLOUD_PROBES_MIN, int(restarts) * _CLOUD_PROBES_PER_RESTART)
+
+
+def draw_prior_starts(model: af.Model, n: int, *, seed: int = 0) -> list[dict]:
+    """``n`` random draws from the free priors as start dicts."""
+    from .results import free_names
+
+    rng = np.random.default_rng(seed)
+    names = free_names(model)
+    out = []
+    for _ in range(max(0, int(n))):
+        start = {}
+        for name in names:
+            prior = getattr(model, name, None)
+            if not isinstance(prior, af.Prior):
+                continue
+            start[name] = float(prior.value_for(float(rng.random())))
+        if start:
+            out.append(start)
+    return out
+
+
+def centre_start(model: af.Model) -> dict:
+    from .results import free_names
+
+    start = {}
+    for name in free_names(model):
+        prior = getattr(model, name, None)
+        if isinstance(prior, af.Prior):
+            start[name] = float(prior.value_for(0.5))
+    return start
+
+
+def score_starts(model: af.Model, analysis, starts: list[dict]) -> list[tuple[float, dict]]:
+    """Single likelihood evaluation per start; highest LL first."""
+    scored = []
+    for start in starts:
+        try:
+            inst = model.instance_from_prior_medians()
+            for name, value in start.items():
+                if hasattr(inst, name):
+                    setattr(inst, name, float(value))
+            ll = float(analysis.log_likelihood_function(inst))
+        except Exception:
+            continue
+        if np.isfinite(ll):
+            scored.append((ll, start))
+    scored.sort(key=lambda t: t[0], reverse=True)
+    return scored
+
+
+def pick_probe_starts(
+    model: af.Model, analysis, search_cfg: dict, restarts: int,
+) -> list[dict] | None:
+    """For cloud-backend optimisers: probe prior draws, return top starts.
+
+    Returns ``None`` to keep the usual start/restart behaviour (user gave an
+    explicit dict start, or probing disabled).
+    """
+    method = method_of(search_cfg)
+    if method not in OPTIMISERS:
+        return None
+    start = search_cfg.get("start", "prior")
+    if isinstance(start, dict):
+        return None  # honour an explicit seed
+    n_probe = n_probe_starts(search_cfg, restarts)
+    if n_probe <= 0:
+        return None
+
+    candidates: list[dict] = []
+    if start == "centre" or start is None or start == "prior":
+        c = centre_start(model)
+        if c:
+            candidates.append(c)
+    candidates.extend(draw_prior_starts(model, n_probe, seed=int(search_cfg.get("probe_seed", 0))))
+
+    logger.info(
+        "probing %d starts for %s (keeping top %d for refinement) ...",
+        len(candidates), method, restarts,
+    )
+    scored = score_starts(model, analysis, candidates)
+    if not scored:
+        logger.warning("all probed starts failed; falling back to default starts")
+        return None
+    logger.info(
+        "probe best preliminary log likelihood %.2f (worst kept will be refined next)",
+        scored[0][0],
+    )
+    # unique-ish: drop starts within 1e-3 relative of an already kept vector
+    picked: list[dict] = []
+    for ll, s in scored:
+        if len(picked) >= restarts:
+            break
+        vec = np.array([s[k] for k in sorted(s)])
+        if any(np.allclose(vec, np.array([p[k] for k in sorted(p)]), rtol=0, atol=1e-6) for p in picked):
+            continue
+        picked.append(s)
+    return picked or None
 
 
 def initializer_from(start, model: af.Model | None):
@@ -149,12 +271,13 @@ def build_search(
     search_cfg: dict, name: str = "fit", path_prefix: str | None = None,
     model: af.Model | None = None, unique_tag: str | None = None,
     tilted_rings: bool = False, n_rings: int | None = None,
+    discrete_clouds: bool = False,
 ):
     method = method_of(search_cfg)
     cls = _CLASSES[method]
     kwargs = dict(_DEFAULTS.get(method, {}))
-    if tilted_rings and method in OPTIMISERS:
-        kwargs.update(tilted_ring_optimiser_defaults(n_rings))
+    if method in OPTIMISERS and (tilted_rings or discrete_clouds):
+        kwargs.update(cloud_optimiser_defaults(n_rings if tilted_rings else None))
     kwargs.update({k: v for k, v in search_cfg.items() if k not in _NOT_KWARGS})
     if method in SAMPLERS:
         kwargs["number_of_cores"] = resolve_number_of_cores(search_cfg)

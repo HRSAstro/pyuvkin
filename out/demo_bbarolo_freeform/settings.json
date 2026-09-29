@@ -1,0 +1,87 @@
+{
+  "dataset": "out/demo_bbarolo_freeform/mock/dataset",
+  "out": "out/demo_bbarolo_freeform/fit",
+  "fov": 3.0,
+  "spectral": {
+    "reference_frequency_ghz": 230.0
+  },
+  "primary_beam": {
+    "enabled": false
+  },
+  "model": {
+    "backend": "bbarolo",
+    "rotation_curve": "arctan"
+  },
+  "priors": {
+    "centre_ra": {
+      "type": "Uniform",
+      "lower": -0.3,
+      "upper": 0.3
+    },
+    "centre_dec": {
+      "type": "Uniform",
+      "lower": -0.3,
+      "upper": 0.3
+    },
+    "v_sys": {
+      "type": "Uniform",
+      "lower": -60,
+      "upper": 60
+    },
+    "inclination": {
+      "type": "Uniform",
+      "lower": 20,
+      "upper": 80
+    },
+    "phi": {
+      "type": "Uniform",
+      "lower": -90,
+      "upper": 170
+    },
+    "turnover_radius": {
+      "type": "Uniform",
+      "lower": 0.02,
+      "upper": 0.6
+    },
+    "maximum_velocity": {
+      "type": "Uniform",
+      "lower": 50,
+      "upper": 500
+    },
+    "velocity_dispersion": {
+      "type": "Uniform",
+      "lower": 5,
+      "upper": 120
+    }
+  },
+  "truth": {
+    "centre_ra": 0.05,
+    "centre_dec": -0.08,
+    "v_sys": 15.0,
+    "intensity": 2.0,
+    "scale_radius": 0.25,
+    "inclination": 55.0,
+    "phi": 40.0,
+    "turnover_radius": 0.15,
+    "maximum_velocity": 250.0,
+    "velocity_dispersion": 40.0,
+    "vmax_black_hole": 0.0
+  },
+  "search": {
+    "method": "lbfgs",
+    "start": {
+      "centre_ra": 0.05134447242770605,
+      "centre_dec": -0.0811990947700974,
+      "v_sys": 15.07002822828338,
+      "inclination": 54.41980712976554,
+      "phi": 39.99240055951773,
+      "turnover_radius": 0.14581007264824541,
+      "maximum_velocity": 248.99552192286072,
+      "velocity_dispersion": 39.76914936898898
+    },
+    "restarts": 1
+  },
+  "surface_brightness": {
+    "type": "freeform"
+  }
+}

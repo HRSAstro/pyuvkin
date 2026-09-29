@@ -23,9 +23,7 @@ pip install kinms galpak==1.34.0   # optional backends
 
 The `bbarolo` backend needs a from-source [pyBBarolo](https://bbarolo.readthedocs.io/)
 build (not a simple pip install on Apple Silicon). See
-[`docs/install-bbarolo.md`](docs/install-bbarolo.md).
-
-
+`[docs/install-bbarolo.md](docs/install-bbarolo.md)`.
 
 ## Use
 
@@ -74,14 +72,14 @@ A minimal settings file:
 }
 ```
 
-[`docs/settings.md`](docs/settings.md) explains every key and its options;
+`[docs/settings.md](docs/settings.md)` explains every key and its options;
 `docs/fit-config-template.json` lists them at their defaults. Copy-ready
-backend starters: [`examples/template_bbarolo.json`](examples/template_bbarolo.json),
-[`examples/template_galpak.json`](examples/template_galpak.json),
-[`examples/template_kinms.json`](examples/template_kinms.json). Worked examples:
-[`examples/ALMAQuest.json`](examples/ALMAQuest.json),
-[`examples/ruby_co76.json`](examples/ruby_co76.json),
-[`examples/REBELS_15.json`](examples/REBELS_15.json). Unknown keys are
+backend starters: `[examples/template_bbarolo.json](examples/template_bbarolo.json)`,
+`[examples/template_galpak.json](examples/template_galpak.json)`,
+`[examples/template_kinms.json](examples/template_kinms.json)`. Worked examples:
+`[examples/ALMAQuest.json](examples/ALMAQuest.json)`,
+`[examples/ruby_co76.json](examples/ruby_co76.json)`,
+`[examples/REBELS_15.json](examples/REBELS_15.json)`. Unknown keys are
 refused. A parameter given a number instead of a prior is fixed. Paths are
 relative to the settings file.
 
@@ -90,18 +88,18 @@ relative to the settings file.
 One parameter set, whatever renders it:
 
 
-| name                                  | unit         | meaning                                                                                                        |
-| ------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------- |
-| `centre_ra`, `centre_dec`             | arcsec       | disc centre, dRA cos δ (+east) and dDec (+north) from the image centre                                         |
-| `v_sys`                               | km/s         | systemic velocity relative to the spectral reference (radio convention)                                        |
-| `intensity`                           | Jy km/s      | velocity-integrated line flux                                                                                  |
-| `scale_radius`                        | arcsec       | exponential scale length `h` of analytic SB (`I ∝ exp(−R/h)`); not the outer radius (`options.rmax`)           |
-| `inclination`                         | deg          | 0 face-on, 90 edge-on                                                                                          |
-| `phi`                                 | deg          | position angle of the receding major axis, east of north                                                       |
-| `turnover_radius`, `maximum_velocity` | arcsec, km/s | parametric rotation curves (`model.rotation_curve`: arctan, tanh, exponential, isothermal)                     |
-| `vrot_i`, per-ring `inclination_i`, `phi_i`, … | …   | free tilted rings when `backend: bbarolo` and `rotation_curve: rings` (see settings doc)                       |
-| `velocity_dispersion`                 | km/s         | intrinsic isotropic dispersion                                                                                 |
-| `vmax_black_hole`                     | km/s         | Keplerian `v_bh/√r` term (KinMS/thindisk)                                                                      |
+| name                                           | unit         | meaning                                                                                              |
+| ---------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------- |
+| `centre_ra`, `centre_dec`                      | arcsec       | disc centre, dRA cos δ (+east) and dDec (+north) from the image centre                               |
+| `v_sys`                                        | km/s         | systemic velocity relative to the spectral reference (radio convention)                              |
+| `intensity`                                    | Jy km/s      | velocity-integrated line flux                                                                        |
+| `scale_radius`                                 | arcsec       | exponential scale length `h` of analytic SB (`I ∝ exp(−R/h)`); not the outer radius (`options.rmax`) |
+| `inclination`                                  | deg          | 0 face-on, 90 edge-on                                                                                |
+| `phi`                                          | deg          | position angle of the receding major axis, east of north                                             |
+| `turnover_radius`, `maximum_velocity`          | arcsec, km/s | parametric rotation curves (`model.rotation_curve`: arctan, tanh, exponential, isothermal)           |
+| `vrot_i`, per-ring `inclination_i`, `phi_i`, … | …            | free tilted rings when `backend: bbarolo` and `rotation_curve: rings` (see settings doc)             |
+| `velocity_dispersion`                          | km/s         | intrinsic isotropic dispersion                                                                       |
+| `vmax_black_hole`                              | km/s         | Keplerian `v_bh/√r` term (KinMS/thindisk)                                                            |
 
 
 The spectral reference (v = 0) is `rest_frequency_ghz / (1 + redshift)`, or
@@ -120,7 +118,7 @@ a rest frequency was given; pyuvkin's zero point goes in `VREFFRQ`.
 | `thindisk` | —                | yes         | built-in analytic thin disc, exact channel integration; fast and smooth, the reference the others are calibrated against                                                                                                                                                                                                                                                                                                                      |
 | `kinms`    | `kinms`          | yes         | Monte Carlo clouds; `options`: `n_samples`, `scale_height_arcsec`, `seed`, `clouds_per_pixel`, `cloud_seed`, `vlos_seed`                                                                                                                                                                                                                                                                                                                      |
 | `galpak`   | `galpak==1.34.0` | no          | `options`: `aspect` (scale height / half-light radius, GalPaK's 0.15 by default), `flux_profile`, `thickness_profile`, `dispersion_profile`. At the default aspect the disc is thick and `velocity_dispersion` is only the constant part of the line width (GalPaK adds a rotation-mixing term `h_z v / r`); `aspect: 0.05` gives a thin disc whose inclination, rotation curve and dispersion match the other backends (pinned by the tests) |
-| `bbarolo`  | `pyBBarolo`      | yes         | GalMod; parametric curves or `rotation_curve: rings` (free VROT per ring). Freeform via `NORM=LOCAL`. `options`: `n_rings`, `rmax`, `free`, `twostage`, `regtype`, `scale_height_arcsec`, `adrift`, optional `linear`/`hanning`. `search.start: bbarolo` runs FitMod3D on the dirty cube to seed ring fits. Install: [`docs/install-bbarolo.md`](docs/install-bbarolo.md) |
+| `bbarolo`  | `pyBBarolo`      | yes         | GalMod; parametric curves or `rotation_curve: rings` (free VROT per ring). Freeform via `NORM=LOCAL`. `options`: `n_rings`, `rmax`, `free`, `twostage`, `regtype`, `scale_height_arcsec`, `adrift`, optional `linear`/`hanning`. `search.start: bbarolo` runs FitMod3D on the dirty cube to seed ring fits. Install: `[docs/install-bbarolo.md](docs/install-bbarolo.md)`                                                                     |
 
 
 `tests/test_conventions.py` pins every backend to the thin disc: centre,

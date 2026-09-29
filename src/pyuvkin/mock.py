@@ -122,6 +122,11 @@ def write_mock_dataset(out: str | Path, parameters=None, **kwargs) -> tuple[Path
 def demo_settings(dataset: str | Path, truth: dict, out: str | Path, method: str = "lbfgs") -> dict:
     """Settings for a fit to a mock: broad priors around the truth."""
     t = truth
+    search = {"method": method}
+    if str(method).lower() in ("lbfgs", "bfgs"):
+        # prior centres + a few restarts; cloud backends need this because
+        # finite-difference gradients vanish with the default tiny eps
+        search.update({"start": "centre", "restarts": 4})
     return {
         "dataset": str(dataset),
         "out": str(out),
@@ -142,5 +147,5 @@ def demo_settings(dataset: str | Path, truth: dict, out: str | Path, method: str
             "velocity_dispersion": {"type": "Uniform", "lower": 5, "upper": 120},
         },
         "truth": {k: v for k, v in t.items() if k in PARAMETER_NAMES},
-        "search": {"method": method},
+        "search": search,
     }

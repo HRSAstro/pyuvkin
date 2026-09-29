@@ -1,0 +1,148 @@
+{
+  "search": "lbfgs",
+  "kind": "optimisation",
+  "free_parameters": [
+    "centre_ra",
+    "centre_dec",
+    "v_sys",
+    "inclination",
+    "phi",
+    "turnover_radius",
+    "maximum_velocity",
+    "velocity_dispersion"
+  ],
+  "units": {
+    "centre_ra": "arcsec",
+    "centre_dec": "arcsec",
+    "v_sys": "km/s",
+    "intensity": "Jy km/s",
+    "scale_radius": "arcsec",
+    "inclination": "deg",
+    "phi": "deg",
+    "turnover_radius": "arcsec",
+    "maximum_velocity": "km/s",
+    "velocity_dispersion": "km/s",
+    "vmax_black_hole": "km/s"
+  },
+  "max_log_likelihood": {
+    "centre_ra": 0.05134447242770605,
+    "centre_dec": -0.0811990947700974,
+    "v_sys": 15.07002822828338,
+    "inclination": 54.41980712976554,
+    "phi": 39.99240055951773,
+    "turnover_radius": 0.14581007264824541,
+    "maximum_velocity": 248.99552192286072,
+    "velocity_dispersion": 39.76914936898898
+  },
+  "fixed": {
+    "intensity": 1.9594912097207529,
+    "scale_radius": 0.3,
+    "vmax_black_hole": 0.0
+  },
+  "n_samples": 1487,
+  "fit_quality": {
+    "log_likelihood": 371024.0750474516,
+    "chi_squared": 59787.521065585905,
+    "n_data": 60000,
+    "chi_squared_reduced": 0.9964586844264317,
+    "chi_squared_per_channel": [
+      2973.806857020023,
+      3029.017223893422,
+      2967.110832557717,
+      2933.4341307483874,
+      2985.5911181622587,
+      2940.5159914970345,
+      2940.161473219775,
+      2895.760114011643,
+      2991.456267446373,
+      2899.304527466481,
+      2977.3590477373778,
+      3098.3005570720225,
+      3071.706455373632,
+      3039.793956546801,
+      3212.493837586744,
+      2909.365594163254,
+      3048.3246303555434,
+      2901.615061765673,
+      2997.1160023459197,
+      2975.287386615828
+    ]
+  },
+  "truth_comparison": {
+    "centre_ra": {
+      "truth": 0.05,
+      "max_log_likelihood": 0.05134447242770605,
+      "offset": 0.0013444724277060505
+    },
+    "centre_dec": {
+      "truth": -0.08,
+      "max_log_likelihood": -0.0811990947700974,
+      "offset": -0.0011990947700974003
+    },
+    "v_sys": {
+      "truth": 15.0,
+      "max_log_likelihood": 15.07002822828338,
+      "offset": 0.0700282282833804
+    },
+    "inclination": {
+      "truth": 55.0,
+      "max_log_likelihood": 54.41980712976554,
+      "offset": -0.5801928702344625
+    },
+    "phi": {
+      "truth": 40.0,
+      "max_log_likelihood": 39.99240055951773,
+      "offset": -0.007599440482266573
+    },
+    "turnover_radius": {
+      "truth": 0.15,
+      "max_log_likelihood": 0.14581007264824541,
+      "offset": -0.00418992735175458
+    },
+    "maximum_velocity": {
+      "truth": 250.0,
+      "max_log_likelihood": 248.99552192286072,
+      "offset": -1.0044780771392823
+    },
+    "velocity_dispersion": {
+      "truth": 40.0,
+      "max_log_likelihood": 39.76914936898898,
+      "offset": -0.2308506310110232
+    }
+  },
+  "truth_fit_quality": {
+    "log_likelihood": 370995.6930697397,
+    "chi_squared": 59844.28502100977,
+    "n_data": 60000,
+    "chi_squared_reduced": 0.9974047503501628,
+    "chi_squared_per_channel": [
+      2973.774982675098,
+      3029.2583891590853,
+      2967.5564928163826,
+      2927.445922515098,
+      2988.5400744167337,
+      2946.5868322433234,
+      2941.4526548866947,
+      2898.2512113941216,
+      2997.778890021671,
+      2909.878755735386,
+      2986.421317701516,
+      3120.5847951748865,
+      3076.9814035675013,
+      3043.403114913793,
+      3205.6439813314846,
+      2917.397824284315,
+      3048.622955108893,
+      2894.804118178009,
+      2994.366725510195,
+      2975.5345793755787
+    ]
+  },
+  "finished": "2026-09-29T15:11:02+0200",
+  "n_likelihood_evaluations": 1977,
+  "written": {
+    "input_parameters": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit_thindisk_seed/input_parameters.json",
+    "best_fit_parameters": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit_thindisk_seed/best_fit_parameters.json",
+    "samples": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit_thindisk_seed/samples.csv"
+  }
+}

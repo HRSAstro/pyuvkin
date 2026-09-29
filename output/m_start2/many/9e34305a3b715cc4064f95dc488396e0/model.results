@@ -1,0 +1,19 @@
+Maximum Log Likelihood                                                          362280.29536572
+
+model                                                                           DiscParameters (N=8)
+    cls                                                                         type (N=0)
+
+Maximum Log Likelihood Model:
+
+centre_ra                                                                       0.113
+centre_dec                                                                      -0.111
+v_sys                                                                           21.871
+inclination                                                                     60.267
+phi                                                                             42.446
+turnover_radius                                                                 0.419
+maximum_velocity                                                                355.505
+velocity_dispersion                                                             41.075
+
+intensity                                                                       1.959491204624881
+scale_radius                                                                    0.3
+vmax_black_hole                                                                 0.0
