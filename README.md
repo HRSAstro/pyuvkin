@@ -11,11 +11,12 @@ re-convolved; dirty images appear only as diagnostics. Data handling is
 uv conventions — so a pyuvkin cube and a pyuvimage image of the same data sit
 on the same sky. 
 
+Note - these installation instructions assume a working version of pyuvimage is installed. See pyuvimage documentation for more information.
+
 ## Install
 
 ```bash
-conda activate native_env          # arm64, JAX-enabled
-pip install -e ~/Work/pyuvimage
+pip install -e pyuvimage
 pip install -e . --no-deps
 pip install kinms galpak==1.34.0   # optional backends
 ```
