@@ -4,12 +4,13 @@
     pyuvkin template settings.json          # every setting at its default
     pyuvkin import MS OUT [...]             # pyuvimage's importer, unchanged
     pyuvkin mock OUT [--backend kinms ...]  # a mock dataset + truth.json
-    pyuvkin demo [OUT] [--method nautilus]  # mock, fit, products
+    pyuvkin demo [OUT] [--method lbfgs]     # mock + analytic and freeform fits
 """
 
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import logging
 import sys
@@ -58,19 +59,25 @@ def main(argv: list[str] | None = None) -> int:
     p_mock.add_argument("--n-vis", type=int, default=2000)
     p_mock.add_argument("--n-chan", type=int, default=24)
     p_mock.add_argument("--dv", type=float, default=30.0, help="channel width, km/s")
-    p_mock.add_argument("--sigma", type=float, default=5e-4, help="per-visibility noise, Jy")
+    p_mock.add_argument("--sigma", type=float, default=2e-3, help="per-visibility noise, Jy")
     p_mock.add_argument("--fov", type=float, default=3.0)
     p_mock.add_argument("--seed", type=int, default=0)
     p_mock.add_argument("--truth", help="JSON file or string of disc parameters to use")
 
-    p_demo = sub.add_parser("demo", help="mock a disc, fit it, write every product")
+    p_demo = sub.add_parser(
+        "demo",
+        help="mock a disc, then fit it with analytic and freeform surface brightness",
+    )
     p_demo.add_argument("out", nargs="?", default="pyuvkin_demo")
     p_demo.add_argument("--method", default="lbfgs")
     p_demo.add_argument("--backend", default="thindisk", help="backend used for the fit")
-    p_demo.add_argument("--freeform", action="store_true", help="fit with a freeform surface brightness")
+    p_demo.add_argument(
+        "--freeform", action="store_true",
+        help="(deprecated) freeform-only; demo always runs both analytic and freeform",
+    )
     p_demo.add_argument("--n-vis", type=int, default=1500)
     p_demo.add_argument("--n-chan", type=int, default=20)
-    p_demo.add_argument("--sigma", type=float, default=5e-4)
+    p_demo.add_argument("--sigma", type=float, default=2e-3, help="per-visibility noise, Jy")
 
     args = parser.parse_args(argv)
     _setup_logging(args.verbose)
@@ -126,42 +133,71 @@ def main(argv: list[str] | None = None) -> int:
         from .api import run
         from .mock import demo_settings, write_mock_dataset
 
+        if args.freeform:
+            logging.getLogger("pyuvkin").warning(
+                "--freeform is deprecated: demo always fits analytic and freeform SB",
+            )
+
         out = Path(args.out)
         ds, tp = write_mock_dataset(
             out / "mock", None, n_vis=args.n_vis, n_chan=args.n_chan, sigma_jy=args.sigma,
         )
         truth = json.loads(tp.read_text())
-        settings = demo_settings(ds, truth, out / "fit", method=args.method)
-        settings["model"]["backend"] = args.backend
-        if args.freeform:
-            settings["surface_brightness"] = {"type": "freeform"}
-            for name in ("intensity", "scale_radius"):
-                settings["priors"].pop(name, None)
+        base = demo_settings(ds, truth, out / "fit_analytic", method=args.method)
+        base["model"]["backend"] = args.backend
+
         # Cloud backends have a stepwise likelihood: seed L-BFGS from a cheap
-        # smooth thindisk fit so we land in the right basin.
+        # smooth thindisk fit so both SB modes land in the right basin.
+        seed_start = None
         if (
             args.backend in ("bbarolo", "kinms")
             and str(args.method).lower() in ("lbfgs", "bfgs")
         ):
             seed_out = out / "fit_thindisk_seed"
             seed_settings = {
-                **settings,
+                **base,
                 "out": str(seed_out),
-                "model": {"backend": "thindisk", "rotation_curve": settings["model"].get("rotation_curve", "arctan")},
+                "model": {
+                    "backend": "thindisk",
+                    "rotation_curve": base["model"].get("rotation_curve", "arctan"),
+                },
                 "search": {"method": "lbfgs", "start": "centre", "restarts": 2, "maxiter": 200},
                 "write_cubes": False,
                 "write_plots": False,
             }
             print(f"seeding {args.backend} from a quick thindisk L-BFGS -> {seed_out}")
             seed = run(seed_settings)
-            settings["search"]["start"] = {
+            seed_start = {
                 n: float(seed.best_fit_record["max_log_likelihood"][n])
                 for n in seed.best_fit_record["free_parameters"]
             }
-            settings["search"]["restarts"] = 1
-        (out / "settings.json").write_text(json.dumps(settings, indent=2) + "\n")
-        result = run(settings)
-        _print_best(result)
+
+        modes = (
+            ("analytic", out / "fit_analytic", {"type": "analytic"}),
+            ("freeform", out / "fit_freeform", {"type": "freeform"}),
+        )
+        for label, fit_out, sb in modes:
+            settings = copy.deepcopy(base)
+            settings["out"] = str(fit_out)
+            settings["surface_brightness"] = dict(sb)
+            if label == "freeform":
+                for name in ("intensity", "scale_radius"):
+                    settings["priors"].pop(name, None)
+            if seed_start is not None:
+                # freeform drops intensity/scale_radius from the seed
+                settings["search"]["start"] = {
+                    k: v for k, v in seed_start.items() if k in settings["priors"]
+                }
+                settings["search"]["restarts"] = 1
+            (out / f"settings_{label}.json").write_text(json.dumps(settings, indent=2) + "\n")
+            print(f"\n=== {label} surface brightness -> {fit_out} ===")
+            result = run(settings)
+            _print_best(result)
+
+        # convenience pointer used by older scripts / docs
+        (out / "settings.json").write_text(
+            (out / "settings_analytic.json").read_text()
+        )
         return 0
 
     parser.error(f"unknown command {args.command}")

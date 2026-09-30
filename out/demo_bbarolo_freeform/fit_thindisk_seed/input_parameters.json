@@ -1,6 +1,6 @@
 {
   "pyuvkin_version": "0.1.0",
-  "started": "2026-09-29T15:09:53+0200",
+  "started": "2026-09-29T19:27:14+0200",
   "settings": {
     "dataset": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/mock/dataset",
     "out": "out/demo_bbarolo_freeform/fit_thindisk_seed",
@@ -117,7 +117,7 @@
     "central_frequency_hz": 230000000000.0,
     "max_baseline_wavelengths": 1128291.9107704926,
     "noise_estimate": "mock",
-    "median_sigma_jy": 0.0005,
+    "median_sigma_jy": 0.002,
     "image_centre_offset_arcsec_yx": null,
     "channel_selection": null
   },
@@ -171,8 +171,8 @@
         52
       ],
       "pixel_scale_arcsec": 0.057692307692307696,
-      "total_flux_jy_kms": 1.9594912097207529,
-      "n_lit_pixels": 1426
+      "total_flux_jy_kms": 1.7979915939526707,
+      "n_lit_pixels": 1222
     },
     "twostage": false,
     "regtype": null,
@@ -185,8 +185,8 @@
     "output": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit_thindisk_seed/surface_brightness",
     "n_channels": 20,
     "snr_threshold": 0.5,
-    "masked_flux_fraction": 0.003575003681845157,
-    "total_flux_jy_kms": 1.9594912097207529,
+    "masked_flux_fraction": 0.010844216717716293,
+    "total_flux_jy_kms": 1.7979915939526707,
     "pyuvimage": {
       "pyuvimage_version": "0.1.0",
       "data": {
@@ -198,7 +198,7 @@
         "central_frequency_hz": 230000000000.0,
         "max_baseline_wavelengths": 1127220.3101354009,
         "noise_estimate": "mock",
-        "median_sigma_jy": 0.0001118033988749895,
+        "median_sigma_jy": 0.000447213595499958,
         "stokes": "I"
       },
       "geometry": {
@@ -246,9 +246,9 @@
         "enabled": false
       },
       "fit_quality": {
-        "chi_squared": 3035.5585857030237,
+        "chi_squared": 3010.014551436656,
         "n_data": 3000,
-        "log_evidence": 22713.031948528158
+        "log_evidence": 18807.849212014895
       },
       "streaming": false,
       "reload": false,
@@ -276,7 +276,7 @@
     },
     "intensity": {
       "type": "fixed",
-      "value": 1.9594912097207529
+      "value": 1.7979915939526707
     },
     "scale_radius": {
       "type": "fixed",

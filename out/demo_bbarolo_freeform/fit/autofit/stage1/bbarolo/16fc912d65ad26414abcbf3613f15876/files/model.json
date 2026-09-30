@@ -1,0 +1,66 @@
+{
+    "class_path": "pyuvkin.models.parameters.DiscParameters",
+    "type": "model",
+    "arguments": {
+        "centre_ra": {
+            "type": "Uniform",
+            "id": 8,
+            "lower_limit": -0.3,
+            "upper_limit": 0.3
+        },
+        "centre_dec": {
+            "type": "Uniform",
+            "id": 9,
+            "lower_limit": -0.3,
+            "upper_limit": 0.3
+        },
+        "v_sys": {
+            "type": "Uniform",
+            "id": 10,
+            "lower_limit": -60.0,
+            "upper_limit": 60.0
+        },
+        "intensity": {
+            "type": "Constant",
+            "value": 1.7979915939526707
+        },
+        "scale_radius": {
+            "type": "Constant",
+            "value": 0.3
+        },
+        "inclination": {
+            "type": "Uniform",
+            "id": 11,
+            "lower_limit": 20.0,
+            "upper_limit": 80.0
+        },
+        "phi": {
+            "type": "Uniform",
+            "id": 12,
+            "lower_limit": -90.0,
+            "upper_limit": 170.0
+        },
+        "turnover_radius": {
+            "type": "Uniform",
+            "id": 13,
+            "lower_limit": 0.02,
+            "upper_limit": 0.6
+        },
+        "maximum_velocity": {
+            "type": "Uniform",
+            "id": 14,
+            "lower_limit": 50.0,
+            "upper_limit": 500.0
+        },
+        "velocity_dispersion": {
+            "type": "Uniform",
+            "id": 15,
+            "lower_limit": 5.0,
+            "upper_limit": 120.0
+        },
+        "vmax_black_hole": {
+            "type": "Constant",
+            "value": 0.0
+        }
+    }
+}

@@ -1,0 +1,13 @@
+Total Free Parameters = 10
+Total Starting Points = 10
+
+centre_ra: Start[0.05028813399226569]
+centre_dec: Start[-0.0797315141962242]
+v_sys: Start[15.609421391722863]
+intensity: Start[2.027668856243363]
+scale_radius: Start[0.24040782789528073]
+inclination: Start[49.46361662228758]
+phi: Start[39.86668676069557]
+turnover_radius: Start[0.16016396457958815]
+maximum_velocity: Start[275.76535554995365]
+velocity_dispersion: Start[39.89310604741656]

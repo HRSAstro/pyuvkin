@@ -1,6 +1,6 @@
 {
   "pyuvkin_version": "0.1.0",
-  "started": "2026-09-29T15:11:06+0200",
+  "started": "2026-09-29T19:28:16+0200",
   "settings": {
     "dataset": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/mock/dataset",
     "out": "out/demo_bbarolo_freeform/fit",
@@ -101,14 +101,14 @@
     "search": {
       "method": "lbfgs",
       "start": {
-        "centre_ra": 0.05134447242770605,
-        "centre_dec": -0.0811990947700974,
-        "v_sys": 15.07002822828338,
-        "inclination": 54.41980712976554,
-        "phi": 39.99240055951773,
-        "turnover_radius": 0.14581007264824541,
-        "maximum_velocity": 248.99552192286072,
-        "velocity_dispersion": 39.76914936898898
+        "centre_ra": 0.05444817673967882,
+        "centre_dec": -0.08747651578166238,
+        "v_sys": 14.109056021093286,
+        "inclination": 45.522055325837286,
+        "phi": 40.27432141080474,
+        "turnover_radius": 0.1417113992562266,
+        "maximum_velocity": 274.8042917153649,
+        "velocity_dispersion": 39.499900262425534
       },
       "restarts": 1
     },
@@ -125,7 +125,7 @@
     "central_frequency_hz": 230000000000.0,
     "max_baseline_wavelengths": 1128291.9107704926,
     "noise_estimate": "mock",
-    "median_sigma_jy": 0.0005,
+    "median_sigma_jy": 0.002,
     "image_centre_offset_arcsec_yx": null,
     "channel_selection": null
   },
@@ -179,8 +179,8 @@
         52
       ],
       "pixel_scale_arcsec": 0.057692307692307696,
-      "total_flux_jy_kms": 1.9594912097207529,
-      "n_lit_pixels": 1426
+      "total_flux_jy_kms": 1.7979915939526707,
+      "n_lit_pixels": 1222
     },
     "n_scale_lengths": "auto",
     "rmax_arcsec": null,
@@ -196,8 +196,8 @@
     "output": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit/surface_brightness",
     "n_channels": 20,
     "snr_threshold": 0.5,
-    "masked_flux_fraction": 0.003575003681845157,
-    "total_flux_jy_kms": 1.9594912097207529,
+    "masked_flux_fraction": 0.010844216717716293,
+    "total_flux_jy_kms": 1.7979915939526707,
     "pyuvimage": {
       "pyuvimage_version": "0.1.0",
       "data": {
@@ -209,7 +209,7 @@
         "central_frequency_hz": 230000000000.0,
         "max_baseline_wavelengths": 1127220.3101354009,
         "noise_estimate": "mock",
-        "median_sigma_jy": 0.0001118033988749895,
+        "median_sigma_jy": 0.000447213595499958,
         "stokes": "I"
       },
       "geometry": {
@@ -257,9 +257,9 @@
         "enabled": false
       },
       "fit_quality": {
-        "chi_squared": 3035.5585857030237,
+        "chi_squared": 3010.014551436656,
         "n_data": 3000,
-        "log_evidence": 22713.031948528158
+        "log_evidence": 18807.849212014895
       },
       "streaming": false,
       "reload": false,
@@ -287,7 +287,7 @@
     },
     "intensity": {
       "type": "fixed",
-      "value": 1.9594912097207529
+      "value": 1.7979915939526707
     },
     "scale_radius": {
       "type": "fixed",
@@ -341,14 +341,14 @@
   "search": {
     "method": "lbfgs",
     "start": {
-      "centre_ra": 0.05134447242770605,
-      "centre_dec": -0.0811990947700974,
-      "v_sys": 15.07002822828338,
-      "inclination": 54.41980712976554,
-      "phi": 39.99240055951773,
-      "turnover_radius": 0.14581007264824541,
-      "maximum_velocity": 248.99552192286072,
-      "velocity_dispersion": 39.76914936898898
+      "centre_ra": 0.05444817673967882,
+      "centre_dec": -0.08747651578166238,
+      "v_sys": 14.109056021093286,
+      "inclination": 45.522055325837286,
+      "phi": 40.27432141080474,
+      "turnover_radius": 0.1417113992562266,
+      "maximum_velocity": 274.8042917153649,
+      "velocity_dispersion": 39.499900262425534
     },
     "restarts": 1
   },

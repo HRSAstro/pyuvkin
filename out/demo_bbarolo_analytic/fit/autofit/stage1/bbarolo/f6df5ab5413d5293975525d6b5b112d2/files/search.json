@@ -1,0 +1,217 @@
+{
+    "type": "instance",
+    "class_path": "autofit.non_linear.search.mle.bfgs.search.LBFGS",
+    "arguments": {
+        "maxcor": 10,
+        "maxls": 20,
+        "iterations_per_quick_update": 1e+99,
+        "live_visual_update": false,
+        "tol": null,
+        "iterations_per_full_update": 1e+99,
+        "initializer": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.initializer.InitializerParamStartPoints",
+            "arguments": {
+                "parameter_dict": {
+                    "type": "compound_dict",
+                    "arguments": [
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 10,
+                                "lower_limit": -0.3,
+                                "upper_limit": 0.3
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    0.05028812399226569,
+                                    0.050288143992265694
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 11,
+                                "lower_limit": -0.3,
+                                "upper_limit": 0.3
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    -0.0797315241962242,
+                                    -0.07973150419622421
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 12,
+                                "lower_limit": -60.0,
+                                "upper_limit": 60.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    15.609421381722862,
+                                    15.609421401722864
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "LogUniform",
+                                "id": 13,
+                                "lower_limit": 0.2,
+                                "upper_limit": 20.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    2.027668846243363,
+                                    2.027668866243363
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 14,
+                                "lower_limit": 0.05,
+                                "upper_limit": 0.8
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    0.24040781789528073,
+                                    0.24040783789528072
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 15,
+                                "lower_limit": 20.0,
+                                "upper_limit": 80.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    49.46361661228758,
+                                    49.46361663228758
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 16,
+                                "lower_limit": -90.0,
+                                "upper_limit": 170.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    39.86668675069557,
+                                    39.86668677069557
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 17,
+                                "lower_limit": 0.02,
+                                "upper_limit": 0.6
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    0.16016395457958815,
+                                    0.16016397457958814
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 18,
+                                "lower_limit": 50.0,
+                                "upper_limit": 500.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    275.76535553995365,
+                                    275.76535555995366
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 19,
+                                "lower_limit": 5.0,
+                                "upper_limit": 120.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    39.89310603741656,
+                                    39.89310605741656
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "iprint": -1.0,
+        "paths": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.paths.directory.DirectoryPaths",
+            "arguments": {
+                "identifier": "f6df5ab5413d5293975525d6b5b112d2",
+                "unique_tag": "stage1",
+                "name": "bbarolo",
+                "image_path_suffix": "",
+                "is_identifier_in_paths": true,
+                "path_prefix": {
+                    "type": "path",
+                    "path": "."
+                },
+                "parent": null
+            }
+        },
+        "silence": false,
+        "unique_tag": "stage1",
+        "inplace": false,
+        "name": "bbarolo",
+        "clipper": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.clipper.ClipperPriorBox",
+            "arguments": {
+                "margin": 1e-06,
+                "strict_epsilon": 1e-12
+            }
+        },
+        "number_of_cores": 1,
+        "ftol": 2.220446049250313e-09,
+        "gtol": 0.001,
+        "eps": 1.0,
+        "maxfun": 15000,
+        "disp": false,
+        "maxiter": 15000,
+        "initial_values": {
+            "type": "dict",
+            "arguments": {}
+        },
+        "path_prefix": {
+            "type": "path",
+            "path": "."
+        }
+    }
+}

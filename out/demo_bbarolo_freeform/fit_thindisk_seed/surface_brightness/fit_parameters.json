@@ -9,7 +9,7 @@
     "central_frequency_hz": 230000000000.0,
     "max_baseline_wavelengths": 1127220.3101354009,
     "noise_estimate": "mock",
-    "median_sigma_jy": 0.0001118033988749895,
+    "median_sigma_jy": 0.000447213595499958,
     "stokes": "I"
   },
   "geometry": {
@@ -57,9 +57,9 @@
     "enabled": false
   },
   "fit_quality": {
-    "chi_squared": 3035.5585857030237,
+    "chi_squared": 3010.014551436656,
     "n_data": 3000,
-    "log_evidence": 22713.031948528158
+    "log_evidence": 18807.849212014895
   },
   "streaming": false,
   "reload": false,

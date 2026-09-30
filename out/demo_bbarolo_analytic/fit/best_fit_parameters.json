@@ -1,0 +1,169 @@
+{
+  "search": "lbfgs",
+  "kind": "optimisation",
+  "free_parameters": [
+    "centre_ra",
+    "centre_dec",
+    "v_sys",
+    "intensity",
+    "scale_radius",
+    "inclination",
+    "phi",
+    "turnover_radius",
+    "maximum_velocity",
+    "velocity_dispersion"
+  ],
+  "units": {
+    "centre_ra": "arcsec",
+    "centre_dec": "arcsec",
+    "v_sys": "km/s",
+    "intensity": "Jy km/s",
+    "scale_radius": "arcsec",
+    "inclination": "deg",
+    "phi": "deg",
+    "turnover_radius": "arcsec",
+    "maximum_velocity": "km/s",
+    "velocity_dispersion": "km/s",
+    "vmax_black_hole": "km/s"
+  },
+  "max_log_likelihood": {
+    "centre_ra": 0.051821859670905634,
+    "centre_dec": -0.08108439731655226,
+    "v_sys": 15.591711048759613,
+    "intensity": 2.0166846136811034,
+    "scale_radius": 0.2392383509667645,
+    "inclination": 49.53200647715439,
+    "phi": 39.75914718919975,
+    "turnover_radius": 0.15930307300265342,
+    "maximum_velocity": 275.76448275857894,
+    "velocity_dispersion": 39.78592371984137
+  },
+  "fixed": {
+    "vmax_black_hole": 0.0
+  },
+  "n_samples": 1,
+  "fit_quality": {
+    "log_likelihood": 287771.3263383848,
+    "chi_squared": 59937.69514933284,
+    "n_data": 60000,
+    "chi_squared_reduced": 0.998961585822214,
+    "chi_squared_per_channel": [
+      2973.892157281471,
+      3031.8305971164,
+      2978.7960205323157,
+      2927.134870353373,
+      3002.6945238192834,
+      2937.128261257588,
+      2952.07242539681,
+      2921.528900584278,
+      2996.573871237844,
+      2908.736458520345,
+      2993.128541378244,
+      3097.92820557453,
+      3078.7106976035584,
+      3056.8369247834144,
+      3249.837696463459,
+      2905.9205367965005,
+      3040.710065035442,
+      2909.217081405757,
+      2995.823325384672,
+      2979.1939888075517
+    ]
+  },
+  "truth_comparison": {
+    "centre_ra": {
+      "truth": 0.05,
+      "max_log_likelihood": 0.051821859670905634,
+      "offset": 0.0018218596709056317
+    },
+    "centre_dec": {
+      "truth": -0.08,
+      "max_log_likelihood": -0.08108439731655226,
+      "offset": -0.0010843973165522575
+    },
+    "v_sys": {
+      "truth": 15.0,
+      "max_log_likelihood": 15.591711048759613,
+      "offset": 0.5917110487596133
+    },
+    "intensity": {
+      "truth": 2.0,
+      "max_log_likelihood": 2.0166846136811034,
+      "offset": 0.01668461368110341
+    },
+    "scale_radius": {
+      "truth": 0.25,
+      "max_log_likelihood": 0.2392383509667645,
+      "offset": -0.01076164903323551
+    },
+    "inclination": {
+      "truth": 55.0,
+      "max_log_likelihood": 49.53200647715439,
+      "offset": -5.46799352284561
+    },
+    "phi": {
+      "truth": 40.0,
+      "max_log_likelihood": 39.75914718919975,
+      "offset": -0.24085281080024856
+    },
+    "turnover_radius": {
+      "truth": 0.15,
+      "max_log_likelihood": 0.15930307300265342,
+      "offset": 0.009303073002653428
+    },
+    "maximum_velocity": {
+      "truth": 250.0,
+      "max_log_likelihood": 275.76448275857894,
+      "offset": 25.764482758578936
+    },
+    "velocity_dispersion": {
+      "truth": 40.0,
+      "max_log_likelihood": 39.78592371984137,
+      "offset": -0.21407628015862912
+    }
+  },
+  "truth_fit_quality": {
+    "log_likelihood": 287823.2176011164,
+    "chi_squared": 59833.912623869735,
+    "n_data": 60000,
+    "chi_squared_reduced": 0.9972318770644956,
+    "chi_squared_per_channel": [
+      2973.991903193496,
+      3031.708423156185,
+      2976.3070973887175,
+      2923.435179037753,
+      3013.6438881717754,
+      2942.721874195562,
+      2932.270039780703,
+      2919.770150053184,
+      2985.133163055959,
+      2904.997637702768,
+      2978.117371221744,
+      3101.1747996217464,
+      3071.272894393051,
+      3047.6772218875626,
+      3234.5470241463017,
+      2895.2448291251235,
+      3029.3870418175457,
+      2900.788855431274,
+      2993.474184792838,
+      2978.2490456964497
+    ]
+  },
+  "finished": "2026-09-29T19:46:11+0200",
+  "n_likelihood_evaluations": 531,
+  "written": {
+    "input_parameters": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/input_parameters.json",
+    "best_fit_parameters": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/best_fit_parameters.json",
+    "samples": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/samples.csv",
+    "model_cube.fits": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/model_cube.fits",
+    "dirty_data.fits": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/dirty_data.fits",
+    "dirty_model.fits": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/dirty_model.fits",
+    "dirty_residual.fits": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/dirty_residual.fits",
+    "residual_snr.fits": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/residual_snr.fits",
+    "summary": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/summary.png",
+    "moment_maps": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/moment_maps.png",
+    "channel_maps": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/channel_maps.png",
+    "pv_diagram": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit/pv_diagram.png"
+  }
+}

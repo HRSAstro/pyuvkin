@@ -258,15 +258,13 @@ def summary_figure(products: CubeProducts, geometry, spectral, out: Path, title:
                    n_channels: int = 12) -> Path:
     """Compact overview: moments + spectrum on top, channel strips below.
 
-    Uses constrained subfigures so colorbars and labels do not collide (the
-    previous GridSpec span over channel columns packed six unequal axes into
-    one row and overlapped).
+    Channel strips are dirty data / dirty model / residual÷σ (raw residual
+    omitted). Constrained layout + tight save keep axis labels inside the PNG.
     """
     import matplotlib
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from mpl_toolkits.axes_grid1 import make_axes_locatable
 
     v = spectral.velocities_kms
     dv = spectral.dv_kms
@@ -286,12 +284,13 @@ def summary_figure(products: CubeProducts, geometry, spectral, out: Path, title:
     ])))) or 1.0
     vmax_ch = float(np.nanmax(np.abs(products.dirty_data[idx]))) or 1.0
 
-    fig = plt.figure(figsize=(max(11.0, 1.45 * ncol), 10.5), layout="constrained")
+    fig = plt.figure(figsize=(max(11.0, 1.45 * ncol), 9.2), layout="constrained")
+    fig.set_constrained_layout_pads(w_pad=0.02, h_pad=0.04, hspace=0.06, wspace=0.02)
     fig.suptitle(title, fontsize=11)
-    top, bottom = fig.subfigures(2, 1, height_ratios=[1.05, 1.55], hspace=0.08)
+    top, bottom = fig.subfigures(2, 1, height_ratios=[1.0, 1.35], hspace=0.06)
 
     # ---- moments + spectrum ------------------------------------------------
-    top.suptitle("moments and aperture spectrum", fontsize=9, y=1.02)
+    top.suptitle("moments and aperture spectrum", fontsize=9)
     axes_t = top.subplots(1, 6, squeeze=False)[0]
 
     def _panel(ax, img, cmap, lo, hi, label):
@@ -301,9 +300,7 @@ def summary_figure(products: CubeProducts, geometry, spectral, out: Path, title:
         ax.set_ylabel("dDec [\"]", fontsize=7)
         ax.tick_params(labelsize=6)
         ax.set_aspect("equal")
-        div = make_axes_locatable(ax)
-        cax = div.append_axes("right", size="4.5%", pad=0.04)
-        cb = fig.colorbar(im, cax=cax)
+        cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
         cb.ax.tick_params(labelsize=6)
         return im
 
@@ -327,16 +324,15 @@ def summary_figure(products: CubeProducts, geometry, spectral, out: Path, title:
     ax.tick_params(labelsize=6)
     ax.set_ylabel("Jy/beam × pixels", fontsize=7)
 
-    # ---- channel strips ----------------------------------------------------
+    # ---- channel strips (data / model / resid÷σ) ---------------------------
     bottom.suptitle(
-        "channels: dirty data / model / residual / residual÷σ  (shared colour scales per row)",
-        fontsize=9, y=1.01,
+        "channels: dirty data / model / residual÷σ  (shared colour scales per row)",
+        fontsize=9,
     )
-    axes_b = bottom.subplots(4, ncol, squeeze=False)
+    axes_b = bottom.subplots(3, ncol, squeeze=False)
     rows = [
         (products.dirty_data, "data", "inferno", 0, vmax_ch),
         (products.dirty_model, "model", "inferno", 0, vmax_ch),
-        (products.dirty_residual, "residual", "RdBu_r", -vmax_ch / 2, vmax_ch / 2),
         (products.residual_snr, "resid/σ", "RdBu_r", -5, 5),
     ]
     for r, (cube, label, cmap, lo, hi) in enumerate(rows):
@@ -348,15 +344,12 @@ def summary_figure(products: CubeProducts, geometry, spectral, out: Path, title:
             if r == 0:
                 ax.set_title(f"{v[k]:+.0f}", fontsize=7, pad=2)
             if c == 0:
-                ax.set_ylabel(label, fontsize=8)
-        # one colorbar per row, attached to the last panel
-        div = make_axes_locatable(axes_b[r, -1])
-        cax = div.append_axes("right", size="6%", pad=0.05)
-        cb = fig.colorbar(im, cax=cax)
+                ax.set_ylabel(label, fontsize=8, labelpad=6)
+        cb = fig.colorbar(im, ax=axes_b[r, :].tolist(), fraction=0.02, pad=0.01)
         cb.ax.tick_params(labelsize=6)
 
     path = out / "summary.png"
-    fig.savefig(path, dpi=120)
+    fig.savefig(path, dpi=120, bbox_inches="tight", pad_inches=0.35)
     plt.close(fig)
     return path
 
@@ -464,8 +457,8 @@ def moment_maps_figure(products: CubeProducts, geometry, spectral, out: Path, ti
 
 def channel_maps_figure(products: CubeProducts, geometry, spectral, out: Path, title: str = "",
                         n_channels: int | None = None, n_columns: int = 6) -> Path:
-    """Every channel (or ``n_channels`` evenly spaced ones): dirty data with
-    the dirty model as contours, then the residual in sigma."""
+    """Every channel (or ``n_channels`` evenly spaced ones): dirty model, then
+    the residual in sigma."""
     import matplotlib
 
     matplotlib.use("Agg")
@@ -478,27 +471,20 @@ def channel_maps_figure(products: CubeProducts, geometry, spectral, out: Path, t
         np.unique(np.linspace(0, n - 1, n_channels).round().astype(int))
     ncol = min(n_columns, len(idx))
     nrow = int(np.ceil(len(idx) / ncol))
-    vmax = float(np.nanmax(np.abs(products.dirty_data[idx])))
-    rms = products.rms
-    levels_sigma = np.array([3, 6, 12, 24, 48, 96])
+    vmax = float(np.nanmax(np.abs(products.dirty_model[idx]))) or 1.0
 
-    fig = plt.figure(figsize=(2.2 * ncol + 0.6, 2.2 * nrow * 2 + 1.4), layout="constrained")
+    fig = plt.figure(figsize=(2.2 * ncol + 0.8, 2.2 * nrow * 2 + 1.6), layout="constrained")
+    fig.set_constrained_layout_pads(w_pad=0.02, h_pad=0.04, hspace=0.06, wspace=0.02)
     fig.suptitle(title, fontsize=10)
-    top, bottom = fig.subfigures(2, 1, hspace=0.04)
-    top.suptitle("dirty data [Jy/beam, 0 to peak] with dirty-model contours at 3, 6, 12, ... σ",
-                 fontsize=9)
+    top, bottom = fig.subfigures(2, 1, hspace=0.06)
+    top.suptitle("dirty model [Jy/beam, 0 to peak]", fontsize=9)
     bottom.suptitle("residual (data − model) in units of the per-channel σ", fontsize=9)
     axes_t = top.subplots(nrow, ncol, squeeze=False)
     axes_b = bottom.subplots(nrow, ncol, squeeze=False)
     for k, c in enumerate(idx):
         r, col = divmod(k, ncol)
         ax = axes_t[r, col]
-        im_t = _show(ax, products.dirty_data[c], extent, cmap="inferno", vmin=0, vmax=vmax)
-        lv = levels_sigma * rms[c]
-        lv = lv[lv < products.dirty_model[c].max()]
-        if lv.size:
-            ax.contour(np.flipud(products.dirty_model[c]), levels=lv, extent=extent,
-                       origin="lower", colors="c", linewidths=0.6)
+        im_t = _show(ax, products.dirty_model[c], extent, cmap="inferno", vmin=0, vmax=vmax)
         ax.text(0.04, 0.9, f"{v[c]:+.0f} km/s", transform=ax.transAxes, color="w", fontsize=7)
         ax = axes_b[r, col]
         im_b = _show(ax, products.residual_snr[c], extent, cmap="RdBu_r", vmin=-5, vmax=5)
@@ -509,10 +495,10 @@ def channel_maps_figure(products: CubeProducts, geometry, spectral, out: Path, t
             ax.set_yticks([])
         for ax in axes.ravel()[len(idx):]:
             ax.set_visible(False)
-    top.colorbar(im_t, ax=axes_t, shrink=0.8, pad=0.01, label="Jy/beam")
-    bottom.colorbar(im_b, ax=axes_b, shrink=0.8, pad=0.01, label="σ")
+    top.colorbar(im_t, ax=axes_t, shrink=0.8, pad=0.02, label="Jy/beam")
+    bottom.colorbar(im_b, ax=axes_b, shrink=0.8, pad=0.02, label="σ")
     path = out / "channel_maps.png"
-    fig.savefig(path, dpi=110)
+    fig.savefig(path, dpi=110, bbox_inches="tight", pad_inches=0.35)
     plt.close(fig)
     return path
 
@@ -584,7 +570,6 @@ def pv_diagram_figure(products: CubeProducts, geometry, spectral, best, out: Pat
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from mpl_toolkits.axes_grid1 import make_axes_locatable
 
     from .conventions import sky_to_grid
     from .models.parameters import ring_mean, ring_values, ring_vrot_kms, rotation_curve_kms
@@ -613,8 +598,9 @@ def pv_diagram_figure(products: CubeProducts, geometry, spectral, best, out: Pat
         ring_inc = ring_values(best, "inclination", rings.size)
         vrot_err = _ring_errors_1sigma(errors_1sigma, "vrot", rings.size)
 
-    fig, axes = plt.subplots(2, 3, figsize=(12.5, 7.2), sharex=True, sharey=True,
+    fig, axes = plt.subplots(2, 3, figsize=(13.5, 7.6), sharex=True, sharey=True,
                              layout="constrained")
+    fig.set_constrained_layout_pads(w_pad=0.04, h_pad=0.04, hspace=0.08, wspace=0.06)
     for i, (axis_name, angle) in enumerate([("major", plot_phi),
                                              ("minor", plot_phi + 90.0)]):
         for j, (label, cube) in enumerate(cubes):
@@ -667,12 +653,10 @@ def pv_diagram_figure(products: CubeProducts, geometry, spectral, best, out: Pat
                                     ms=4.5, mew=0.6, mec="k", ecolor="c",
                                     elinewidth=0.9, capsize=2.0, capthick=0.7,
                                     label=lab if sign > 0 else None,
-                                    clip_on=False,
                                 )
                             else:
                                 ax.plot(sign * rr, yy, "o", color="c", ms=4.5,
-                                        mew=0.6, mec="k", label=lab,
-                                        clip_on=False)
+                                        mew=0.6, mec="k", label=lab)
                 elif rings is not None:
                     sini = np.sin(np.radians(plot_inc))
                     vc = rotation_curve_kms(np.maximum(r, 1e-6), best, rotation_curve)
@@ -685,8 +669,7 @@ def pv_diagram_figure(products: CubeProducts, geometry, spectral, best, out: Pat
                             ax.plot(sign * rr,
                                     plot_vsys + sign * vcr * sini,
                                     "o", color="c", ms=4.5, mew=0.6, mec="k",
-                                    label="GalMod rings (parametric v_c)" if sign > 0 else None,
-                                    clip_on=False)
+                                    label="GalMod rings (parametric v_c)" if sign > 0 else None)
                 else:
                     sini = np.sin(np.radians(plot_inc))
                     vc = rotation_curve_kms(np.maximum(r, 1e-6), best, rotation_curve)
@@ -695,12 +678,11 @@ def pv_diagram_figure(products: CubeProducts, geometry, spectral, best, out: Pat
                             label="v_sys ± v_c sin i")
                 ax.axhline(plot_vsys, color="c", lw=0.5, alpha=0.5)
             ax.axvline(0.0, color="0.7", lw=0.5)
-            div = make_axes_locatable(ax)
-            cax = div.append_axes("right", size="3.5%", pad=0.04)
-            fig.colorbar(im, cax=cax).ax.tick_params(labelsize=6)
+            cb = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.03)
+            cb.ax.tick_params(labelsize=6)
             ax.set_ylim(v.min() - spectral.dv_kms / 2, v.max() + spectral.dv_kms / 2)
             ax.tick_params(labelsize=7)
-        axes[i, 0].set_ylabel("v [km/s]", fontsize=8)
+        axes[i, 0].set_ylabel("v [km/s]", fontsize=8, labelpad=4)
     handles, labels_ = axes[0, 0].get_legend_handles_labels()
     if handles:
         axes[0, 0].legend(fontsize=7, loc="lower right", frameon=True, framealpha=0.85)
@@ -721,7 +703,7 @@ def pv_diagram_figure(products: CubeProducts, geometry, spectral, best, out: Pat
         fontsize=9,
     )
     path = out / "pv_diagram.png"
-    fig.savefig(path, dpi=120)
+    fig.savefig(path, dpi=120, bbox_inches="tight", pad_inches=0.4)
     plt.close(fig)
     return path
 

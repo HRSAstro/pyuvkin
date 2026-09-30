@@ -1,6 +1,6 @@
 {
-  "dataset": "out/demo_bbarolo_freeform/mock/dataset",
-  "out": "out/demo_bbarolo_freeform/fit",
+  "dataset": "mock/dataset",
+  "out": "fit",
   "fov": 3.0,
   "spectral": {
     "reference_frequency_ghz": 230.0
@@ -70,14 +70,14 @@
   "search": {
     "method": "lbfgs",
     "start": {
-      "centre_ra": 0.05134447242770605,
-      "centre_dec": -0.0811990947700974,
-      "v_sys": 15.07002822828338,
-      "inclination": 54.41980712976554,
-      "phi": 39.99240055951773,
-      "turnover_radius": 0.14581007264824541,
-      "maximum_velocity": 248.99552192286072,
-      "velocity_dispersion": 39.76914936898898
+      "centre_ra": 0.05444817673967882,
+      "centre_dec": -0.08747651578166238,
+      "v_sys": 14.109056021093286,
+      "inclination": 45.522055325837286,
+      "phi": 40.27432141080474,
+      "turnover_radius": 0.1417113992562266,
+      "maximum_velocity": 274.8042917153649,
+      "velocity_dispersion": 39.499900262425534
     },
     "restarts": 1
   },

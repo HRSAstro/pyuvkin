@@ -58,7 +58,7 @@ def simulate_disc(
     reference_frequency_ghz: float = 230.0,
     n_chan: int = 24,
     dv_kms: float = 30.0,
-    sigma_jy: float = 5e-4,
+    sigma_jy: float = 2e-3,
     backend: str = "thindisk",
     options: dict | None = None,
     pixel_scale: float | str = "auto",

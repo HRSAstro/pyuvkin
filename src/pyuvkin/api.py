@@ -239,6 +239,13 @@ def run(settings_or_path, **overrides) -> RunResult:
 
     # PyAutoFit writes under out/autofit/<name>/<hash>/
     af.conf.instance.output_path = str(out / "autofit")
+    # Starting-point FITS/plots can trip BBarolo's GalMod (Abort trap) on some
+    # macOS builds when dens profiles are non-flat; skip them — final products
+    # are written by pyuvkin anyway.
+    try:
+        af.conf.instance["output"]["start_point"] = False
+    except Exception:
+        pass
     method = search.method_of(settings["search"])
     sampler = search.is_sampler(method)
     if not sampler and model_cfg["backend"] in ("kinms", "bbarolo"):

@@ -1,0 +1,187 @@
+{
+    "type": "instance",
+    "class_path": "autofit.non_linear.search.mle.bfgs.search.LBFGS",
+    "arguments": {
+        "initializer": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.initializer.InitializerParamStartPoints",
+            "arguments": {
+                "parameter_dict": {
+                    "type": "compound_dict",
+                    "arguments": [
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 8,
+                                "lower_limit": -0.3,
+                                "upper_limit": 0.3
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    0.05444816673967882,
+                                    0.05444818673967882
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 9,
+                                "lower_limit": -0.3,
+                                "upper_limit": 0.3
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    -0.08747652578166237,
+                                    -0.08747650578166238
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 10,
+                                "lower_limit": -60.0,
+                                "upper_limit": 60.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    14.109056011093285,
+                                    14.109056031093287
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 11,
+                                "lower_limit": 20.0,
+                                "upper_limit": 80.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    45.522055315837285,
+                                    45.52205533583729
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 12,
+                                "lower_limit": -90.0,
+                                "upper_limit": 170.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    40.27432140080474,
+                                    40.27432142080474
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 13,
+                                "lower_limit": 0.02,
+                                "upper_limit": 0.6
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    0.14171138925622662,
+                                    0.1417114092562266
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 14,
+                                "lower_limit": 50.0,
+                                "upper_limit": 500.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    274.8042917053649,
+                                    274.8042917253649
+                                ]
+                            }
+                        },
+                        {
+                            "key": {
+                                "type": "Uniform",
+                                "id": 15,
+                                "lower_limit": 5.0,
+                                "upper_limit": 120.0
+                            },
+                            "value": {
+                                "type": "tuple",
+                                "values": [
+                                    39.49990025242553,
+                                    39.499900272425535
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "paths": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.paths.directory.DirectoryPaths",
+            "arguments": {
+                "identifier": "16fc912d65ad26414abcbf3613f15876",
+                "unique_tag": "stage1",
+                "image_path_suffix": "",
+                "parent": null,
+                "name": "bbarolo",
+                "path_prefix": {
+                    "type": "path",
+                    "path": "."
+                },
+                "is_identifier_in_paths": true
+            }
+        },
+        "unique_tag": "stage1",
+        "maxcor": 10,
+        "number_of_cores": 1,
+        "initial_values": {
+            "type": "dict",
+            "arguments": {}
+        },
+        "inplace": false,
+        "gtol": 0.001,
+        "disp": false,
+        "maxls": 20,
+        "live_visual_update": false,
+        "silence": false,
+        "iterations_per_quick_update": 1e+99,
+        "iprint": -1.0,
+        "path_prefix": {
+            "type": "path",
+            "path": "."
+        },
+        "ftol": 2.220446049250313e-09,
+        "name": "bbarolo",
+        "maxfun": 15000,
+        "iterations_per_full_update": 1e+99,
+        "eps": 1.0,
+        "maxiter": 15000,
+        "tol": null,
+        "clipper": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.clipper.ClipperPriorBox",
+            "arguments": {
+                "strict_epsilon": 1e-12,
+                "margin": 1e-06
+            }
+        }
+    }
+}

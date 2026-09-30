@@ -31,11 +31,14 @@ build (not a simple pip install on Apple Silicon). See
 pyuvkin template settings.json     # every setting at its default
 pyuvkin import obs.ms data/ --spw 3          # pyuvimage's importer
 pyuvkin fit settings.json [--method lbfgs] [--backend kinms]
-pyuvkin demo out/ --method nautilus          # mock + fit, end to end
+pyuvkin demo out/ --method lbfgs             # mock + analytic and freeform fits
 ```
 
 The CLI is the `pyuvkin` console script (`pip install -e .`); there is no
-`python -m pyuvkin` entry point.
+`python -m pyuvkin` entry point. `pyuvkin demo` writes one mock under
+`out/mock/`, then fits it twice: `out/fit_analytic/` (exponential disc) and
+`out/fit_freeform/` (pyuvimage adaptive moment map). Cloud backends seed both
+from a quick thindisk L-BFGS under `out/fit_thindisk_seed/`.
 
 or in Python
 
@@ -173,9 +176,9 @@ keys pass through to the PyAutoFit search (`n_live`, `nlive`, `nwalkers`/`nsteps
 | `model_cube.fits`                                                                 | best-fit intrinsic sky, Jy/pixel per channel, with FREQ axis                                                                     |
 | `dirty_data.fits`, `dirty_model.fits`, `dirty_residual.fits`, `residual_snr.fits` | naturally weighted dirty cubes (Jy/beam) and the residual in σ                                                                   |
 | `moment_maps.png`                                                                 | moments 0, 1, 2 of the dirty data and dirty model, residual moment 0 in σ, moment 1/2 differences                                |
-| `channel_maps.png`                                                                | every channel: dirty data with dirty-model contours (3, 6, 12, ... σ), residual in σ                                             |
+| `channel_maps.png`                                                                | every channel: dirty model and residual in σ                                                                                     |
 | `pv_diagram.png`                                                                  | position-velocity slices along the fitted major and minor axes with the projected rotation curve                                 |
-| `summary.png`, `cornerplot.png`                                                   | one-page overview; posterior corner (samplers)                                                                                   |
+| `summary.png`, `cornerplot.png`                                                   | one-page overview (moments, spectrum, channel strips of data/model/resid÷σ); posterior corner (samplers)                         |
 | `samples_stage1.csv`                                                              | TWOSTAGE ring fits: stage-1 optimiser trace                                                                                      |
 | `surface_brightness/`                                                             | freeform map reconstruction (pyuvimage products)                                                                                 |
 | `bbarolo_seed/`                                                                   | FitMod3D seed run (`search.start: bbarolo`)                                                                                      |

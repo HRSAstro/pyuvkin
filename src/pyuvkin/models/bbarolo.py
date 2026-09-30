@@ -357,7 +357,14 @@ class BBaroloRenderer(Renderer):
             # flat rings: morphology comes from the freeform rescale below
             dens = np.ones_like(radii)
         else:
-            dens = np.exp(-radii / max(float(p.scale_radius), 1e-4))
+            # GalMod aborts on some macOS builds when dens drops by many
+            # decades across the ring list (tiny scale_radius vs field-sized
+            # rmax). Cap the exponential at 5 scale lengths — enough for an
+            # exponential disc — and keep a small relative floor.
+            h = max(float(p.scale_radius), 1e-4)
+            dens = np.exp(-np.minimum(radii, 5.0 * h) / h)
+            dens = np.maximum(dens, 1e-3 * float(np.max(dens)))
+            dens = dens / float(dens[0])
         if self.free_rings:
             vrot = ring_vrot_kms(p, self.n_rings)
             if vrot.size != radii.size:

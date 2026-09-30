@@ -1,0 +1,160 @@
+{
+  "search": "lbfgs",
+  "kind": "optimisation",
+  "free_parameters": [
+    "centre_ra",
+    "centre_dec",
+    "v_sys",
+    "intensity",
+    "scale_radius",
+    "inclination",
+    "phi",
+    "turnover_radius",
+    "maximum_velocity",
+    "velocity_dispersion"
+  ],
+  "units": {
+    "centre_ra": "arcsec",
+    "centre_dec": "arcsec",
+    "v_sys": "km/s",
+    "intensity": "Jy km/s",
+    "scale_radius": "arcsec",
+    "inclination": "deg",
+    "phi": "deg",
+    "turnover_radius": "arcsec",
+    "maximum_velocity": "km/s",
+    "velocity_dispersion": "km/s",
+    "vmax_black_hole": "km/s"
+  },
+  "max_log_likelihood": {
+    "centre_ra": 0.05028813399226569,
+    "centre_dec": -0.0797315141962242,
+    "v_sys": 15.609421391722863,
+    "intensity": 2.027668856243363,
+    "scale_radius": 0.24040782789528073,
+    "inclination": 49.46361662228758,
+    "phi": 39.86668676069557,
+    "turnover_radius": 0.16016396457958815,
+    "maximum_velocity": 275.76535554995365,
+    "velocity_dispersion": 39.89310604741656
+  },
+  "fixed": {
+    "vmax_black_hole": 0.0
+  },
+  "n_samples": 1,
+  "fit_quality": {
+    "log_likelihood": 287996.1594708308,
+    "chi_squared": 59488.028884440835,
+    "n_data": 60000,
+    "chi_squared_reduced": 0.9914671480740139,
+    "chi_squared_per_channel": [
+      2973.8523399793276,
+      3029.966398643426,
+      2968.197950358219,
+      2927.703070314436,
+      2989.5725090945307,
+      2932.6165727310945,
+      2937.6914043058073,
+      2880.6436690704027,
+      2969.572843410156,
+      2866.6673917061744,
+      2940.723910207233,
+      3056.2519262053447,
+      3045.4026856256687,
+      3020.356609334717,
+      3192.7905912169563,
+      2868.7797298456144,
+      3023.5720683925892,
+      2896.383159713966,
+      2990.514885147477,
+      2976.7691691376995
+    ]
+  },
+  "truth_comparison": {
+    "centre_ra": {
+      "truth": 0.05,
+      "max_log_likelihood": 0.05028813399226569,
+      "offset": 0.0002881339922656892
+    },
+    "centre_dec": {
+      "truth": -0.08,
+      "max_log_likelihood": -0.0797315141962242,
+      "offset": 0.0002684858037757948
+    },
+    "v_sys": {
+      "truth": 15.0,
+      "max_log_likelihood": 15.609421391722863,
+      "offset": 0.6094213917228632
+    },
+    "intensity": {
+      "truth": 2.0,
+      "max_log_likelihood": 2.027668856243363,
+      "offset": 0.027668856243363127
+    },
+    "scale_radius": {
+      "truth": 0.25,
+      "max_log_likelihood": 0.24040782789528073,
+      "offset": -0.009592172104719271
+    },
+    "inclination": {
+      "truth": 55.0,
+      "max_log_likelihood": 49.46361662228758,
+      "offset": -5.5363833777124185
+    },
+    "phi": {
+      "truth": 40.0,
+      "max_log_likelihood": 39.86668676069557,
+      "offset": -0.13331323930442807
+    },
+    "turnover_radius": {
+      "truth": 0.15,
+      "max_log_likelihood": 0.16016396457958815,
+      "offset": 0.010163964579588153
+    },
+    "maximum_velocity": {
+      "truth": 250.0,
+      "max_log_likelihood": 275.76535554995365,
+      "offset": 25.765355549953654
+    },
+    "velocity_dispersion": {
+      "truth": 40.0,
+      "max_log_likelihood": 39.89310604741656,
+      "offset": -0.10689395258344092
+    }
+  },
+  "truth_fit_quality": {
+    "log_likelihood": 288006.7677657795,
+    "chi_squared": 59466.81229454348,
+    "n_data": 60000,
+    "chi_squared_reduced": 0.9911135382423913,
+    "chi_squared_per_channel": [
+      2973.878806737513,
+      3029.81846649453,
+      2968.6894328147955,
+      2927.129531347539,
+      2989.451924912322,
+      2929.108714507558,
+      2929.747618857988,
+      2875.3642162941796,
+      2962.959459126071,
+      2870.4925483743837,
+      2940.9547087383207,
+      3062.3320058307736,
+      3040.6863737343638,
+      3022.8463206250935,
+      3184.869923172775,
+      2870.0709668468535,
+      3025.1702735847866,
+      2896.2336685556306,
+      2990.3241746278127,
+      2976.6831593601974
+    ]
+  },
+  "finished": "2026-09-29T19:45:36+0200",
+  "n_likelihood_evaluations": 1535,
+  "written": {
+    "input_parameters": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit_thindisk_seed/input_parameters.json",
+    "best_fit_parameters": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit_thindisk_seed/best_fit_parameters.json",
+    "samples": "/Users/hstacey/Work/pyuvkin/out/demo_bbarolo_analytic/fit_thindisk_seed/samples.csv"
+  }
+}

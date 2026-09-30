@@ -1,27 +1,27 @@
-2026-09-29 15:11:02,489 INFO pyuvkin 0.1.0 -> /Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit
-2026-09-29 15:11:02,511 INFO memory [start]: process 1.42 GB RSS; 3.93 GB available (17.2 GB total)
-2026-09-29 15:11:02,521 INFO dataset: 1500 visibilities x 20 channels, 229.781-230.219 GHz; 30.0 km/s channels, v = -285..+285 km/s about 230.000000 GHz
-2026-09-29 15:11:02,521 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.09141"), model rendered at 0.05769"/pixel
-2026-09-29 15:11:02,522 INFO freeform surface brightness: pyuvimage on the 20 channels collapsed in the uv-plane, fov 3" -> /Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit/surface_brightness
-2026-09-29 15:11:04,335 INFO   S/N >= 0.50 keeps 1426 of 2704 pixels and 99.6% of the positive flux
-2026-09-29 15:11:04,335 INFO   surface-brightness map: 1.959 Jy km/s in 1426 lit pixels at 0.05769"/pixel
-2026-09-29 15:11:04,335 INFO transformer auto -> dft: the exact DFT matrices take 1.3 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
-2026-09-29 15:11:06,122 INFO memory [setup]: process 1.65 GB RSS; 3.45 GB available (17.2 GB total)
-2026-09-29 15:11:06,123 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion']
-2026-09-29 15:11:06,125 WARNING bbarolo builds its cube from discrete clouds, so the likelihood is piecewise constant on small scales and finite-difference gradients vanish: lbfgs may stop early. Prefer a sampler (nautilus, dynesty, emcee) for this backend.
-2026-09-29 15:11:06,125 INFO running stage1 lbfgs (optimisation) ...
-2026-09-29 15:11:06,151 INFO memory [stage1]: process 1.63 GB RSS; 3.45 GB available (17.2 GB total)
-2026-09-29 15:11:06,152 INFO search: lbfgs {'eps': 1.0, 'gtol': 0.001}
-2026-09-29 15:11:53,713 INFO stage 1 finished after 1200 likelihood evaluations
-2026-09-29 15:11:53,746 INFO memory [stage1]: process 1.74 GB RSS; 3.59 GB available (17.2 GB total)
-2026-09-29 15:11:53,831 INFO chi^2/N = 1.0347 (chi^2 = 62081.5, N = 60000)
-2026-09-29 15:11:53,831 INFO   centre_ra            =     0.066786   truth 0.05
-2026-09-29 15:11:53,831 INFO   centre_dec           =    -0.094788   truth -0.08
-2026-09-29 15:11:53,831 INFO   v_sys                =       14.739   truth 15
-2026-09-29 15:11:53,831 INFO   inclination          =       52.312   truth 55
-2026-09-29 15:11:53,831 INFO   phi                  =       39.795   truth 40
-2026-09-29 15:11:53,831 INFO   turnover_radius      =        0.138   truth 0.15
-2026-09-29 15:11:53,831 INFO   maximum_velocity     =       247.09   truth 250
-2026-09-29 15:11:53,831 INFO   velocity_dispersion  =        37.61   truth 40
-2026-09-29 15:11:56,763 INFO wrote best_fit_parameters.json, channel_maps.png, dirty_data.fits, dirty_model.fits, dirty_residual.fits, input_parameters.json, model_cube.fits, moment_maps.png, pv_diagram.png, residual_snr.fits, samples.csv, summary.png
-2026-09-29 15:11:56,802 INFO memory [done]: process 1.70 GB RSS; 3.36 GB available (17.2 GB total)
+2026-09-29 19:28:11,899 INFO pyuvkin 0.1.0 -> /Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit
+2026-09-29 19:28:11,941 INFO memory [start]: process 1.43 GB RSS; 4.99 GB available (17.2 GB total)
+2026-09-29 19:28:11,953 INFO dataset: 1500 visibilities x 20 channels, 229.781-230.219 GHz; 30.0 km/s channels, v = -285..+285 km/s about 230.000000 GHz
+2026-09-29 19:28:11,954 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.09141"), model rendered at 0.05769"/pixel
+2026-09-29 19:28:11,954 INFO freeform surface brightness: pyuvimage on the 20 channels collapsed in the uv-plane, fov 3" -> /Users/hstacey/Work/pyuvkin/out/demo_bbarolo_freeform/fit/surface_brightness
+2026-09-29 19:28:14,215 INFO   S/N >= 0.50 keeps 1222 of 2704 pixels and 98.9% of the positive flux
+2026-09-29 19:28:14,215 INFO   surface-brightness map: 1.798 Jy km/s in 1222 lit pixels at 0.05769"/pixel
+2026-09-29 19:28:14,216 INFO transformer auto -> dft: the exact DFT matrices take 1.3 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-09-29 19:28:16,496 INFO memory [setup]: process 2.09 GB RSS; 4.80 GB available (17.2 GB total)
+2026-09-29 19:28:16,499 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion']
+2026-09-29 19:28:16,501 WARNING bbarolo builds its cube from discrete clouds, so the likelihood is piecewise constant on small scales and finite-difference gradients vanish: lbfgs may stop early. Prefer a sampler (nautilus, dynesty, emcee) for this backend.
+2026-09-29 19:28:16,501 INFO running stage1 lbfgs (optimisation) ...
+2026-09-29 19:28:16,550 INFO memory [stage1]: process 2.09 GB RSS; 4.80 GB available (17.2 GB total)
+2026-09-29 19:28:16,551 INFO search: lbfgs {'eps': 1.0, 'gtol': 0.001}
+2026-09-29 19:28:44,238 INFO stage 1 finished after 462 likelihood evaluations
+2026-09-29 19:28:44,267 INFO memory [stage1]: process 1.72 GB RSS; 3.77 GB available (17.2 GB total)
+2026-09-29 19:28:44,365 INFO chi^2/N = 0.9960 (chi^2 = 59759.2, N = 60000)
+2026-09-29 19:28:44,365 INFO   centre_ra            =     0.090803   truth 0.05
+2026-09-29 19:28:44,365 INFO   centre_dec           =     -0.11894   truth -0.08
+2026-09-29 19:28:44,365 INFO   v_sys                =       13.434   truth 15
+2026-09-29 19:28:44,365 INFO   inclination          =       44.002   truth 55
+2026-09-29 19:28:44,365 INFO   phi                  =       39.964   truth 40
+2026-09-29 19:28:44,365 INFO   turnover_radius      =      0.12369   truth 0.15
+2026-09-29 19:28:44,365 INFO   maximum_velocity     =       274.31   truth 250
+2026-09-29 19:28:44,365 INFO   velocity_dispersion  =       34.497   truth 40
+2026-09-29 19:28:47,976 INFO wrote best_fit_parameters.json, channel_maps.png, dirty_data.fits, dirty_model.fits, dirty_residual.fits, input_parameters.json, model_cube.fits, moment_maps.png, pv_diagram.png, residual_snr.fits, samples.csv, summary.png
+2026-09-29 19:28:48,014 INFO memory [done]: process 1.85 GB RSS; 3.58 GB available (17.2 GB total)

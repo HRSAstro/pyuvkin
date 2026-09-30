@@ -1,0 +1,11 @@
+Total Free Parameters = 8
+Total Starting Points = 8
+
+centre_ra: Start[0.05444817673967882]
+centre_dec: Start[-0.08747651578166238]
+v_sys: Start[14.109056021093286]
+inclination: Start[45.522055325837286]
+phi: Start[40.27432141080474]
+turnover_radius: Start[0.1417113992562266]
+maximum_velocity: Start[274.8042917153649]
+velocity_dispersion: Start[39.499900262425534]

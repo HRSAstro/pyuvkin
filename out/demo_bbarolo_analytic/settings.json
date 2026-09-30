@@ -1,0 +1,96 @@
+{
+  "dataset": "out/demo_bbarolo_analytic/mock/dataset",
+  "out": "out/demo_bbarolo_analytic/fit",
+  "fov": 3.0,
+  "spectral": {
+    "reference_frequency_ghz": 230.0
+  },
+  "primary_beam": {
+    "enabled": false
+  },
+  "model": {
+    "backend": "bbarolo",
+    "rotation_curve": "arctan"
+  },
+  "priors": {
+    "centre_ra": {
+      "type": "Uniform",
+      "lower": -0.3,
+      "upper": 0.3
+    },
+    "centre_dec": {
+      "type": "Uniform",
+      "lower": -0.3,
+      "upper": 0.3
+    },
+    "v_sys": {
+      "type": "Uniform",
+      "lower": -60,
+      "upper": 60
+    },
+    "intensity": {
+      "type": "LogUniform",
+      "lower": 0.2,
+      "upper": 20
+    },
+    "scale_radius": {
+      "type": "Uniform",
+      "lower": 0.05,
+      "upper": 0.8
+    },
+    "inclination": {
+      "type": "Uniform",
+      "lower": 20,
+      "upper": 80
+    },
+    "phi": {
+      "type": "Uniform",
+      "lower": -90,
+      "upper": 170
+    },
+    "turnover_radius": {
+      "type": "Uniform",
+      "lower": 0.02,
+      "upper": 0.6
+    },
+    "maximum_velocity": {
+      "type": "Uniform",
+      "lower": 50,
+      "upper": 500
+    },
+    "velocity_dispersion": {
+      "type": "Uniform",
+      "lower": 5,
+      "upper": 120
+    }
+  },
+  "truth": {
+    "centre_ra": 0.05,
+    "centre_dec": -0.08,
+    "v_sys": 15.0,
+    "intensity": 2.0,
+    "scale_radius": 0.25,
+    "inclination": 55.0,
+    "phi": 40.0,
+    "turnover_radius": 0.15,
+    "maximum_velocity": 250.0,
+    "velocity_dispersion": 40.0,
+    "vmax_black_hole": 0.0
+  },
+  "search": {
+    "method": "lbfgs",
+    "start": {
+      "centre_ra": 0.05028813399226569,
+      "centre_dec": -0.0797315141962242,
+      "v_sys": 15.609421391722863,
+      "intensity": 2.027668856243363,
+      "scale_radius": 0.24040782789528073,
+      "inclination": 49.46361662228758,
+      "phi": 39.86668676069557,
+      "turnover_radius": 0.16016396457958815,
+      "maximum_velocity": 275.76535554995365,
+      "velocity_dispersion": 39.89310604741656
+    },
+    "restarts": 1
+  }
+}
