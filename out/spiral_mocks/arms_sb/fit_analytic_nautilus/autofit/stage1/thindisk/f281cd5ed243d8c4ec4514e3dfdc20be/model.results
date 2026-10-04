@@ -1,0 +1,51 @@
+Bayesian Evidence                                                               355932.76295022
+Maximum Log Likelihood                                                          355992.74350398
+
+model                                                                           DiscParameters (N=10)
+    cls                                                                         type (N=0)
+
+Maximum Log Likelihood Model:
+
+centre_ra                                                                       0.049
+centre_dec                                                                      -0.081
+v_sys                                                                           14.635
+intensity                                                                       3.253
+scale_radius                                                                    0.487
+inclination                                                                     64.499
+phi                                                                             37.459
+turnover_radius                                                                 0.223
+maximum_velocity                                                                231.237
+velocity_dispersion                                                             33.070
+
+
+Summary (3.0 sigma limits):
+
+centre_ra                                                                       0.05 (0.05, 0.05)
+centre_dec                                                                      -0.08 (-0.08, -0.08)
+v_sys                                                                           14.5921 (14.0538, 15.1299)
+intensity                                                                       3.2503 (3.2278, 3.2732)
+scale_radius                                                                    0.4875 (0.4835, 0.4916)
+inclination                                                                     64.5324 (64.2084, 64.8402)
+phi                                                                             37.4462 (37.2338, 37.6668)
+turnover_radius                                                                 0.2227 (0.2171, 0.2285)
+maximum_velocity                                                                231.2 (229.5, 233.0)
+velocity_dispersion                                                             33.0096 (32.6253, 33.4207)
+
+
+Summary (1.0 sigma limits):
+
+centre_ra                                                                       0.05 (0.05, 0.05)
+centre_dec                                                                      -0.08 (-0.08, -0.08)
+v_sys                                                                           14.5921 (14.4092, 14.7744)
+intensity                                                                       3.2503 (3.2423, 3.2581)
+scale_radius                                                                    0.4875 (0.4862, 0.4888)
+inclination                                                                     64.5324 (64.4245, 64.6369)
+phi                                                                             37.4462 (37.3722, 37.5189)
+turnover_radius                                                                 0.2227 (0.2209, 0.2246)
+maximum_velocity                                                                231.2 (230.6, 231.8)
+velocity_dispersion                                                             33.0096 (32.8768, 33.1453)
+
+instances
+
+vrad                                                                            0.0
+vmax_black_hole                                                                 0.0

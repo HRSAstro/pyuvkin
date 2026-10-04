@@ -1,0 +1,87 @@
+{
+  "dataset": "dataset",
+  "out": "fit_freeform_matern",
+  "fov": 3.0,
+  "spectral": {
+    "reference_frequency_ghz": 230.0
+  },
+  "primary_beam": {
+    "enabled": false
+  },
+  "model": {
+    "backend": "thindisk",
+    "rotation_curve": "arctan"
+  },
+  "priors": {
+    "centre_ra": {
+      "type": "Uniform",
+      "lower": -0.3,
+      "upper": 0.3
+    },
+    "centre_dec": {
+      "type": "Uniform",
+      "lower": -0.3,
+      "upper": 0.3
+    },
+    "v_sys": {
+      "type": "Uniform",
+      "lower": -60,
+      "upper": 60
+    },
+    "inclination": {
+      "type": "Uniform",
+      "lower": 20,
+      "upper": 80
+    },
+    "phi": {
+      "type": "Uniform",
+      "lower": -90,
+      "upper": 170
+    },
+    "turnover_radius": {
+      "type": "Uniform",
+      "lower": 0.02,
+      "upper": 0.6
+    },
+    "maximum_velocity": {
+      "type": "Uniform",
+      "lower": 50,
+      "upper": 500
+    },
+    "velocity_dispersion": {
+      "type": "Uniform",
+      "lower": 5,
+      "upper": 120
+    },
+    "vrad": {
+      "type": "Uniform",
+      "lower": -200.0,
+      "upper": 200.0
+    }
+  },
+  "truth": {
+    "centre_ra": 0.05,
+    "centre_dec": -0.08,
+    "v_sys": 15.0,
+    "intensity": 3.0,
+    "scale_radius": 0.511,
+    "inclination": 55.0,
+    "phi": 40.0,
+    "turnover_radius": 0.25,
+    "maximum_velocity": 250.0,
+    "velocity_dispersion": 35.0,
+    "vrad": -90.0,
+    "vmax_black_hole": 0.0
+  },
+  "search": {
+    "method": "lbfgs",
+    "start": "centre",
+    "restarts": 4
+  },
+  "surface_brightness": {
+    "type": "freeform",
+    "pyuvimage": {
+      "reg": "matern"
+    }
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "search": "nautilus",
+  "kind": "bayesian_sampling",
+  "free_parameters": [
+    "centre_ra",
+    "centre_dec",
+    "v_sys",
+    "inclination",
+    "phi",
+    "turnover_radius",
+    "maximum_velocity",
+    "velocity_dispersion",
+    "vrad"
+  ],
+  "units": {
+    "centre_ra": "arcsec",
+    "centre_dec": "arcsec",
+    "v_sys": "km/s",
+    "intensity": "Jy km/s",
+    "scale_radius": "arcsec",
+    "inclination": "deg",
+    "phi": "deg",
+    "turnover_radius": "arcsec",
+    "maximum_velocity": "km/s",
+    "velocity_dispersion": "km/s",
+    "vrad": "km/s",
+    "vmax_black_hole": "km/s"
+  },
+  "max_log_likelihood": {
+    "centre_ra": 0.04975245314226495,
+    "centre_dec": -0.07966162112969993,
+    "v_sys": 14.984614283239267,
+    "inclination": 55.44951182490235,
+    "phi": 39.131242516992984,
+    "turnover_radius": 0.23330783579880923,
+    "maximum_velocity": 246.1456968520565,
+    "velocity_dispersion": 35.42685794337116,
+    "vrad": -87.36679374160107
+  },
+  "fixed": {
+    "intensity": 2.9620137479329816,
+    "scale_radius": 0.3,
+    "vmax_black_hole": 0.0
+  },
+  "max_log_posterior": {
+    "centre_ra": 0.04975245314226495,
+    "centre_dec": -0.07966162112969993,
+    "v_sys": 14.984614283239267,
+    "inclination": 55.44951182490235,
+    "phi": 39.131242516992984,
+    "turnover_radius": 0.23330783579880923,
+    "maximum_velocity": 246.1456968520565,
+    "velocity_dispersion": 35.42685794337116,
+    "vrad": -87.36679374160107
+  },
+  "median_pdf": {
+    "centre_ra": 0.04939997667540737,
+    "centre_dec": -0.07958379573806297,
+    "v_sys": 15.01172421740996,
+    "inclination": 55.3470291520342,
+    "phi": 39.177449104380436,
+    "turnover_radius": 0.2344916076452915,
+    "maximum_velocity": 246.54199824177257,
+    "velocity_dispersion": 35.4439143705392,
+    "vrad": -87.59508501484963
+  },
+  "sigma_1": {
+    "centre_ra": [
+      0.048280889369379715,
+      0.05050733955009929
+    ],
+    "centre_dec": [
+      -0.08016555944536513,
+      -0.07899749954429673
+    ],
+    "v_sys": [
+      14.85349318371775,
+      15.164056751475306
+    ],
+    "inclination": [
+      55.08791161371271,
+      55.58273631951008
+    ],
+    "phi": [
+      38.960939665108114,
+      39.40174988992737
+    ],
+    "turnover_radius": [
+      0.23071433331154834,
+      0.23824231587785868
+    ],
+    "maximum_velocity": [
+      245.41938141106135,
+      247.68061424187016
+    ],
+    "velocity_dispersion": [
+      35.33610264521946,
+      35.5528745560444
+    ],
+    "vrad": [
+      -88.30656231390645,
+      -86.88722905311965
+    ]
+  },
+  "sigma_3": {
+    "centre_ra": [
+      0.04620529515527731,
+      0.05268665677712023
+    ],
+    "centre_dec": [
+      -0.08139064700514961,
+      -0.077746897817739
+    ],
+    "v_sys": [
+      14.556331615749802,
+      15.478854202732055
+    ],
+    "inclination": [
+      54.61186665517005,
+      56.08576607343637
+    ],
+    "phi": [
+      38.532734688714164,
+      39.811464995856376
+    ],
+    "turnover_radius": [
+      0.22379845450856134,
+      0.2452752639997785
+    ],
+    "maximum_velocity": [
+      243.55935708267515,
+      250.05699368008706
+    ],
+    "velocity_dispersion": [
+      35.133313327039744,
+      35.77555796548546
+    ],
+    "vrad": [
+      -89.69637637252147,
+      -85.52649381425768
+    ]
+  },
+  "errors_1sigma": {
+    "centre_ra": [
+      0.0011190873060276524,
+      0.0011073628746919237
+    ],
+    "centre_dec": [
+      0.0005817637073021603,
+      0.0005862961937662392
+    ],
+    "v_sys": [
+      0.1582310336922088,
+      0.15233253406534608
+    ],
+    "inclination": [
+      0.2591175383214903,
+      0.23570716747587994
+    ],
+    "phi": [
+      0.2165094392723219,
+      0.22430078554693722
+    ],
+    "turnover_radius": [
+      0.003777274333743169,
+      0.0037507082325671792
+    ],
+    "maximum_velocity": [
+      1.1226168307112232,
+      1.138616000097585
+    ],
+    "velocity_dispersion": [
+      0.10781172531973482,
+      0.10896018550520381
+    ],
+    "vrad": [
+      0.7114772990568241,
+      0.707855961729976
+    ]
+  },
+  "log_evidence": 383367.2471446034,
+  "n_samples": 21600,
+  "fit_quality": {
+    "log_likelihood": 383419.0103580646,
+    "chi_squared": 65116.20258543269,
+    "n_data": 64000,
+    "chi_squared_reduced": 1.0174406653973858,
+    "chi_squared_per_channel": [
+      4024.8097861800925,
+      3933.962485811065,
+      3945.567911528091,
+      4040.537799216764,
+      4138.013257211605,
+      4038.705080311509,
+      4034.515507243194,
+      4072.9777724459655,
+      4201.226002204182,
+      4191.075251772433,
+      4177.122269410472,
+      4203.320003926758,
+      4202.730456149135,
+      3969.816220932556,
+      3994.463571132521,
+      3947.3592099563434
+    ]
+  },
+  "truth_comparison": {
+    "centre_ra": {
+      "truth": 0.05,
+      "max_log_likelihood": 0.04975245314226495,
+      "offset": -0.0002475468577350509,
+      "median_offset": -0.0006000233245926356,
+      "median_offset_sigma": -0.5418488720416661
+    },
+    "centre_dec": {
+      "truth": -0.08,
+      "max_log_likelihood": -0.07966162112969993,
+      "offset": 0.0003383788703000684,
+      "median_offset": 0.00041620426193703097,
+      "median_offset_sigma": 0.7154180584194814
+    },
+    "v_sys": {
+      "truth": 15.0,
+      "max_log_likelihood": 14.984614283239267,
+      "offset": -0.015385716760732748,
+      "median_offset": 0.011724217409959437,
+      "median_offset_sigma": 0.07409556226982247
+    },
+    "inclination": {
+      "truth": 55.0,
+      "max_log_likelihood": 55.44951182490235,
+      "offset": 0.449511824902352,
+      "median_offset": 0.34702915203420304,
+      "median_offset_sigma": 1.3392731124345574
+    },
+    "phi": {
+      "truth": 40.0,
+      "max_log_likelihood": 39.131242516992984,
+      "offset": -0.8687574830070162,
+      "median_offset": -0.822550895619564,
+      "median_offset_sigma": -3.66717795309476
+    },
+    "turnover_radius": {
+      "truth": 0.25,
+      "max_log_likelihood": 0.23330783579880923,
+      "offset": -0.016692164201190768,
+      "median_offset": -0.015508392354708495,
+      "median_offset_sigma": -4.134790389732274
+    },
+    "maximum_velocity": {
+      "truth": 250.0,
+      "max_log_likelihood": 246.1456968520565,
+      "offset": -3.8543031479435115,
+      "median_offset": -3.458001758227425,
+      "median_offset_sigma": -3.0370219265591363
+    },
+    "velocity_dispersion": {
+      "truth": 35.0,
+      "max_log_likelihood": 35.42685794337116,
+      "offset": 0.4268579433711608,
+      "median_offset": 0.443914370539197,
+      "median_offset_sigma": 4.117496211313659
+    },
+    "vrad": {
+      "truth": -90.0,
+      "max_log_likelihood": -87.36679374160107,
+      "offset": 2.6332062583989284,
+      "median_offset": 2.40491498515037,
+      "median_offset_sigma": 3.3801710726940493
+    }
+  },
+  "truth_fit_quality": {
+    "log_likelihood": 383352.5472705318,
+    "chi_squared": 65249.128760498206,
+    "n_data": 64000,
+    "chi_squared_reduced": 1.0195176368827845,
+    "chi_squared_per_channel": [
+      4024.791364929548,
+      3933.9630107670864,
+      3946.664140131237,
+      4040.9273785646055,
+      4137.0560179323975,
+      4042.7422356658008,
+      4049.3131601992245,
+      4080.6289266037084,
+      4201.779842953712,
+      4216.463750885821,
+      4198.274368477241,
+      4217.629941113515,
+      4241.4582352711095,
+      3977.660774200637,
+      3992.202724016516,
+      3947.5728887860378
+    ]
+  },
+  "finished": "2026-10-04T14:16:00+0200",
+  "n_likelihood_evaluations": 21302,
+  "written": {
+    "input_parameters": "fit_freeform_nautilus/input_parameters.json",
+    "best_fit_parameters": "fit_freeform_nautilus/best_fit_parameters.json",
+    "samples": "fit_freeform_nautilus/samples.csv",
+    "model_cube.fits": "fit_freeform_nautilus/model_cube.fits",
+    "dirty_data.fits": "fit_freeform_nautilus/dirty_data.fits",
+    "dirty_model.fits": "fit_freeform_nautilus/dirty_model.fits",
+    "dirty_residual.fits": "fit_freeform_nautilus/dirty_residual.fits",
+    "residual_snr.fits": "fit_freeform_nautilus/residual_snr.fits",
+    "summary": "fit_freeform_nautilus/summary.png",
+    "moment_maps": "fit_freeform_nautilus/moment_maps.png",
+    "channel_maps": "fit_freeform_nautilus/channel_maps.png",
+    "pv_diagram": "fit_freeform_nautilus/pv_diagram.png",
+    "cornerplot": "fit_freeform_nautilus/cornerplot.png"
+  }
+}

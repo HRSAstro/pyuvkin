@@ -1,0 +1,40 @@
+2026-10-04 14:50:30,056 INFO pyuvkin 0.1.0 -> fit_analytic_nautilus
+2026-10-04 14:50:30,076 INFO memory [start]: process 245 MB RSS; 6.70 GB available (17.2 GB total)
+2026-10-04 14:50:30,091 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 14:50:30,091 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 14:50:30,160 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 14:50:31,909 INFO memory [setup]: process 968 MB RSS; 5.59 GB available (17.2 GB total)
+2026-10-04 14:50:31,910 WARNING no prior for 'vrad': fixed at its default 0.0
+2026-10-04 14:50:31,910 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 14:50:31,911 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'intensity', 'scale_radius', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion']
+2026-10-04 14:50:31,914 INFO running stage1 nautilus (sampling) ...
+2026-10-04 14:50:31,936 INFO memory [stage1]: process 966 MB RSS; 5.54 GB available (17.2 GB total)
+2026-10-04 14:50:31,936 INFO search: nautilus {'n_live': 200, 'number_of_cores': 4}
+2026-10-04 14:59:00,163 INFO pyuvkin 0.1.0 -> fit_analytic_nautilus
+2026-10-04 14:59:00,181 INFO memory [start]: process 248 MB RSS; 7.38 GB available (17.2 GB total)
+2026-10-04 14:59:00,188 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 14:59:00,189 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 14:59:00,258 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 14:59:01,889 INFO memory [setup]: process 1.87 GB RSS; 7.05 GB available (17.2 GB total)
+2026-10-04 14:59:01,890 WARNING no prior for 'vrad': fixed at its default 0.0
+2026-10-04 14:59:01,890 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 14:59:01,891 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'intensity', 'scale_radius', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion']
+2026-10-04 14:59:01,892 INFO running stage1 nautilus (sampling) ...
+2026-10-04 14:59:01,906 INFO memory [stage1]: process 1.87 GB RSS; 7.05 GB available (17.2 GB total)
+2026-10-04 14:59:01,906 INFO search: nautilus {'n_live': 200, 'number_of_cores': 1}
+2026-10-04 15:13:17,504 INFO stage 1 finished after 27002 likelihood evaluations
+2026-10-04 15:13:17,552 INFO memory [stage1]: process 2.33 GB RSS; 7.50 GB available (17.2 GB total)
+2026-10-04 15:13:18,097 INFO chi^2/N = 1.8745 (chi^2 = 119968.7, N = 64000)
+2026-10-04 15:13:18,097 INFO log evidence = 355932.76
+2026-10-04 15:13:18,097 INFO   centre_ra            =     0.048827   (median 0.048507 -0.000694 +0.000701)   truth 0.05
+2026-10-04 15:13:18,097 INFO   centre_dec           =    -0.080614   (median -0.080878 -0.000704 +0.000733)   truth -0.08
+2026-10-04 15:13:18,097 INFO   v_sys                =       14.635   (median 14.592 -0.183 +0.182)   truth 15
+2026-10-04 15:13:18,097 INFO   intensity            =        3.253   (median 3.2503 -0.00798 +0.00784)   truth 3
+2026-10-04 15:13:18,097 INFO   scale_radius         =      0.48729   (median 0.48753 -0.00134 +0.00129)   truth 0.511
+2026-10-04 15:13:18,097 INFO   inclination          =       64.499   (median 64.532 -0.108 +0.104)   truth 55
+2026-10-04 15:13:18,098 INFO   phi                  =       37.459   (median 37.446 -0.074 +0.0727)   truth 40
+2026-10-04 15:13:18,098 INFO   turnover_radius      =      0.22283   (median 0.22271 -0.00181 +0.00186)   truth 0.25
+2026-10-04 15:13:18,098 INFO   maximum_velocity     =       231.24   (median 231.17 -0.563 +0.588)   truth 250
+2026-10-04 15:13:18,098 INFO   velocity_dispersion  =        33.07   (median 33.01 -0.133 +0.136)   truth 35
+2026-10-04 15:13:21,902 INFO wrote best_fit_parameters.json, channel_maps.png, cornerplot.png, dirty_data.fits, dirty_model.fits, dirty_residual.fits, input_parameters.json, model_cube.fits, moment_maps.png, pv_diagram.png, residual_snr.fits, samples.csv, summary.png
+2026-10-04 15:13:21,942 INFO memory [done]: process 2.46 GB RSS; 7.37 GB available (17.2 GB total)

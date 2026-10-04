@@ -1,0 +1,9 @@
+Total Samples = 1
+Clipper = ClipperPriorBox
+Clipped Lane-Steps = not measured (bounds enforced by scipy)
+Time To Run = 0:09:02.885487
+Time Per Sample (seconds) = 542.8854868412018
+Log Likelihood Function Evaluation Time (seconds) = 0.032705068588256836
+Expected Time To Run (seconds) = 0:00:00.032705
+Speed Up Factor (e.g. due to parallelization) = 6.024290719262949e-05
+Visualization Time (seconds) = 1.4559428691864014

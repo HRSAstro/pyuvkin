@@ -1,0 +1,29 @@
+2026-10-04 15:13:31,120 INFO pyuvkin 0.1.0 -> fit_freeform_nautilus
+2026-10-04 15:13:31,143 INFO memory [start]: process 251 MB RSS; 8.52 GB available (17.2 GB total)
+2026-10-04 15:13:31,151 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 15:13:31,152 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 15:13:31,152 INFO freeform surface brightness: pyuvimage on the 16 channels collapsed in the uv-plane, fov 3" -> fit_freeform_nautilus/surface_brightness
+2026-10-04 15:13:33,556 INFO   S/N >= 0.50 keeps 1530 of 2704 pixels and 99.8% of the positive flux
+2026-10-04 15:13:33,557 INFO   surface-brightness map: 2.962 Jy km/s in 1530 lit pixels at 0.05769"/pixel
+2026-10-04 15:13:33,560 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 15:13:35,146 INFO memory [setup]: process 2.27 GB RSS; 7.28 GB available (17.2 GB total)
+2026-10-04 15:13:35,146 WARNING no prior for 'vrad': fixed at its default 0.0
+2026-10-04 15:13:35,146 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 15:13:35,147 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion']
+2026-10-04 15:13:35,149 INFO running stage1 nautilus (sampling) ...
+2026-10-04 15:13:35,170 INFO memory [stage1]: process 2.27 GB RSS; 7.28 GB available (17.2 GB total)
+2026-10-04 15:13:35,171 INFO search: nautilus {'n_live': 200, 'number_of_cores': 1}
+2026-10-04 15:22:59,726 INFO stage 1 finished after 17702 likelihood evaluations
+2026-10-04 15:22:59,758 INFO memory [stage1]: process 2.39 GB RSS; 6.90 GB available (17.2 GB total)
+2026-10-04 15:23:00,087 INFO chi^2/N = 1.0130 (chi^2 = 64833.7, N = 64000)
+2026-10-04 15:23:00,087 INFO log evidence = 383514.57
+2026-10-04 15:23:00,088 INFO   centre_ra            =      0.04952   (median 0.049648 -0.00125 +0.00126)   truth 0.05
+2026-10-04 15:23:00,088 INFO   centre_dec           =    -0.080499   (median -0.080734 -0.000967 +0.000912)   truth -0.08
+2026-10-04 15:23:00,088 INFO   v_sys                =       14.811   (median 14.782 -0.171 +0.163)   truth 15
+2026-10-04 15:23:00,088 INFO   inclination          =       54.214   (median 54.344 -0.3 +0.296)   truth 55
+2026-10-04 15:23:00,088 INFO   phi                  =       40.059   (median 40.044 -0.116 +0.115)   truth 40
+2026-10-04 15:23:00,088 INFO   turnover_radius      =      0.25197   (median 0.25085 -0.00256 +0.00259)   truth 0.25
+2026-10-04 15:23:00,088 INFO   maximum_velocity     =       251.72   (median 251.11 -1.14 +1.21)   truth 250
+2026-10-04 15:23:00,088 INFO   velocity_dispersion  =         35.3   (median 35.287 -0.0997 +0.0902)   truth 35
+2026-10-04 15:23:03,580 INFO wrote best_fit_parameters.json, channel_maps.png, cornerplot.png, dirty_data.fits, dirty_model.fits, dirty_residual.fits, input_parameters.json, model_cube.fits, moment_maps.png, pv_diagram.png, residual_snr.fits, samples.csv, summary.png
+2026-10-04 15:23:03,617 INFO memory [done]: process 2.49 GB RSS; 6.96 GB available (17.2 GB total)

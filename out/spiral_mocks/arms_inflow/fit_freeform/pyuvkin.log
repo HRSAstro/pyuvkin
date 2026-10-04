@@ -1,0 +1,49 @@
+2026-10-04 13:25:47,425 INFO pyuvkin 0.1.0 -> out/spiral_mocks/arms_inflow/fit_freeform
+2026-10-04 13:25:47,462 INFO memory [start]: process 1.78 GB RSS; 4.22 GB available (17.2 GB total)
+2026-10-04 13:25:47,479 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 13:25:47,479 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 13:25:47,479 INFO freeform surface brightness: pyuvimage on the 16 channels collapsed in the uv-plane, fov 3" -> out/spiral_mocks/arms_inflow/fit_freeform/surface_brightness
+2026-10-04 13:25:50,085 INFO   S/N >= 0.50 keeps 1530 of 2704 pixels and 99.8% of the positive flux
+2026-10-04 13:25:50,085 INFO   surface-brightness map: 2.962 Jy km/s in 1530 lit pixels at 0.05769"/pixel
+2026-10-04 13:25:50,085 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 13:25:52,245 INFO memory [setup]: process 2.19 GB RSS; 4.17 GB available (17.2 GB total)
+2026-10-04 13:25:52,246 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 13:25:52,248 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion', 'vrad']
+2026-10-04 13:25:52,249 INFO running stage1 lbfgs (optimisation, 4 starts) ...
+2026-10-04 13:25:52,294 INFO memory [stage1]: process 2.19 GB RSS; 4.18 GB available (17.2 GB total)
+2026-10-04 13:25:52,294 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:27:26,479 INFO stage1 start 1/4: max log likelihood 382596.87
+2026-10-04 13:27:26,479 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:29:03,434 INFO stage1 start 2/4: max log likelihood 382614.69
+2026-10-04 13:29:03,434 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:32:00,083 INFO stage1 start 3/4: max log likelihood 383418.82
+2026-10-04 13:32:00,083 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:33:29,445 INFO stage1 start 4/4: max log likelihood 382660.03
+2026-10-04 13:33:29,445 INFO stage 1 finished after 7222 likelihood evaluations
+2026-10-04 13:33:29,481 INFO memory [stage1]: process 1.73 GB RSS; 3.72 GB available (17.2 GB total)
+2026-10-04 13:33:29,570 INFO chi^2/N = 1.0174 (chi^2 = 65116.6, N = 64000)
+2026-10-04 13:33:29,571 INFO   centre_ra            =     0.049516   truth 0.05
+2026-10-04 13:33:29,571 INFO   centre_dec           =    -0.079514   truth -0.08
+2026-10-04 13:33:29,571 INFO   v_sys                =       15.047   truth 15
+2026-10-04 13:33:29,571 INFO   inclination          =       55.429   truth 55
+2026-10-04 13:33:29,571 INFO   phi                  =       39.072   truth 40
+2026-10-04 13:33:29,571 INFO   turnover_radius      =      0.23451   truth 0.25
+2026-10-04 13:33:29,571 INFO   maximum_velocity     =       246.66   truth 250
+2026-10-04 13:33:29,571 INFO   velocity_dispersion  =       35.373   truth 35
+2026-10-04 13:33:29,571 INFO   vrad                 =      -87.165   truth -90
+2026-10-04 13:33:33,288 INFO wrote best_fit_parameters.json, channel_maps.png, dirty_data.fits, dirty_model.fits, dirty_residual.fits, input_parameters.json, model_cube.fits, moment_maps.png, pv_diagram.png, residual_snr.fits, samples.csv, summary.png
+2026-10-04 13:33:33,329 INFO memory [done]: process 1.86 GB RSS; 3.63 GB available (17.2 GB total)
+2026-10-04 13:33:33,371 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 13:33:33,371 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 13:33:33,372 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 13:33:36,575 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 13:33:36,575 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 13:33:36,580 INFO   S/N >= 0.50 keeps 1530 of 2704 pixels and 99.8% of the positive flux
+2026-10-04 13:33:36,580 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 13:33:39,590 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 13:33:39,590 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 13:33:39,590 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 13:33:43,085 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 13:33:43,085 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 13:33:43,094 INFO   S/N >= 0.50 keeps 1530 of 2704 pixels and 99.8% of the positive flux
+2026-10-04 13:33:43,095 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)

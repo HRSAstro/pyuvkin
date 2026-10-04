@@ -1,0 +1,6 @@
+{
+    "total_iterations": 432,
+    "clipper": "ClipperPriorBox",
+    "time": "244.43905997276306",
+    "class_path": "autofit.non_linear.samples.samples.Samples"
+}

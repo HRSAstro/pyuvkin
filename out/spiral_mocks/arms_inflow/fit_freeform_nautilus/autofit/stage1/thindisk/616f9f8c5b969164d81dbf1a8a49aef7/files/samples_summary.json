@@ -1,0 +1,326 @@
+{
+    "type": "instance",
+    "class_path": "autofit.non_linear.samples.summary.SamplesSummary",
+    "arguments": {
+        "values_at_sigma_1": {
+            "type": "dict",
+            "arguments": {
+                "centre_ra": {
+                    "type": "tuple",
+                    "values": [
+                        0.048280889369379715,
+                        0.05050733955009929
+                    ]
+                },
+                "centre_dec": {
+                    "type": "tuple",
+                    "values": [
+                        -0.08016555944536513,
+                        -0.07899749954429673
+                    ]
+                },
+                "v_sys": {
+                    "type": "tuple",
+                    "values": [
+                        14.85349318371775,
+                        15.164056751475306
+                    ]
+                },
+                "inclination": {
+                    "type": "tuple",
+                    "values": [
+                        55.08791161371271,
+                        55.58273631951008
+                    ]
+                },
+                "phi": {
+                    "type": "tuple",
+                    "values": [
+                        38.960939665108114,
+                        39.40174988992737
+                    ]
+                },
+                "turnover_radius": {
+                    "type": "tuple",
+                    "values": [
+                        0.23071433331154834,
+                        0.23824231587785868
+                    ]
+                },
+                "maximum_velocity": {
+                    "type": "tuple",
+                    "values": [
+                        245.41938141106135,
+                        247.68061424187016
+                    ]
+                },
+                "velocity_dispersion": {
+                    "type": "tuple",
+                    "values": [
+                        35.33610264521946,
+                        35.5528745560444
+                    ]
+                },
+                "vrad": {
+                    "type": "tuple",
+                    "values": [
+                        -88.30656231390645,
+                        -86.88722905311965
+                    ]
+                }
+            }
+        },
+        "max_log_likelihood_sample": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.samples.sample.Sample",
+            "arguments": {
+                "log_likelihood": 383419.0103580646,
+                "log_prior": 0.0,
+                "weight": 7.462608943168223e-05,
+                "kwargs": {
+                    "type": "dict",
+                    "arguments": {
+                        "centre_ra": 0.04975245314226495,
+                        "centre_dec": -0.07966162112969993,
+                        "v_sys": 14.984614283239267,
+                        "inclination": 55.44951182490235,
+                        "phi": 39.131242516992984,
+                        "turnover_radius": 0.23330783579880923,
+                        "maximum_velocity": 246.1456968520565,
+                        "velocity_dispersion": 35.42685794337116,
+                        "vrad": -87.36679374160107
+                    }
+                }
+            }
+        },
+        "median_pdf_sample": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.samples.sample.Sample",
+            "arguments": {
+                "log_likelihood": 383419.0103580646,
+                "log_prior": 0.0,
+                "weight": 7.462608943168223e-05,
+                "kwargs": {
+                    "type": "dict",
+                    "arguments": {
+                        "centre_ra": 0.04939997667540737,
+                        "centre_dec": -0.07958379573806297,
+                        "v_sys": 15.01172421740996,
+                        "inclination": 55.3470291520342,
+                        "phi": 39.177449104380436,
+                        "turnover_radius": 0.2344916076452915,
+                        "maximum_velocity": 246.54199824177257,
+                        "velocity_dispersion": 35.4439143705392,
+                        "vrad": -87.59508501484963
+                    }
+                }
+            }
+        },
+        "values_at_sigma_3": {
+            "type": "dict",
+            "arguments": {
+                "centre_ra": {
+                    "type": "tuple",
+                    "values": [
+                        0.04620529515527731,
+                        0.05268665677712023
+                    ]
+                },
+                "centre_dec": {
+                    "type": "tuple",
+                    "values": [
+                        -0.08139064700514961,
+                        -0.077746897817739
+                    ]
+                },
+                "v_sys": {
+                    "type": "tuple",
+                    "values": [
+                        14.556331615749802,
+                        15.478854202732055
+                    ]
+                },
+                "inclination": {
+                    "type": "tuple",
+                    "values": [
+                        54.61186665517005,
+                        56.08576607343637
+                    ]
+                },
+                "phi": {
+                    "type": "tuple",
+                    "values": [
+                        38.532734688714164,
+                        39.811464995856376
+                    ]
+                },
+                "turnover_radius": {
+                    "type": "tuple",
+                    "values": [
+                        0.22379845450856134,
+                        0.2452752639997785
+                    ]
+                },
+                "maximum_velocity": {
+                    "type": "tuple",
+                    "values": [
+                        243.55935708267515,
+                        250.05699368008706
+                    ]
+                },
+                "velocity_dispersion": {
+                    "type": "tuple",
+                    "values": [
+                        35.133313327039744,
+                        35.77555796548546
+                    ]
+                },
+                "vrad": {
+                    "type": "tuple",
+                    "values": [
+                        -89.69637637252147,
+                        -85.52649381425768
+                    ]
+                }
+            }
+        },
+        "model": null,
+        "log_evidence": 383367.2471446034,
+        "errors_at_sigma_3": {
+            "type": "dict",
+            "arguments": {
+                "centre_ra": {
+                    "type": "tuple",
+                    "values": [
+                        0.003194681520130055,
+                        0.0032866801017128605
+                    ]
+                },
+                "centre_dec": {
+                    "type": "tuple",
+                    "values": [
+                        0.0018068512670866427,
+                        0.0018368979203239738
+                    ]
+                },
+                "v_sys": {
+                    "type": "tuple",
+                    "values": [
+                        0.45539260166015794,
+                        0.4671299853220958
+                    ]
+                },
+                "inclination": {
+                    "type": "tuple",
+                    "values": [
+                        0.7351624968641559,
+                        0.7387369214021646
+                    ]
+                },
+                "phi": {
+                    "type": "tuple",
+                    "values": [
+                        0.6447144156662716,
+                        0.63401589147594
+                    ]
+                },
+                "turnover_radius": {
+                    "type": "tuple",
+                    "values": [
+                        0.010693153136730166,
+                        0.010783656354486998
+                    ]
+                },
+                "maximum_velocity": {
+                    "type": "tuple",
+                    "values": [
+                        2.982641159097426,
+                        3.514995438314486
+                    ]
+                },
+                "velocity_dispersion": {
+                    "type": "tuple",
+                    "values": [
+                        0.31060104349945306,
+                        0.3316435949462644
+                    ]
+                },
+                "vrad": {
+                    "type": "tuple",
+                    "values": [
+                        2.1012913576718404,
+                        2.0685912005919533
+                    ]
+                }
+            }
+        },
+        "errors_at_sigma_1": {
+            "type": "dict",
+            "arguments": {
+                "centre_ra": {
+                    "type": "tuple",
+                    "values": [
+                        0.0011190873060276524,
+                        0.0011073628746919237
+                    ]
+                },
+                "centre_dec": {
+                    "type": "tuple",
+                    "values": [
+                        0.0005817637073021603,
+                        0.0005862961937662392
+                    ]
+                },
+                "v_sys": {
+                    "type": "tuple",
+                    "values": [
+                        0.1582310336922088,
+                        0.15233253406534608
+                    ]
+                },
+                "inclination": {
+                    "type": "tuple",
+                    "values": [
+                        0.2591175383214903,
+                        0.23570716747587994
+                    ]
+                },
+                "phi": {
+                    "type": "tuple",
+                    "values": [
+                        0.2165094392723219,
+                        0.22430078554693722
+                    ]
+                },
+                "turnover_radius": {
+                    "type": "tuple",
+                    "values": [
+                        0.003777274333743169,
+                        0.0037507082325671792
+                    ]
+                },
+                "maximum_velocity": {
+                    "type": "tuple",
+                    "values": [
+                        1.1226168307112232,
+                        1.138616000097585
+                    ]
+                },
+                "velocity_dispersion": {
+                    "type": "tuple",
+                    "values": [
+                        0.10781172531973482,
+                        0.10896018550520381
+                    ]
+                },
+                "vrad": {
+                    "type": "tuple",
+                    "values": [
+                        0.7114772990568241,
+                        0.707855961729976
+                    ]
+                }
+            }
+        }
+    }
+}

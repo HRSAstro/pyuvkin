@@ -1,0 +1,18 @@
+Total Free Parameters = 11
+
+model                                                                           DiscParameters (N=11)
+    cls                                                                         type (N=0)
+
+cls
+    parameter_names                                                             ('centre_ra', 'centre_dec', 'v_sys', 'intensity', 'scale_radius', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion', 'vrad', 'vmax_black_hole')
+centre_ra                                                                       UniformPrior [18], lower_limit = -0.3, upper_limit = 0.3
+centre_dec                                                                      UniformPrior [19], lower_limit = -0.3, upper_limit = 0.3
+v_sys                                                                           UniformPrior [20], lower_limit = -60.0, upper_limit = 60.0
+intensity - vmax_black_hole                                                     LogUniformPrior [21], lower_limit = 0.2, upper_limit = 20.0
+scale_radius                                                                    UniformPrior [22], lower_limit = 0.05, upper_limit = 0.8
+inclination                                                                     UniformPrior [23], lower_limit = 20.0, upper_limit = 80.0
+phi                                                                             UniformPrior [24], lower_limit = -90.0, upper_limit = 170.0
+turnover_radius                                                                 UniformPrior [25], lower_limit = 0.02, upper_limit = 0.6
+maximum_velocity                                                                UniformPrior [26], lower_limit = 50.0, upper_limit = 500.0
+velocity_dispersion                                                             UniformPrior [27], lower_limit = 5.0, upper_limit = 120.0
+vrad                                                                            UniformPrior [28], lower_limit = -200.0, upper_limit = 200.0

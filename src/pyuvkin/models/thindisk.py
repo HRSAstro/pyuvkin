@@ -1,11 +1,16 @@
 """An analytic, infinitely thin rotating disc -- deterministic and fast.
 
 Each sky pixel is deprojected onto the disc plane (`conventions.disc_coordinates`),
-given a line-of-sight velocity ``v_sys + v_c(R) sin i cos theta`` and a Gaussian
-line of width ``velocity_dispersion``, and the line is integrated exactly over
-each channel. No Monte Carlo, so the likelihood is smooth in every parameter,
-which optimisers appreciate; and no external dependency, so it is the reference
-against which the other backends' angle and centre conventions are pinned.
+given a line-of-sight velocity
+
+    v_los = v_sys + (v_c(R) cos theta + vrad sin theta) sin i
+
+(``theta`` from the receding major axis; ``vrad`` > 0 is outwards) and a
+Gaussian line of width ``velocity_dispersion``, and the line is integrated
+exactly over each channel. No Monte Carlo, so the likelihood is smooth in
+every parameter, which optimisers appreciate; and no external dependency, so
+it is the reference against which the other backends' angle and centre
+conventions are pinned.
 
 Freeform surface brightness is supported directly: the map is resampled onto
 the render grid and used as the per-pixel integrated flux.
@@ -39,7 +44,7 @@ class ThinDiskRenderer(Renderer):
     parameter_names = (
         "centre_ra", "centre_dec", "v_sys", "intensity", "scale_radius",
         "inclination", "phi", "turnover_radius", "maximum_velocity",
-        "velocity_dispersion", "vmax_black_hole",
+        "velocity_dispersion", "vrad", "vmax_black_hole",
     )
     supports_freeform = True
 
@@ -66,11 +71,13 @@ class ThinDiskRenderer(Renderer):
         return prof * (float(p.intensity) / s if s > 0 else 0.0)
 
     def render(self, p: DiscParameters) -> np.ndarray:
-        R, cos_t, _ = conventions.disc_coordinates(
+        R, cos_t, sin_t = conventions.disc_coordinates(
             self.yy, self.xx, p.centre_ra, p.centre_dec, p.phi, p.inclination,
         )
         v_c = rotation_curve_kms(R, p, self.rotation_curve)
-        v_los = float(p.v_sys) + v_c * np.sin(np.radians(float(p.inclination))) * cos_t
+        v_r = float(getattr(p, "vrad", 0.0) or 0.0)
+        sin_i = np.sin(np.radians(float(p.inclination)))
+        v_los = float(p.v_sys) + (v_c * cos_t + v_r * sin_t) * sin_i
         frac = channel_fractions(self.v_edges, v_los, p.velocity_dispersion)
         sb = self.integrated_map(p, R)
         return frac * (sb / self.dv)[None]

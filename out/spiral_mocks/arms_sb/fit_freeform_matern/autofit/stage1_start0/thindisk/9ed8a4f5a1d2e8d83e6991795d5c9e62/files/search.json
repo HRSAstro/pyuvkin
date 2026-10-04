@@ -1,0 +1,64 @@
+{
+    "type": "instance",
+    "class_path": "autofit.non_linear.search.mle.bfgs.search.LBFGS",
+    "arguments": {
+        "live_visual_update": false,
+        "disp": false,
+        "gtol": 1e-05,
+        "path_prefix": {
+            "type": "path",
+            "path": "."
+        },
+        "maxiter": 15000,
+        "unique_tag": "stage1_start0",
+        "paths": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.paths.directory.DirectoryPaths",
+            "arguments": {
+                "path_prefix": {
+                    "type": "path",
+                    "path": "."
+                },
+                "image_path_suffix": "",
+                "unique_tag": "stage1_start0",
+                "name": "thindisk",
+                "is_identifier_in_paths": true,
+                "identifier": "9ed8a4f5a1d2e8d83e6991795d5c9e62",
+                "parent": null
+            }
+        },
+        "name": "thindisk",
+        "maxfun": 15000,
+        "initializer": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.initializer.InitializerBall",
+            "arguments": {
+                "upper_limit": 0.5,
+                "lower_limit": 0.5
+            }
+        },
+        "maxls": 20,
+        "eps": 1e-06,
+        "iterations_per_full_update": 1e+99,
+        "maxcor": 10,
+        "iterations_per_quick_update": 1e+99,
+        "ftol": 2.220446049250313e-09,
+        "inplace": false,
+        "iprint": -1.0,
+        "number_of_cores": 1,
+        "silence": false,
+        "tol": null,
+        "clipper": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.clipper.ClipperPriorBox",
+            "arguments": {
+                "margin": 1e-06,
+                "strict_epsilon": 1e-12
+            }
+        },
+        "initial_values": {
+            "type": "dict",
+            "arguments": {}
+        }
+    }
+}

@@ -1,0 +1,2 @@
+          centre_ra,         centre_dec,             v_sys,      inclination,               phi,    turnover_radius, maximum_velocity,velocity_dispersion,    log_likelihood,log_prior,     log_posterior,weight
+0.04977404805623517,-0.0813407670538278,14.742316715395583,49.20067786829284,41.309265862688804,0.28388058601162763,278.2842878162603,  35.16909859454596,383384.34654722566,      0.0,383384.34654722566,   1.0

@@ -1,0 +1,297 @@
+{
+  "pyuvkin_version": "0.1.0",
+  "started": "2026-10-04T12:53:27+0200",
+  "settings": {
+    "dataset": "out/spiral_mocks/arms_inflow/dataset",
+    "out": "fit_analytic",
+    "spw": null,
+    "channels": null,
+    "velocity_window_kms": null,
+    "noise": "keep",
+    "spectral": {
+      "rest_frequency_ghz": null,
+      "redshift": null,
+      "reference_frequency_ghz": 230.0,
+      "frame": null
+    },
+    "fov": 3.0,
+    "pixel_scale": "auto",
+    "oversample": 2,
+    "n_pixels": null,
+    "render_oversample": 1,
+    "image_centre": [
+      0.0,
+      0.0
+    ],
+    "transformer": "auto",
+    "primary_beam": {
+      "enabled": false,
+      "dish_diameter_m": null,
+      "pb_factor": 1.13
+    },
+    "model": {
+      "backend": "thindisk",
+      "rotation_curve": "arctan",
+      "options": {}
+    },
+    "surface_brightness": {
+      "type": "analytic",
+      "map_fits": null,
+      "uncertainty_fits": null,
+      "map_units": "jy_per_pixel_per_channel",
+      "snr_threshold": 0.5,
+      "pyuvimage": {},
+      "morphology_samples": 0
+    },
+    "priors": {
+      "centre_ra": {
+        "type": "Uniform",
+        "lower": -0.3,
+        "upper": 0.3
+      },
+      "centre_dec": {
+        "type": "Uniform",
+        "lower": -0.3,
+        "upper": 0.3
+      },
+      "v_sys": {
+        "type": "Uniform",
+        "lower": -60,
+        "upper": 60
+      },
+      "intensity": {
+        "type": "LogUniform",
+        "lower": 0.2,
+        "upper": 20
+      },
+      "scale_radius": {
+        "type": "Uniform",
+        "lower": 0.05,
+        "upper": 0.8
+      },
+      "inclination": {
+        "type": "Uniform",
+        "lower": 20,
+        "upper": 80
+      },
+      "phi": {
+        "type": "Uniform",
+        "lower": -90,
+        "upper": 170
+      },
+      "turnover_radius": {
+        "type": "Uniform",
+        "lower": 0.02,
+        "upper": 0.6
+      },
+      "maximum_velocity": {
+        "type": "Uniform",
+        "lower": 50,
+        "upper": 500
+      },
+      "velocity_dispersion": {
+        "type": "Uniform",
+        "lower": 5,
+        "upper": 120
+      },
+      "vrad": {
+        "type": "Uniform",
+        "lower": -200.0,
+        "upper": 200.0
+      }
+    },
+    "truth": {
+      "centre_ra": 0.05,
+      "centre_dec": -0.08,
+      "v_sys": 15.0,
+      "intensity": 3.0,
+      "scale_radius": 0.511,
+      "inclination": 55.0,
+      "phi": 40.0,
+      "turnover_radius": 0.25,
+      "maximum_velocity": 250.0,
+      "velocity_dispersion": 35.0,
+      "vrad": -90.0,
+      "vmax_black_hole": 0.0
+    },
+    "search": {
+      "method": "lbfgs",
+      "start": "centre",
+      "restarts": 4
+    },
+    "write_cubes": true,
+    "write_plots": true,
+    "n_plot_channels": 12
+  },
+  "data": {
+    "path": "out/spiral_mocks/arms_inflow/dataset",
+    "n_visibilities": 2000,
+    "n_channels": 16,
+    "n_samples": 32000,
+    "n_data": 64000,
+    "central_frequency_hz": 230000000000.0,
+    "max_baseline_wavelengths": 1128348.3108039186,
+    "noise_estimate": "mock",
+    "median_sigma_jy": 0.0006,
+    "image_centre_offset_arcsec_yx": null,
+    "channel_selection": null
+  },
+  "spectral": {
+    "reference_frequency_hz": 230000000000.0,
+    "n_channels": 16,
+    "channel_width_kms": 40.000000000037915,
+    "velocity_range_kms": [
+      -300.0000000000184,
+      299.99999999998516
+    ],
+    "frequency_range_hz": [
+      229769840774.3133,
+      230230159225.68674
+    ]
+  },
+  "geometry": {
+    "fov_arcsec": 3.0,
+    "image_shape": [
+      52,
+      52
+    ],
+    "image_pixel_scale_arcsec": 0.057692307692307696,
+    "nyquist_pixel_scale_arcsec": 0.09140121196270418,
+    "render_oversample": 1,
+    "render_pixel_scale_arcsec": 0.057692307692307696
+  },
+  "transformer": {
+    "transformer": "dft",
+    "n_channels": 16,
+    "n_samples": 32000,
+    "n_data": 64000,
+    "primary_beam_applied": false
+  },
+  "primary_beam": {
+    "applied": false,
+    "enabled": false,
+    "dish_diameter_m": null,
+    "pb_factor": 1.13
+  },
+  "model": {
+    "backend": "thindisk",
+    "options": {
+      "rotation_curve": "arctan"
+    },
+    "surface_brightness": {
+      "type": "analytic",
+      "profile": "exponential"
+    },
+    "twostage": false,
+    "regtype": null,
+    "free_ring_params": null,
+    "adrift": false
+  },
+  "surface_brightness": {
+    "type": "analytic"
+  },
+  "priors": {
+    "centre_ra": {
+      "type": "Uniform",
+      "lower": -0.3,
+      "upper": 0.3,
+      "mean": 0.0
+    },
+    "centre_dec": {
+      "type": "Uniform",
+      "lower": -0.3,
+      "upper": 0.3,
+      "mean": 0.0
+    },
+    "v_sys": {
+      "type": "Uniform",
+      "lower": -60.0,
+      "upper": 60.0,
+      "mean": 0.0
+    },
+    "intensity": {
+      "type": "LogUniform",
+      "lower": 0.2,
+      "upper": 20.0,
+      "mean": 2.0000000000000004
+    },
+    "scale_radius": {
+      "type": "Uniform",
+      "lower": 0.05,
+      "upper": 0.8,
+      "mean": 0.425
+    },
+    "inclination": {
+      "type": "Uniform",
+      "lower": 20.0,
+      "upper": 80.0,
+      "mean": 50.0
+    },
+    "phi": {
+      "type": "Uniform",
+      "lower": -90.0,
+      "upper": 170.0,
+      "mean": 40.0
+    },
+    "turnover_radius": {
+      "type": "Uniform",
+      "lower": 0.02,
+      "upper": 0.6,
+      "mean": 0.31
+    },
+    "maximum_velocity": {
+      "type": "Uniform",
+      "lower": 50.0,
+      "upper": 500.0,
+      "mean": 275.0
+    },
+    "velocity_dispersion": {
+      "type": "Uniform",
+      "lower": 5.0,
+      "upper": 120.0,
+      "mean": 62.5
+    },
+    "vrad": {
+      "type": "Uniform",
+      "lower": -200.0,
+      "upper": 200.0,
+      "mean": 0.0
+    },
+    "vmax_black_hole": {
+      "type": "fixed",
+      "value": 0.0
+    }
+  },
+  "free_parameters": [
+    "centre_ra",
+    "centre_dec",
+    "v_sys",
+    "intensity",
+    "scale_radius",
+    "inclination",
+    "phi",
+    "turnover_radius",
+    "maximum_velocity",
+    "velocity_dispersion",
+    "vrad"
+  ],
+  "search": {
+    "method": "lbfgs",
+    "start": "centre",
+    "restarts": 4
+  },
+  "truth": {
+    "centre_ra": 0.05,
+    "centre_dec": -0.08,
+    "v_sys": 15.0,
+    "intensity": 3.0,
+    "scale_radius": 0.511,
+    "inclination": 55.0,
+    "phi": 40.0,
+    "turnover_radius": 0.25,
+    "maximum_velocity": 250.0,
+    "velocity_dispersion": 35.0,
+    "vrad": -90.0,
+    "vmax_black_hole": 0.0
+  }
+}

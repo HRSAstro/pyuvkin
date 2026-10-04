@@ -1,0 +1,61 @@
+{
+    "type": "instance",
+    "class_path": "autofit.non_linear.search.nest.nautilus.search.Nautilus",
+    "arguments": {
+        "n_update": null,
+        "n_networks": 4,
+        "n_like_max": Infinity,
+        "discard_exploration": false,
+        "iterations_per_quick_update": 1e+99,
+        "unique_tag": "stage1",
+        "force_x1_cpu": false,
+        "paths": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.paths.directory.DirectoryPaths",
+            "arguments": {
+                "unique_tag": "stage1",
+                "image_path_suffix": "",
+                "parent": null,
+                "path_prefix": {
+                    "type": "path",
+                    "path": "."
+                },
+                "name": "thindisk",
+                "identifier": "d2743e06e980ce89fd0ddb4d2a9ff99f",
+                "is_identifier_in_paths": true
+            }
+        },
+        "split_threshold": 100,
+        "initial_values": {
+            "type": "dict",
+            "arguments": {}
+        },
+        "path_prefix": {
+            "type": "path",
+            "path": "."
+        },
+        "verbose": true,
+        "vectorized": false,
+        "silence": false,
+        "f_live": 0.01,
+        "use_jax_vmap": true,
+        "iterations_per_full_update": 1e+99,
+        "n_points_min": null,
+        "seed": null,
+        "n_live": 200,
+        "number_of_cores": 1,
+        "n_batch": 100,
+        "n_like_new_bound": null,
+        "enlarge_per_dim": 1.1,
+        "n_shell": 1,
+        "initializer": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.initializer.InitializerPrior",
+            "arguments": {}
+        },
+        "name": "thindisk",
+        "inplace": false,
+        "live_visual_update": false,
+        "n_eff": 500
+    }
+}

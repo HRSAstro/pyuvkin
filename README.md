@@ -32,6 +32,7 @@ pyuvkin template settings.json     # every setting at its default
 pyuvkin import obs.ms data/ --spw 3          # pyuvimage's importer
 pyuvkin fit settings.json [--method lbfgs] [--backend kinms]
 pyuvkin demo out/ --method lbfgs             # mock + analytic and freeform fits
+pyuvkin mock-spiral out/                     # mocks with structured morphology
 ```
 
 The CLI is the `pyuvkin` console script (`pip install -e .`); there is no
@@ -39,6 +40,43 @@ The CLI is the `pyuvkin` console script (`pip install -e .`); there is no
 `out/mock/`, then fits it twice: `out/fit_analytic/` (exponential disc) and
 `out/fit_freeform/` (pyuvimage adaptive moment map). Cloud backends seed both
 from a quick thindisk L-BFGS under `out/fit_thindisk_seed/`.
+
+### When the morphology is not an exponential disc
+
+`pyuvkin mock-spiral` writes two mocks whose surface brightness is a compact
+Sérsic bulge plus a shallow extended Sérsic disc modulated by two trailing
+m=2 spiral arms — a shape the analytic surface brightness cannot make. Each
+gets a `dataset/`, a `truth.json`, the truth map as `truth_sb.fits` and
+`settings_analytic.json` / `settings_freeform.json`; `mocks_overview.png`
+compares them. Pass `--fit` to run all four L-BFGS fits and write
+`fit_parameters.png`, `fit_bias.png` and `fit_maps.png`; `--plot` rebuilds
+those figures from finished fits. They share a morphology, a uv coverage and
+a noise realisation, and differ only in the velocity field:
+
+- `arms_sb` — the arms are in the light only. The velocity field is exactly
+  the one `thindisk` fits, so any bias is the surface brightness's fault.
+- `arms_inflow` — same spiral morphology plus a constant axisymmetric radial
+  inflow (`vrad = −90` km/s, +outwards), as in the Price et al. (2021) toy
+  model on real IFU data. This is what `thindisk` can recover.
+
+The arms skew the apparent geometry: strip them out and the moment-0 map
+reads back the true inclination and position angle, put them in and it is
+pulled ~5° in inclination and ~9° in position angle, while the kinematics
+still have the truth in them exactly. L-BFGS with the `thindisk` backend:
+
+| | χ²/N | inclination | phi | v_max | v_max sin i | vrad |
+| --- | --- | --- | --- | --- | --- | --- |
+| truth (`arms_sb`) | | 55.0 | 40.0 | 250 | 204.8 | 0 |
+| truth (`arms_inflow`) | | 55.0 | 40.0 | 250 | 204.8 | −90 |
+| `arms_sb`, analytic | 1.875 | 64.4 | 37.5 | 231 | 208.7 | (fixed 0) |
+| `arms_sb`, freeform | 1.018 | 48.5 | 41.3 | 279 | 208.8 | (fixed 0) |
+| `arms_inflow`, analytic | 1.830 | 64.4 | 34.9 | 242 | 218.7 | −64.0 |
+| `arms_inflow`, freeform | 1.017 | 55.4 | 39.1 | 247 | 203.1 | −87.2 |
+
+Freeform recovers the constant inflow (`vrad → −87` vs truth `−90`) once the
+spiral morphology is taken from the map; analytic undershoots (`−64`) while
+biasing inclination. On `arms_sb`, freeform still beats analytic on φ /
+χ², though inclination can trade against `v_max`.
 
 or in Python
 
@@ -200,6 +238,6 @@ to a small mock takes ~3 minutes; L-BFGS about a minute.
 ## Tests
 
 ```bash
-pytest            # conventions, data, an L-BFGS and an emcee fit to mocks
+pytest            # conventions, data, the structured mocks, an L-BFGS and an emcee fit
 ```
 

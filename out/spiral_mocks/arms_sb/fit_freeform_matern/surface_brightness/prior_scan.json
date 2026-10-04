@@ -1,0 +1,188 @@
+{
+  "criterion": "discrepancy",
+  "regularization": "matern",
+  "free_parameters": [
+    "coefficient"
+  ],
+  "n_data": 4000,
+  "best": {
+    "coefficient": 161546565572.48907,
+    "scale": 0.23930100921830516,
+    "nu": 1.5
+  },
+  "n_evaluations": 23,
+  "trials": [
+    {
+      "coefficient": 1e-06,
+      "scale": 0.23930100921830516,
+      "log_evidence": 17021.16996040297,
+      "chi_squared": 3619.534818335698,
+      "chi_squared_per_datum": 0.9048837045839245,
+      "positive": true
+    },
+    {
+      "coefficient": 1000000.0,
+      "scale": 0.23930100921830516,
+      "log_evidence": 26432.23722626819,
+      "chi_squared": 3235.398899680513,
+      "chi_squared_per_datum": 0.8088497249201282
+    },
+    {
+      "coefficient": 1000000000.0,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28493.02690065032,
+      "chi_squared": 3296.438608879631,
+      "chi_squared_per_datum": 0.8241096522199077
+    },
+    {
+      "coefficient": 1000000000000.0,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28373.784708664665,
+      "chi_squared": 4529.205786074628,
+      "chi_squared_per_datum": 1.132301446518657
+    },
+    {
+      "coefficient": 1000.0,
+      "scale": 0.23930100921830516,
+      "log_evidence": 24182.376752647582,
+      "chi_squared": 3223.8426125546393,
+      "chi_squared_per_datum": 0.8059606531386598
+    },
+    {
+      "coefficient": 31622776.60168379,
+      "scale": 0.23930100921830516,
+      "log_evidence": 27516.80445856719,
+      "chi_squared": 3247.5625192523003,
+      "chi_squared_per_datum": 0.811890629813075
+    },
+    {
+      "coefficient": 5623413251.903491,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28858.605729425963,
+      "chi_squared": 3377.8402925273404,
+      "chi_squared_per_datum": 0.8444600731318351
+    },
+    {
+      "coefficient": 74989420933.24559,
+      "scale": 0.23930100921830516,
+      "log_evidence": 29079.06202556174,
+      "chi_squared": 3674.045416386798,
+      "chi_squared_per_datum": 0.9185113540966995
+    },
+    {
+      "coefficient": 273841963426.43613,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28922.044653169003,
+      "chi_squared": 3968.3591128158587,
+      "chi_squared_per_datum": 0.9920897782039647
+    },
+    {
+      "coefficient": 523299114681.4947,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28714.84692921338,
+      "chi_squared": 4196.566411779189,
+      "chi_squared_per_datum": 1.0491416029447973
+    },
+    {
+      "coefficient": 378551524925.863,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28832.47112379181,
+      "chi_squared": 4072.4740706527955,
+      "chi_squared_per_datum": 1.0181185176631988
+    },
+    {
+      "coefficient": 321967844425.1379,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28880.467834070187,
+      "chi_squared": 4018.2460128914827,
+      "chi_squared_per_datum": 1.0045615032228707
+    },
+    {
+      "coefficient": 296931484820.24786,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28902.024145976153,
+      "chi_squared": 3992.796447721965,
+      "chi_squared_per_datum": 0.9981991119304912
+    },
+    {
+      "coefficient": 309196361733.9809,
+      "scale": 0.23930100921830516,
+      "log_evidence": 28891.442180097976,
+      "chi_squared": 4005.3903311320028,
+      "chi_squared_per_datum": 1.0013475827830007
+    },
+    {
+      "coefficient": 550.4560587241367,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 23787.330957897335,
+      "chi_squared": 3619.5348183358146,
+      "chi_squared_per_datum": 0.9048837045839536
+    },
+    {
+      "coefficient": 12914689.952522412,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 27055.09156705273,
+      "chi_squared": 3619.6704221188265,
+      "chi_squared_per_datum": 0.9049176055297067
+    },
+    {
+      "coefficient": 1978174724.204946,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 28507.956993564956,
+      "chi_squared": 3641.012084411399,
+      "chi_squared_per_datum": 0.9102530211028498
+    },
+    {
+      "coefficient": 24482455876.33338,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 28944.906605380183,
+      "chi_squared": 3750.064802819179,
+      "chi_squared_per_datum": 0.9375162007047948
+    },
+    {
+      "coefficient": 86129147075.98024,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 28993.812284412958,
+      "chi_squared": 3893.16805972546,
+      "chi_squared_per_datum": 0.973292014931365
+    },
+    {
+      "coefficient": 161546565572.48907,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 28949.134143401097,
+      "chi_squared": 4000.769191815285,
+      "chi_squared_per_datum": 1.0001922979538214
+    },
+    {
+      "coefficient": 117957059584.46234,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 28978.70884657496,
+      "chi_squared": 3943.1209433231998,
+      "chi_squared_per_datum": 0.9857802358308
+    },
+    {
+      "coefficient": 138041869955.81937,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 28965.877301098102,
+      "chi_squared": 3970.8980561553763,
+      "chi_squared_per_datum": 0.9927245140388441
+    },
+    {
+      "coefficient": 149332481384.8842,
+      "scale": 0.23930100921830516,
+      "nu": 1.5,
+      "log_evidence": 28958.015415256195,
+      "chi_squared": 3985.555669435329,
+      "chi_squared_per_datum": 0.9963889173588323
+    }
+  ],
+  "chi_squared_floor": 3619.534818335698
+}

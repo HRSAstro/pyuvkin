@@ -14,6 +14,7 @@ One parameter set, one meaning, whatever renders the cube:
 | turnover_radius       | arcsec  | rotation-curve turnover radius                       |
 | maximum_velocity      | km/s    | asymptotic rotation velocity                         |
 | velocity_dispersion   | km/s    | intrinsic (isotropic) gas dispersion                 |
+| vrad                  | km/s    | in-plane radial velocity, +outwards (thindisk / BBarolo) |
 | vmax_black_hole       | km/s    | Keplerian term ``v_bh / sqrt(r)`` (KinMS only)       |
 
 The rotation curve is ``v(r) = (2 v_max / pi) arctan(r / r_t)`` (KinMS/BBarolo
@@ -45,6 +46,7 @@ PARAMETER_UNITS = {
     "turnover_radius": "arcsec",
     "maximum_velocity": "km/s",
     "velocity_dispersion": "km/s",
+    "vrad": "km/s",
     "vmax_black_hole": "km/s",
 }
 
@@ -93,6 +95,7 @@ DEFAULTS = {
     "turnover_radius": 0.1,
     "maximum_velocity": 200.0,
     "velocity_dispersion": 30.0,
+    "vrad": DEFAULT_VRAD_KMS,
     "vmax_black_hole": 0.0,
 }
 
@@ -250,6 +253,7 @@ class DiscParameters:
         turnover_radius: float = 0.1,
         maximum_velocity: float = 200.0,
         velocity_dispersion: float = 30.0,
+        vrad: float = 0.0,
         vmax_black_hole: float = 0.0,
     ):
         self.centre_ra = centre_ra
@@ -262,6 +266,7 @@ class DiscParameters:
         self.turnover_radius = turnover_radius
         self.maximum_velocity = maximum_velocity
         self.velocity_dispersion = velocity_dispersion
+        self.vrad = vrad
         self.vmax_black_hole = vmax_black_hole
 
     @classmethod

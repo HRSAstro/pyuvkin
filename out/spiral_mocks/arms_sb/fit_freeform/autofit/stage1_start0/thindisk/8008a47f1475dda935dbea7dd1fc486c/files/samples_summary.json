@@ -1,0 +1,35 @@
+{
+    "type": "instance",
+    "class_path": "autofit.non_linear.samples.summary.SamplesSummary",
+    "arguments": {
+        "values_at_sigma_1": null,
+        "model": null,
+        "errors_at_sigma_3": null,
+        "values_at_sigma_3": null,
+        "median_pdf_sample": null,
+        "errors_at_sigma_1": null,
+        "max_log_likelihood_sample": {
+            "type": "instance",
+            "class_path": "autofit.non_linear.samples.sample.Sample",
+            "arguments": {
+                "log_likelihood": 383396.16211366776,
+                "log_prior": 0.0,
+                "weight": 1.0,
+                "kwargs": {
+                    "type": "dict",
+                    "arguments": {
+                        "centre_ra": 0.0497274792627555,
+                        "centre_dec": -0.08097604552206362,
+                        "v_sys": 14.774050804898682,
+                        "inclination": 48.3178568484084,
+                        "phi": 41.31020805537204,
+                        "turnover_radius": 0.27947462341854595,
+                        "maximum_velocity": 279.75421161222977,
+                        "velocity_dispersion": 35.59402496019042
+                    }
+                }
+            }
+        },
+        "log_evidence": null
+    }
+}

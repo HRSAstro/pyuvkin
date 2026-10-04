@@ -1,0 +1,34 @@
+2026-10-04 12:53:25,105 INFO pyuvkin 0.1.0 -> out/spiral_mocks/arms_inflow/fit_analytic
+2026-10-04 12:53:25,149 INFO memory [start]: process 1.91 GB RSS; 4.51 GB available (17.2 GB total)
+2026-10-04 12:53:25,164 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 12:53:25,164 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 12:53:25,165 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 12:53:27,369 INFO memory [setup]: process 2.13 GB RSS; 4.36 GB available (17.2 GB total)
+2026-10-04 12:53:27,370 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 12:53:27,371 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'intensity', 'scale_radius', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion', 'vrad']
+2026-10-04 12:53:27,372 INFO running stage1 lbfgs (optimisation, 4 starts) ...
+2026-10-04 12:53:27,409 INFO memory [stage1]: process 2.13 GB RSS; 4.36 GB available (17.2 GB total)
+2026-10-04 12:53:27,409 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:02:33,380 INFO stage1 start 1/4: max log likelihood 357426.23
+2026-10-04 13:02:33,380 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:11:43,022 INFO stage1 start 2/4: max log likelihood 357431.11
+2026-10-04 13:11:43,023 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:19:22,481 INFO stage1 start 3/4: max log likelihood 357429.82
+2026-10-04 13:19:22,481 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:25:43,236 INFO stage1 start 4/4: max log likelihood 357431.50
+2026-10-04 13:25:43,237 INFO stage 1 finished after 31584 likelihood evaluations
+2026-10-04 13:25:43,277 INFO memory [stage1]: process 1.74 GB RSS; 4.11 GB available (17.2 GB total)
+2026-10-04 13:25:43,366 INFO chi^2/N = 1.8296 (chi^2 = 117091.2, N = 64000)
+2026-10-04 13:25:43,366 INFO   centre_ra            =     0.049516   truth 0.05
+2026-10-04 13:25:43,366 INFO   centre_dec           =     -0.08295   truth -0.08
+2026-10-04 13:25:43,366 INFO   v_sys                =       14.299   truth 15
+2026-10-04 13:25:43,366 INFO   intensity            =        3.274   truth 3
+2026-10-04 13:25:43,366 INFO   scale_radius         =      0.49307   truth 0.511
+2026-10-04 13:25:43,366 INFO   inclination          =       64.427   truth 55
+2026-10-04 13:25:43,366 INFO   phi                  =       34.949   truth 40
+2026-10-04 13:25:43,366 INFO   turnover_radius      =      0.21806   truth 0.25
+2026-10-04 13:25:43,366 INFO   maximum_velocity     =       242.46   truth 250
+2026-10-04 13:25:43,366 INFO   velocity_dispersion  =       33.787   truth 35
+2026-10-04 13:25:43,366 INFO   vrad                 =      -63.988   truth -90
+2026-10-04 13:25:47,366 INFO wrote best_fit_parameters.json, channel_maps.png, dirty_data.fits, dirty_model.fits, dirty_residual.fits, input_parameters.json, model_cube.fits, moment_maps.png, pv_diagram.png, residual_snr.fits, samples.csv, summary.png
+2026-10-04 13:25:47,403 INFO memory [done]: process 1.88 GB RSS; 4.17 GB available (17.2 GB total)

@@ -1,0 +1,57 @@
+2026-10-04 13:57:30,908 INFO pyuvkin 0.1.0 -> fit_freeform_nautilus
+2026-10-04 13:57:30,925 INFO memory [start]: process 248 MB RSS; 4.24 GB available (17.2 GB total)
+2026-10-04 13:57:30,937 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 13:57:30,937 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 13:57:30,937 INFO freeform surface brightness: pyuvimage on the 16 channels collapsed in the uv-plane, fov 3" -> fit_freeform_nautilus/surface_brightness
+2026-10-04 13:57:33,603 INFO   S/N >= 0.50 keeps 1530 of 2704 pixels and 99.8% of the positive flux
+2026-10-04 13:57:33,603 INFO   surface-brightness map: 2.962 Jy km/s in 1530 lit pixels at 0.05769"/pixel
+2026-10-04 13:57:33,608 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 13:57:35,382 INFO memory [setup]: process 1.14 GB RSS; 3.26 GB available (17.2 GB total)
+2026-10-04 13:57:35,383 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 13:57:35,385 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion', 'vrad']
+2026-10-04 13:57:35,387 INFO running stage1 nautilus (sampling) ...
+2026-10-04 13:57:35,412 INFO memory [stage1]: process 1.05 GB RSS; 3.20 GB available (17.2 GB total)
+2026-10-04 13:57:35,412 INFO search: nautilus {'n_live': 200, 'number_of_cores': 4}
+2026-10-04 13:59:29,800 INFO pyuvkin 0.1.0 -> fit_freeform_nautilus
+2026-10-04 13:59:29,815 INFO memory [start]: process 252 MB RSS; 9.90 GB available (17.2 GB total)
+2026-10-04 13:59:29,826 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 13:59:29,826 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 13:59:29,826 INFO freeform surface brightness: pyuvimage on the 16 channels collapsed in the uv-plane, fov 3" -> fit_freeform_nautilus/surface_brightness
+2026-10-04 13:59:32,431 INFO   S/N >= 0.50 keeps 1530 of 2704 pixels and 99.8% of the positive flux
+2026-10-04 13:59:32,432 INFO   surface-brightness map: 2.962 Jy km/s in 1530 lit pixels at 0.05769"/pixel
+2026-10-04 13:59:32,436 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 13:59:34,066 INFO memory [setup]: process 2.26 GB RSS; 8.94 GB available (17.2 GB total)
+2026-10-04 13:59:34,067 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 13:59:34,068 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion', 'vrad']
+2026-10-04 13:59:34,069 INFO running stage1 nautilus (sampling) ...
+2026-10-04 13:59:34,089 INFO memory [stage1]: process 2.26 GB RSS; 8.95 GB available (17.2 GB total)
+2026-10-04 13:59:34,090 INFO search: nautilus {'n_live': 200, 'number_of_cores': 4}
+2026-10-04 14:04:23,533 INFO pyuvkin 0.1.0 -> fit_freeform_nautilus
+2026-10-04 14:04:23,549 INFO memory [start]: process 248 MB RSS; 9.68 GB available (17.2 GB total)
+2026-10-04 14:04:23,561 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 14:04:23,561 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 14:04:23,561 INFO freeform surface brightness: pyuvimage on the 16 channels collapsed in the uv-plane, fov 3" -> fit_freeform_nautilus/surface_brightness
+2026-10-04 14:04:26,055 INFO   S/N >= 0.50 keeps 1530 of 2704 pixels and 99.8% of the positive flux
+2026-10-04 14:04:26,055 INFO   surface-brightness map: 2.962 Jy km/s in 1530 lit pixels at 0.05769"/pixel
+2026-10-04 14:04:26,059 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 14:04:27,638 INFO memory [setup]: process 2.26 GB RSS; 7.75 GB available (17.2 GB total)
+2026-10-04 14:04:27,638 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 14:04:27,639 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion', 'vrad']
+2026-10-04 14:04:27,640 INFO running stage1 nautilus (sampling) ...
+2026-10-04 14:04:27,655 INFO memory [stage1]: process 2.26 GB RSS; 7.75 GB available (17.2 GB total)
+2026-10-04 14:04:27,655 INFO search: nautilus {'n_live': 200, 'number_of_cores': 1}
+2026-10-04 14:16:00,490 INFO stage 1 finished after 21302 likelihood evaluations
+2026-10-04 14:16:00,530 INFO memory [stage1]: process 2.03 GB RSS; 5.51 GB available (17.2 GB total)
+2026-10-04 14:16:00,949 INFO chi^2/N = 1.0174 (chi^2 = 65116.2, N = 64000)
+2026-10-04 14:16:00,949 INFO log evidence = 383367.25
+2026-10-04 14:16:00,950 INFO   centre_ra            =     0.049752   (median 0.0494 -0.00112 +0.00111)   truth 0.05
+2026-10-04 14:16:00,950 INFO   centre_dec           =    -0.079662   (median -0.079584 -0.000582 +0.000586)   truth -0.08
+2026-10-04 14:16:00,950 INFO   v_sys                =       14.985   (median 15.012 -0.158 +0.152)   truth 15
+2026-10-04 14:16:00,950 INFO   inclination          =        55.45   (median 55.347 -0.259 +0.236)   truth 55
+2026-10-04 14:16:00,950 INFO   phi                  =       39.131   (median 39.177 -0.217 +0.224)   truth 40
+2026-10-04 14:16:00,950 INFO   turnover_radius      =      0.23331   (median 0.23449 -0.00378 +0.00375)   truth 0.25
+2026-10-04 14:16:00,950 INFO   maximum_velocity     =       246.15   (median 246.54 -1.12 +1.14)   truth 250
+2026-10-04 14:16:00,950 INFO   velocity_dispersion  =       35.427   (median 35.444 -0.108 +0.109)   truth 35
+2026-10-04 14:16:00,950 INFO   vrad                 =      -87.367   (median -87.595 -0.711 +0.708)   truth -90
+2026-10-04 14:16:04,812 INFO wrote best_fit_parameters.json, channel_maps.png, cornerplot.png, dirty_data.fits, dirty_model.fits, dirty_residual.fits, input_parameters.json, model_cube.fits, moment_maps.png, pv_diagram.png, residual_snr.fits, samples.csv, summary.png
+2026-10-04 14:16:04,846 INFO memory [done]: process 2.21 GB RSS; 5.64 GB available (17.2 GB total)

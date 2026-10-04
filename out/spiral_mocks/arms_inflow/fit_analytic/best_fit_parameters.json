@@ -1,0 +1,169 @@
+{
+  "search": "lbfgs",
+  "kind": "optimisation",
+  "free_parameters": [
+    "centre_ra",
+    "centre_dec",
+    "v_sys",
+    "intensity",
+    "scale_radius",
+    "inclination",
+    "phi",
+    "turnover_radius",
+    "maximum_velocity",
+    "velocity_dispersion",
+    "vrad"
+  ],
+  "units": {
+    "centre_ra": "arcsec",
+    "centre_dec": "arcsec",
+    "v_sys": "km/s",
+    "intensity": "Jy km/s",
+    "scale_radius": "arcsec",
+    "inclination": "deg",
+    "phi": "deg",
+    "turnover_radius": "arcsec",
+    "maximum_velocity": "km/s",
+    "velocity_dispersion": "km/s",
+    "vrad": "km/s",
+    "vmax_black_hole": "km/s"
+  },
+  "max_log_likelihood": {
+    "centre_ra": 0.04951646412269702,
+    "centre_dec": -0.08295006184066595,
+    "v_sys": 14.298893435679206,
+    "intensity": 3.273951513119879,
+    "scale_radius": 0.49307086756338553,
+    "inclination": 64.42692403891164,
+    "phi": 34.94870826505691,
+    "turnover_radius": 0.21806462325880033,
+    "maximum_velocity": 242.45762966691504,
+    "velocity_dispersion": 33.786798206957634,
+    "vrad": -63.9883002236776
+  },
+  "fixed": {
+    "vmax_black_hole": 0.0
+  },
+  "n_samples": 1,
+  "fit_quality": {
+    "log_likelihood": 357431.5030670141,
+    "chi_squared": 117091.21716753374,
+    "n_data": 64000,
+    "chi_squared_reduced": 1.8295502682427147,
+    "chi_squared_per_channel": [
+      4024.546368929255,
+      3943.9352837247707,
+      4620.027383644497,
+      9578.91637912775,
+      14601.768621134235,
+      9828.203023316466,
+      6211.315125971951,
+      5106.436245368737,
+      4973.65784902236,
+      5533.610068512078,
+      6724.095940077907,
+      11122.499344237192,
+      14307.779647817257,
+      8209.056170291042,
+      4347.4498699173055,
+      3957.9198464409365
+    ]
+  },
+  "truth_comparison": {
+    "centre_ra": {
+      "truth": 0.05,
+      "max_log_likelihood": 0.04951646412269702,
+      "offset": -0.0004835358773029805
+    },
+    "centre_dec": {
+      "truth": -0.08,
+      "max_log_likelihood": -0.08295006184066595,
+      "offset": -0.0029500618406659435
+    },
+    "v_sys": {
+      "truth": 15.0,
+      "max_log_likelihood": 14.298893435679206,
+      "offset": -0.7011065643207939
+    },
+    "intensity": {
+      "truth": 3.0,
+      "max_log_likelihood": 3.273951513119879,
+      "offset": 0.27395151311987886
+    },
+    "scale_radius": {
+      "truth": 0.511,
+      "max_log_likelihood": 0.49307086756338553,
+      "offset": -0.01792913243661448
+    },
+    "inclination": {
+      "truth": 55.0,
+      "max_log_likelihood": 64.42692403891164,
+      "offset": 9.426924038911636
+    },
+    "phi": {
+      "truth": 40.0,
+      "max_log_likelihood": 34.94870826505691,
+      "offset": -5.051291734943092
+    },
+    "turnover_radius": {
+      "truth": 0.25,
+      "max_log_likelihood": 0.21806462325880033,
+      "offset": -0.03193537674119967
+    },
+    "maximum_velocity": {
+      "truth": 250.0,
+      "max_log_likelihood": 242.45762966691504,
+      "offset": -7.5423703330849605
+    },
+    "velocity_dispersion": {
+      "truth": 35.0,
+      "max_log_likelihood": 33.786798206957634,
+      "offset": -1.2132017930423658
+    },
+    "vrad": {
+      "truth": -90.0,
+      "max_log_likelihood": -63.9883002236776,
+      "offset": 26.011699776322402
+    }
+  },
+  "truth_fit_quality": {
+    "log_likelihood": 348487.17817166884,
+    "chi_squared": 134979.86695822421,
+    "n_data": 64000,
+    "chi_squared_reduced": 2.1090604212222535,
+    "chi_squared_per_channel": [
+      4024.690324707623,
+      3943.3028429208925,
+      4715.271272905446,
+      12824.465838700786,
+      18006.172167434677,
+      10297.395381716806,
+      6958.099412708423,
+      6282.647156822046,
+      5720.772440187782,
+      6310.506803221964,
+      7383.276325791965,
+      11997.80225430358,
+      18299.84972902395,
+      9930.59872801968,
+      4330.2645664708725,
+      3954.7517132877333
+    ]
+  },
+  "finished": "2026-10-04T13:25:43+0200",
+  "n_likelihood_evaluations": 31584,
+  "written": {
+    "input_parameters": "out/spiral_mocks/arms_inflow/fit_analytic/input_parameters.json",
+    "best_fit_parameters": "out/spiral_mocks/arms_inflow/fit_analytic/best_fit_parameters.json",
+    "samples": "out/spiral_mocks/arms_inflow/fit_analytic/samples.csv",
+    "model_cube.fits": "out/spiral_mocks/arms_inflow/fit_analytic/model_cube.fits",
+    "dirty_data.fits": "out/spiral_mocks/arms_inflow/fit_analytic/dirty_data.fits",
+    "dirty_model.fits": "out/spiral_mocks/arms_inflow/fit_analytic/dirty_model.fits",
+    "dirty_residual.fits": "out/spiral_mocks/arms_inflow/fit_analytic/dirty_residual.fits",
+    "residual_snr.fits": "out/spiral_mocks/arms_inflow/fit_analytic/residual_snr.fits",
+    "summary": "out/spiral_mocks/arms_inflow/fit_analytic/summary.png",
+    "moment_maps": "out/spiral_mocks/arms_inflow/fit_analytic/moment_maps.png",
+    "channel_maps": "out/spiral_mocks/arms_inflow/fit_analytic/channel_maps.png",
+    "pv_diagram": "out/spiral_mocks/arms_inflow/fit_analytic/pv_diagram.png"
+  }
+}

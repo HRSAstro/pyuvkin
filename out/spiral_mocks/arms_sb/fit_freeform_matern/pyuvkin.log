@@ -1,0 +1,35 @@
+2026-10-04 13:39:44,232 INFO pyuvkin 0.1.0 -> out/spiral_mocks/arms_sb/fit_freeform_matern
+2026-10-04 13:39:44,266 INFO memory [start]: process 252 MB RSS; 4.52 GB available (17.2 GB total)
+2026-10-04 13:39:44,283 INFO dataset: 2000 visibilities x 16 channels, 229.77-230.23 GHz; 40.0 km/s channels, v = -300..+300 km/s about 230.000000 GHz
+2026-10-04 13:39:44,284 INFO image grid 52x52 at 0.05769"/pixel (Nyquist of the longest baseline 0.0914"), model rendered at 0.05769"/pixel
+2026-10-04 13:39:44,284 INFO freeform surface brightness: pyuvimage on the 16 channels collapsed in the uv-plane, fov 3" -> out/spiral_mocks/arms_sb/fit_freeform_matern/surface_brightness
+2026-10-04 13:39:47,285 INFO   S/N >= 0.50 keeps 972 of 2704 pixels and 98.8% of the positive flux
+2026-10-04 13:39:47,285 INFO   surface-brightness map: 2.982 Jy km/s in 972 lit pixels at 0.05769"/pixel
+2026-10-04 13:39:47,289 INFO transformer auto -> dft: the exact DFT matrices take 1.4 GB (limit 1.5 GB, PYUVKIN_DFT_MAX_BYTES)
+2026-10-04 13:39:49,492 INFO memory [setup]: process 1.16 GB RSS; 3.56 GB available (17.2 GB total)
+2026-10-04 13:39:49,493 WARNING no prior for 'vrad': fixed at its default 0.0
+2026-10-04 13:39:49,493 WARNING no prior for 'vmax_black_hole': fixed at its default 0.0
+2026-10-04 13:39:49,495 INFO free parameters: ['centre_ra', 'centre_dec', 'v_sys', 'inclination', 'phi', 'turnover_radius', 'maximum_velocity', 'velocity_dispersion']
+2026-10-04 13:39:49,496 INFO running stage1 lbfgs (optimisation, 4 starts) ...
+2026-10-04 13:39:49,529 INFO memory [stage1]: process 1.16 GB RSS; 3.46 GB available (17.2 GB total)
+2026-10-04 13:39:49,529 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:40:40,204 INFO stage1 start 1/4: max log likelihood 383368.71
+2026-10-04 13:40:40,204 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:41:22,626 INFO stage1 start 2/4: max log likelihood 383384.35
+2026-10-04 13:41:22,626 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:42:05,372 INFO stage1 start 3/4: max log likelihood 383370.62
+2026-10-04 13:42:05,372 INFO search: lbfgs {'eps': 1e-06}
+2026-10-04 13:43:02,368 INFO stage1 start 4/4: max log likelihood 383345.53
+2026-10-04 13:43:02,368 INFO stage 1 finished after 3684 likelihood evaluations
+2026-10-04 13:43:02,396 INFO memory [stage1]: process 1.79 GB RSS; 3.90 GB available (17.2 GB total)
+2026-10-04 13:43:02,460 INFO chi^2/N = 1.0185 (chi^2 = 65185.5, N = 64000)
+2026-10-04 13:43:02,460 INFO   centre_ra            =     0.049774   truth 0.05
+2026-10-04 13:43:02,460 INFO   centre_dec           =    -0.081341   truth -0.08
+2026-10-04 13:43:02,460 INFO   v_sys                =       14.742   truth 15
+2026-10-04 13:43:02,460 INFO   inclination          =       49.201   truth 55
+2026-10-04 13:43:02,461 INFO   phi                  =       41.309   truth 40
+2026-10-04 13:43:02,461 INFO   turnover_radius      =      0.28388   truth 0.25
+2026-10-04 13:43:02,461 INFO   maximum_velocity     =       278.28   truth 250
+2026-10-04 13:43:02,461 INFO   velocity_dispersion  =       35.169   truth 35
+2026-10-04 13:43:05,371 INFO wrote best_fit_parameters.json, channel_maps.png, dirty_data.fits, dirty_model.fits, dirty_residual.fits, input_parameters.json, model_cube.fits, moment_maps.png, pv_diagram.png, residual_snr.fits, samples.csv, summary.png
+2026-10-04 13:43:05,399 INFO memory [done]: process 1.96 GB RSS; 3.93 GB available (17.2 GB total)

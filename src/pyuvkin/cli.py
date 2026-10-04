@@ -4,6 +4,7 @@
     pyuvkin template settings.json          # every setting at its default
     pyuvkin import MS OUT [...]             # pyuvimage's importer, unchanged
     pyuvkin mock OUT [--backend kinms ...]  # a mock dataset + truth.json
+    pyuvkin mock-spiral [OUT]               # mocks with 2 Sersic + 2 spiral arms
     pyuvkin demo [OUT] [--method lbfgs]     # mock + analytic and freeform fits
 """
 
@@ -63,6 +64,33 @@ def main(argv: list[str] | None = None) -> int:
     p_mock.add_argument("--fov", type=float, default=3.0)
     p_mock.add_argument("--seed", type=int, default=0)
     p_mock.add_argument("--truth", help="JSON file or string of disc parameters to use")
+
+    p_spiral = sub.add_parser(
+        "mock-spiral",
+        help="write the structured mocks (2 Sersic + 2 spiral arms) used to compare "
+             "analytic and freeform surface brightness",
+    )
+    p_spiral.add_argument("out", nargs="?", default="pyuvkin_spiral_mocks")
+    p_spiral.add_argument("--method", default="lbfgs", help="search.method in the fit settings")
+    p_spiral.add_argument("--backend", default="thindisk", help="model.backend in the fit settings")
+    p_spiral.add_argument("--n-vis", type=int, default=2000)
+    p_spiral.add_argument("--n-chan", type=int, default=16)
+    p_spiral.add_argument("--dv", type=float, default=40.0, help="channel width, km/s")
+    p_spiral.add_argument("--sigma", type=float, default=6e-4, help="per-visibility noise, Jy")
+    p_spiral.add_argument("--fov", type=float, default=3.0)
+    p_spiral.add_argument("--seed", type=int, default=0)
+    p_spiral.add_argument(
+        "--fit", action="store_true",
+        help="also fit every mock with both surface-brightness models and plot the comparison",
+    )
+    p_spiral.add_argument(
+        "--plot", action="store_true",
+        help="rebuild the comparison plots from finished fits (no new fitting)",
+    )
+    p_spiral.add_argument(
+        "--refit", action="store_true",
+        help="with --fit, redo fits even if best_fit_parameters.json already exists",
+    )
 
     p_demo = sub.add_parser(
         "demo",
@@ -127,6 +155,48 @@ def main(argv: list[str] | None = None) -> int:
             dv_kms=args.dv, sigma_jy=args.sigma, fov=args.fov, seed=args.seed,
         )
         print(f"wrote {ds} and {tp}")
+        return 0
+
+    if args.command == "mock-spiral":
+        from .mock_structured import (
+            MOCKS, compare_structured_fits, fit_structured_mocks, write_structured_mocks,
+        )
+
+        out = Path(args.out)
+        mocks_ready = all((out / name / "dataset").exists() for name in MOCKS)
+
+        # --plot alone: rebuild figures from finished fits, leave the mocks alone
+        if args.plot and not args.fit:
+            for name, path in compare_structured_fits(out).items():
+                print(f"wrote {name} -> {path}")
+            return 0
+
+        # don't wipe finished fits by rewriting the mocks underneath them
+        if mocks_ready and args.fit and not args.refit:
+            print(f"keeping existing mocks under {out}")
+        else:
+            written = write_structured_mocks(
+                out, method=args.method, backend=args.backend, n_vis=args.n_vis,
+                n_chan=args.n_chan, dv_kms=args.dv, sigma_jy=args.sigma, fov=args.fov,
+                seed=args.seed,
+            )
+            overview = written.pop("overview", None)
+            for name, d in written.items():
+                print(f"wrote {name} -> {d}")
+            if overview:
+                print(f"wrote overview -> {overview}")
+
+        if args.fit:
+            for name, path in fit_structured_mocks(out, refit=args.refit).items():
+                print(f"wrote {name} -> {path}")
+            return 0
+
+        print("\nfit each with, for example:")
+        for name in MOCKS:
+            for sb in ("analytic", "freeform"):
+                print(f"  pyuvkin fit {out / name / f'settings_{sb}.json'}")
+        print(f"\nor: pyuvkin mock-spiral {out} --fit")
+        print(f"then: pyuvkin mock-spiral {out} --plot")
         return 0
 
     if args.command == "demo":
