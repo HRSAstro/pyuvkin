@@ -536,7 +536,11 @@ def _analysis_for_finished_fit(fit_dir: Path):
     surface, _ = prepare_surface_brightness(settings, uvd, spectral, fit_dir)
     transformer = CubeTransformer(uvd, geometry, settings["transformer"])
     model_cfg = settings["model"]
-    options = {"rotation_curve": model_cfg["rotation_curve"], **(model_cfg.get("options") or {})}
+    options = {
+        "rotation_curve": model_cfg["rotation_curve"],
+        "dispersion_curve": model_cfg.get("dispersion_curve", "constant"),
+        **(model_cfg.get("options") or {}),
+    }
     renderer = make_renderer(model_cfg["backend"], geometry, spectral, surface, options)
     return KinematicAnalysis(transformer, renderer), DiscParameters, surface
 

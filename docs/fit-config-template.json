@@ -29,6 +29,7 @@
   "model": {
     "backend": "thindisk",
     "rotation_curve": "arctan",
+    "dispersion_curve": "constant",
     "options": {}
   },
   "surface_brightness": {

@@ -45,6 +45,9 @@ DEFAULTS: dict[str, Any] = {
     "model": {
         "backend": "thindisk",     # thindisk | kinms | galpak | bbarolo
         "rotation_curve": "arctan",
+        # arctan | tanh | exponential | isothermal | rix (Rix+1997 multi-param)
+        # | rings (bbarolo only)
+        "dispersion_curve": "constant",  # constant | exponential | linear
         # backend options, e.g. kinms: n_samples, scale_height_arcsec, seed,
         # clouds_per_pixel; galpak: thickness_profile, dispersion_profile;
         # bbarolo: n_rings, rmax (arcsec outer radius; preferred),
@@ -141,9 +144,15 @@ def validate_settings(s: dict) -> None:
 
     if s["model"]["backend"] not in BACKENDS:
         raise ValueError(f"model.backend must be one of {BACKENDS}")
-    from .models.parameters import ROTATION_CURVES
+    from .models.parameters import (
+        DISPERSION_CURVES,
+        ROTATION_CURVES,
+        normalize_dispersion_curve,
+        normalize_rotation_curve,
+    )
 
-    rc = s["model"]["rotation_curve"]
+    rc = normalize_rotation_curve(s["model"]["rotation_curve"])
+    s["model"]["rotation_curve"] = rc
     if rc not in ROTATION_CURVES:
         raise ValueError(f"model.rotation_curve must be one of {ROTATION_CURVES}")
     if rc == "rings":
@@ -157,6 +166,26 @@ def validate_settings(s: dict) -> None:
             raise ValueError(
                 "rotation_curve 'rings' requires model.options.n_rings >= 1"
             )
+    dc = normalize_dispersion_curve(s["model"].get("dispersion_curve", "constant"))
+    s["model"]["dispersion_curve"] = dc
+    if dc not in DISPERSION_CURVES:
+        raise ValueError(f"model.dispersion_curve must be one of {DISPERSION_CURVES}")
+    if dc != "constant" and rc == "rings":
+        raise ValueError(
+            "model.dispersion_curve is for parametric analytic profiles; "
+            "with rotation_curve 'rings' set per-ring velocity_dispersion instead"
+        )
+    backend = s["model"]["backend"]
+    if backend == "galpak" and rc == "rix":
+        raise ValueError(
+            "rotation_curve 'rix' is not available for galpak; use thindisk, "
+            "kinms, or bbarolo"
+        )
+    if backend == "galpak" and dc != "constant":
+        raise ValueError(
+            "model.dispersion_curve is not available for galpak "
+            "(use options.dispersion_profile for GalPaK's thick/thin models)"
+        )
     from .search import method_of
 
     method_of(s["search"])

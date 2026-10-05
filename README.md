@@ -95,19 +95,48 @@ relative to the settings file.
 One parameter set, whatever renders it:
 
 
-| name                                           | unit         | meaning                                                                                              |
-| ---------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------- |
-| `centre_ra`, `centre_dec`                      | arcsec       | disc centre, dRA cos δ (+east) and dDec (+north) from the image centre                               |
-| `v_sys`                                        | km/s         | systemic velocity relative to the spectral reference (radio convention)                              |
-| `intensity`                                    | Jy km/s      | velocity-integrated line flux                                                                        |
-| `scale_radius`                                 | arcsec       | exponential scale length `h` of analytic SB (`I ∝ exp(−R/h)`); not the outer radius (`options.rmax`) |
-| `inclination`                                  | deg          | 0 face-on, 90 edge-on                                                                                |
-| `phi`                                          | deg          | position angle of the receding major axis, east of north                                             |
-| `turnover_radius`, `maximum_velocity`          | arcsec, km/s | parametric rotation curves (`model.rotation_curve`: arctan, tanh, exponential, isothermal)           |
-| `vrot_i`, per-ring `inclination_i`, `phi_i`, … | …            | free tilted rings when `backend: bbarolo` and `rotation_curve: rings` (see settings doc)             |
-| `velocity_dispersion`                          | km/s         | intrinsic isotropic dispersion                                                                       |
-| `vmax_black_hole`                              | km/s         | Keplerian `v_bh/√r` term (KinMS/thindisk)                                                            |
+| name                                             | unit         | meaning                                                                                              |
+| ------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------------------- |
+| `centre_ra`, `centre_dec`                        | arcsec       | disc centre, dRA cos δ (+east) and dDec (+north) from the image centre                               |
+| `v_sys`                                          | km/s         | systemic velocity relative to the spectral reference (radio convention)                              |
+| `intensity`                                      | Jy km/s      | velocity-integrated line flux                                                                        |
+| `scale_radius`                                   | arcsec       | exponential scale length `h` of analytic SB (`I ∝ exp(−R/h)`); not the outer radius (`options.rmax`) |
+| `inclination`                                    | deg          | 0 face-on, 90 edge-on                                                                                |
+| `phi`                                            | deg          | position angle of the receding major axis, east of north                                             |
+| `turnover_radius`, `maximum_velocity`            | arcsec, km/s | `r_t`, `V_t` for parametric rotation curves                                                          |
+| `rotation_beta`, `rotation_xi`                   | —, —         | Rix et al. (1997) β, ξ when `rotation_curve` is `rix`                                                |
+| `velocity_dispersion`, `dispersion_scale_radius` | km/s, arcsec | σ₀ and R_σ for the radial dispersion curve                                                           |
+| `vrot_i`, per-ring `inclination_i`, `phi_i`, …   | …            | free tilted rings when `backend: bbarolo` and `rotation_curve: rings` (see settings doc)             |
+| `vmax_black_hole`                                | km/s         | Keplerian `v_bh/√r` term (KinMS/thindisk)                                                            |
 
+
+### Rotation and dispersion curves
+
+Set under `model` (parametric backends: `thindisk`, `kinms`, `bbarolo`; not
+`galpak` or free rings):
+
+**`rotation_curve`** (default `arctan`):
+
+| name           | form |
+| -------------- | ---- |
+| `arctan`       | \(V = (2 V_t / \pi)\,\arctan(R / R_t)\) |
+| `tanh`         | \(V = V_t\,\tanh(R / R_t)\) |
+| `exponential`  | \(V = V_t\,(1 - e^{-R/R_t})\) |
+| `isothermal`   | isothermal sphere |
+| `rix` (`multi`) | Rix et al. (1997) / Rizzo+2021: \(V = V_t\,(1+R_t/R)^\beta\,/\,[1+(R_t/R)^\xi]^{1/\xi}\) |
+| `rings`        | free per-ring `vrot_i` (BBarolo only) |
+
+**`dispersion_curve`** (default `constant`):
+
+| name           | form |
+| -------------- | ---- |
+| `constant`     | \(\sigma = \sigma_0\) |
+| `exponential`  | \(\sigma = \sigma_0\,e^{-R/R_\sigma}\) (Rizzo+2021) |
+| `linear`       | \(\sigma = \sigma_0\,\max(1 - R/R_\sigma,\,0)\) |
+
+`V_t` / `R_t` are `maximum_velocity` / `turnover_radius`; β / ξ are
+`rotation_beta` / `rotation_xi`; σ₀ / R_σ are `velocity_dispersion` /
+`dispersion_scale_radius`. Full detail: `[docs/settings.md](docs/settings.md)`.
 
 The spectral reference (v = 0) is `rest_frequency_ghz / (1 + redshift)`, or
 `reference_frequency_ghz`, or — with neither — the mean frequency of the full

@@ -23,7 +23,9 @@
 
   "model": {
     "backend": "thindisk",
-    "rotation_curve": "arctan"
+    "rotation_curve": "arctan",
+    "dispersion_curve": "constant",
+    "_note": "rotation_curve: arctan|tanh|exponential|isothermal|rix (Rix+1997; free rotation_beta, rotation_xi). dispersion_curve: constant|exponential|linear (free dispersion_scale_radius when not constant)."
   },
   "surface_brightness": {"type": "analytic"},
 
@@ -39,7 +41,7 @@
     "scale_radius":        {"type": "Uniform",    "lower": 0.1,   "upper": 5.0},
     "turnover_radius":     {"type": "Uniform",    "lower": 0.05,   "upper": 5.0}
   },
-  "_priors_note": "parametric arctan disc; for free rings use backend bbarolo, rotation_curve rings, and vrot priors (see template_bbarolo.json)",
+  "_priors_note": "parametric disc; for rix add rotation_beta/rotation_xi priors; for exponential/linear dispersion add dispersion_scale_radius. For free rings use backend bbarolo, rotation_curve rings (see template_bbarolo.json)",
 
   "search": {
     "method": "lbfgs",

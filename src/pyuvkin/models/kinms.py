@@ -19,7 +19,14 @@ import numpy as np
 
 from .. import conventions
 from .base import Renderer
-from .parameters import DiscParameters, rotation_curve_kms
+from .parameters import (
+    DEFAULT_DISPERSION_CURVE,
+    DiscParameters,
+    dispersion_curve_kms,
+    normalize_dispersion_curve,
+    normalize_rotation_curve,
+    rotation_curve_kms,
+)
 from .sb import FreeformSB
 
 #: first KinMS release that runs unpatched on NumPy 2 / SciPy >= 1.14
@@ -90,7 +97,8 @@ class KinMSRenderer(Renderer):
     parameter_names = (
         "centre_ra", "centre_dec", "v_sys", "intensity", "scale_radius",
         "inclination", "phi", "turnover_radius", "maximum_velocity",
-        "velocity_dispersion", "vmax_black_hole",
+        "rotation_beta", "rotation_xi",
+        "velocity_dispersion", "dispersion_scale_radius", "vmax_black_hole",
     )
     supports_freeform = True
 
@@ -104,7 +112,12 @@ class KinMSRenderer(Renderer):
         ps = self.render_pixel_scale
         self.n_samples = int(self.options.get("n_samples", DEFAULT_N_SAMPLES))
         self.disk_thick = float(self.options.get("scale_height_arcsec", 0.0))
-        self.rotation_curve = self.options.get("rotation_curve", "arctan")
+        self.rotation_curve = normalize_rotation_curve(
+            self.options.get("rotation_curve", "arctan"),
+        )
+        self.dispersion_curve = normalize_dispersion_curve(
+            self.options.get("dispersion_curve", DEFAULT_DISPERSION_CURVE),
+        )
         self.kinms = KinMS(
             xs=nx * ps, ys=ny * ps, vs=self.n_chan * self.dv,
             cellSize=ps, dv=self.dv, beamSize=None,
@@ -164,11 +177,12 @@ class KinMSRenderer(Renderer):
         h = max(float(p.scale_radius), 1e-4)
         sbprof = np.exp(-self.radii / h)
         velprof = rotation_curve_kms(self.radii, p, self.rotation_curve)
+        sigprof = dispersion_curve_kms(self.radii, p, self.dispersion_curve)
         return self.kinms.model_cube(
             inc=float(p.inclination),
             posAng=kinms_pos_ang(p.phi),
             intFlux=float(p.intensity),
-            gasSigma=float(p.velocity_dispersion),
+            gasSigma=sigprof,
             diskThick=self.disk_thick,
             sbProf=sbprof, sbRad=self.radii, velProf=velprof, velRad=self.radii,
             inClouds=np.zeros((0, 3)), flux_clouds=None,
@@ -182,9 +196,10 @@ class KinMSRenderer(Renderer):
         )
         v_c = rotation_curve_kms(R, p, self.rotation_curve)
         v_los = v_c * np.sin(np.radians(float(p.inclination))) * cos_t
-        if float(p.velocity_dispersion) > 0:
+        sigma = dispersion_curve_kms(R, p, self.dispersion_curve)
+        if np.any(sigma > 0):
             rng = np.random.RandomState(int(self.options.get("vlos_seed", 7)))
-            v_los = v_los + rng.normal(0.0, float(p.velocity_dispersion), size=v_los.shape)
+            v_los = v_los + rng.normal(0.0, sigma, size=v_los.shape)
         # KinMS x is +east = -grid x; clouds relative to the disc centre,
         # phaseCent puts the centre back
         in_clouds = np.column_stack([-xs - p.centre_ra, ys - p.centre_dec, zs])
@@ -201,6 +216,8 @@ class KinMSRenderer(Renderer):
         d = super().as_dict()
         d["options"] = {
             **d["options"], "n_samples": self.n_samples,
-            "scale_height_arcsec": self.disk_thick, "rotation_curve": self.rotation_curve,
+            "scale_height_arcsec": self.disk_thick,
+            "rotation_curve": self.rotation_curve,
+            "dispersion_curve": self.dispersion_curve,
         }
         return d

@@ -34,7 +34,11 @@ import numpy as np
 from .. import conventions
 from .base import Renderer
 from .parameters import (
+    DEFAULT_DISPERSION_CURVE,
     DiscParameters,
+    dispersion_curve_kms,
+    normalize_dispersion_curve,
+    normalize_rotation_curve,
     DEFAULT_FREE_RING_PARAMS,
     parse_free_ring_params,
     ring_parameter_names,
@@ -267,7 +271,8 @@ class BBaroloRenderer(Renderer):
     parameter_names = (
         "centre_ra", "centre_dec", "v_sys", "intensity", "scale_radius",
         "inclination", "phi", "turnover_radius", "maximum_velocity",
-        "velocity_dispersion",
+        "rotation_beta", "rotation_xi",
+        "velocity_dispersion", "dispersion_scale_radius",
     )
     supports_freeform = True
 
@@ -279,7 +284,12 @@ class BBaroloRenderer(Renderer):
                 "(https://bbarolo.readthedocs.io/en/latest/pybb_install.html)"
             )
         super().__init__(geometry, spectral, sb, options)
-        self.rotation_curve = self.options.get("rotation_curve", "arctan")
+        self.rotation_curve = normalize_rotation_curve(
+            self.options.get("rotation_curve", "arctan"),
+        )
+        self.dispersion_curve = normalize_dispersion_curve(
+            self.options.get("dispersion_curve", DEFAULT_DISPERSION_CURVE),
+        )
         self.free_rings = self.rotation_curve == "rings"
         raw_nsl = self.options.get("n_scale_lengths", "auto")
         if raw_nsl is None or (
@@ -395,7 +405,7 @@ class BBaroloRenderer(Renderer):
             ypos = (ny - 1) / 2.0 + y_g / ps
             inc = float(p.inclination)
             phi = bbarolo_phi(p.phi)
-            vdisp = float(p.velocity_dispersion)
+            vdisp = dispersion_curve_kms(radii, p, self.dispersion_curve)
             vrad = float(getattr(p, "vrad", 0.0) or 0.0)
             vsys = float(p.v_sys)
         # GalMod prints HEADER WARNINGs for missing BMAJ/BMIN/BPA on our blank

@@ -165,7 +165,11 @@ def run(settings_or_path, **overrides) -> RunResult:
 
     transformer = CubeTransformer(uvd, geometry, settings["transformer"], primary_beam=pb)
     model_cfg = settings["model"]
-    options = {"rotation_curve": model_cfg["rotation_curve"], **(model_cfg["options"] or {})}
+    options = {
+        "rotation_curve": model_cfg["rotation_curve"],
+        "dispersion_curve": model_cfg.get("dispersion_curve", "constant"),
+        **(model_cfg["options"] or {}),
+    }
     renderer = make_renderer(model_cfg["backend"], geometry, spectral, sb, options)
     memory.log_memory("setup")
 
@@ -504,7 +508,11 @@ def morphology_scatter(settings, sb, transformer, geometry, spectral, model, bes
     names = results.free_names(model)
     start = {k: float(getattr(best, k)) for k in names}
     cfg = {"method": "lbfgs", "start": start, "maxiter": int(settings["search"].get("maxiter", 300))}
-    options = {"rotation_curve": model_cfg["rotation_curve"], **(model_cfg["options"] or {})}
+    options = {
+        "rotation_curve": model_cfg["rotation_curve"],
+        "dispersion_curve": model_cfg.get("dispersion_curve", "constant"),
+        **(model_cfg["options"] or {}),
+    }
     rows = []
     logger.info("morphology: re-fitting %d perturbed surface-brightness maps ...", n)
     parameter_cls = DiscParameters

@@ -230,6 +230,7 @@ def main(argv: list[str] | None = None) -> int:
                 "model": {
                     "backend": "thindisk",
                     "rotation_curve": base["model"].get("rotation_curve", "arctan"),
+                    "dispersion_curve": base["model"].get("dispersion_curve", "constant"),
                 },
                 "search": {"method": "lbfgs", "start": "centre", "restarts": 2, "maxiter": 200},
                 "write_cubes": False,
