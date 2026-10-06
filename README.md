@@ -110,29 +110,35 @@ One parameter set, whatever renders it:
 | `vmax_black_hole`                                | km/s         | Keplerian `v_bh/√r` term (KinMS/thindisk)                                                            |
 
 
+
+
 ### Rotation and dispersion curves
 
 Set under `model` (parametric backends: `thindisk`, `kinms`, `bbarolo`; not
 `galpak` or free rings):
 
-**`rotation_curve`** (default `arctan`):
+`rotation_curve` (default `arctan`):
 
-| name           | form |
-| -------------- | ---- |
-| `arctan`       | \(V = (2 V_t / \pi)\,\arctan(R / R_t)\) |
-| `tanh`         | \(V = V_t\,\tanh(R / R_t)\) |
-| `exponential`  | \(V = V_t\,(1 - e^{-R/R_t})\) |
-| `isothermal`   | isothermal sphere |
-| `rix` (`multi`) | Rix et al. (1997) / Rizzo+2021: \(V = V_t\,(1+R_t/R)^\beta\,/\,[1+(R_t/R)^\xi]^{1/\xi}\) |
-| `rings`        | free per-ring `vrot_i` (BBarolo only) |
 
-**`dispersion_curve`** (default `constant`):
+| name            | form                                                                             |
+| --------------- | -------------------------------------------------------------------------------- |
+| `arctan`        | $V = (2 V_t / \pi)\arctan(R / R_t)$                                              |
+| `tanh`          | $V = V_t\tanh(R / R_t)$                                                          |
+| `exponential`   | $V = V_t(1 - e^{-R/R_t})$                                                        |
+| `isothermal`    | isothermal sphere                                                                |
+| `rix` (`multi`) | Rix et al. (1997) / Rizzo+2021: $V = V_t(1+R_t/R)^\beta/[1+(R_t/R)^\xi]^{1/\xi}$ |
+| `rings`         | free per-ring `vrot_i` (BBarolo only)                                            |
 
-| name           | form |
-| -------------- | ---- |
-| `constant`     | \(\sigma = \sigma_0\) |
-| `exponential`  | \(\sigma = \sigma_0\,e^{-R/R_\sigma}\) (Rizzo+2021) |
-| `linear`       | \(\sigma = \sigma_0\,\max(1 - R/R_\sigma,\,0)\) |
+
+`dispersion_curve` (default `constant`):
+
+
+| name          | form                                            |
+| ------------- | ----------------------------------------------- |
+| `constant`    | $\sigma = \sigma_0$                             |
+| `exponential` | $\sigma = \sigma_0e^{-R/R_\sigma}$ (Rizzo+2021) |
+| `linear`      | $\sigma = \sigma_0\max(1 - R/R_\sigma,0)$       |
+
 
 `V_t` / `R_t` are `maximum_velocity` / `turnover_radius`; β / ξ are
 `rotation_beta` / `rotation_xi`; σ₀ / R_σ are `velocity_dispersion` /
