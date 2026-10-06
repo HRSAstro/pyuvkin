@@ -81,6 +81,10 @@ DEFAULTS: dict[str, Any] = {
     "write_cubes": True,
     "write_plots": True,
     "n_plot_channels": 12,
+    # bright mask for moment 1/2 and the aperture spectrum (dirty-model m0):
+    # keep pixels with m0 > max(snr * σ₀, peak_fraction * peak)
+    "moment_mask_snr": 5.0,
+    "moment_mask_peak_fraction": 0.1,
 }
 
 _REQUIRED = ("dataset", "fov")
@@ -194,6 +198,11 @@ def validate_settings(s: dict) -> None:
     ic = s["image_centre"]
     if not (isinstance(ic, (list, tuple)) and len(ic) == 2):
         raise ValueError("image_centre must be [dRA, dDec] in arcsec")
+    if float(s["moment_mask_snr"]) < 0:
+        raise ValueError("moment_mask_snr must be >= 0")
+    frac = float(s["moment_mask_peak_fraction"])
+    if not 0.0 <= frac <= 1.0:
+        raise ValueError("moment_mask_peak_fraction must be in [0, 1]")
 
 
 def resolve_path(settings: dict, value) -> Path:

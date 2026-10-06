@@ -471,9 +471,14 @@ def run(settings_or_path, **overrides) -> RunResult:
         written["summary"] = str(results.summary_figure(
             products, geometry, spectral, out, title=title,
             n_channels=int(settings["n_plot_channels"]),
+            moment_mask_snr=float(settings["moment_mask_snr"]),
+            moment_mask_peak_fraction=float(settings["moment_mask_peak_fraction"]),
         ))
         written["moment_maps"] = str(results.moment_maps_figure(
-            products, geometry, spectral, out, title=title))
+            products, geometry, spectral, out, title=title,
+            moment_mask_snr=float(settings["moment_mask_snr"]),
+            moment_mask_peak_fraction=float(settings["moment_mask_peak_fraction"]),
+        ))
         written["channel_maps"] = str(results.channel_maps_figure(
             products, geometry, spectral, out, title=title))
         written["pv_diagram"] = str(results.pv_diagram_figure(

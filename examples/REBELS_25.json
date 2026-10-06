@@ -3,18 +3,18 @@
       "REBELS-25 CII data"
     ],
   
-    "dataset": "../../pyuvimage/testing_data/Ruby_CO7-6/Ruby_CO7-6_48kms.npz",
-    "out": "ALMAQuest_out",
+    "dataset": "/Users/hstacey/Work/REBELS_25/Rebels25.concat.CII.npz",
+    "out": "/Users/hstacey/Work/REBELS_25/REBELS_25_thindisk",
     "noise": "difference",
   
     "spectral": {
       "rest_frequency_ghz": 1900.5369,
-      "redshift": 7.31,
+      "redshift": 7.30650,
       "frame": "TOPOCENT"
     },
-    "velocity_window_kms": null,
+    "velocity_window_kms": [-300,300],
   
-    "fov": 4.0,
+    "fov": 3.5,
     "pixel_scale": "auto",
     "oversample": 2,
     "image_centre": [0, 0],
@@ -24,21 +24,23 @@
     "model": {
       "backend": "thindisk",
       "rotation_curve": "arctan",
-      "options": {"n_rings": 10, "n_scale_lengths": 5, "scale_height_arcsec": 0.1}
+      "options": {"n_rings": 4, "rmax": 1.0, "scale_height_arcsec": 0.016}
     },
-    "surface_brightness": {"type": "freeform"},
+    "surface_brightness": {
+      "type": "freeform"
+    },
   
     "priors": {
       "centre_ra":           {"type": "Uniform",    "lower": -0.5,  "upper": 0.5},
       "centre_dec":          {"type": "Uniform",    "lower": -0.5,  "upper": 0.5},
-      "v_sys":               {"type": "Uniform",    "lower": -300,  "upper": 300},
-      "intensity":           {"type": "LogUniform", "lower": 1.0,   "upper": 200.0},
+      "v_sys":               {"type": "Constant",   "value": 0},
+      "intensity":           {"type": "Constant",   "value": 1.0},
       "scale_radius":        {"type": "Uniform",    "lower": 0.1,   "upper": 1.5},
       "inclination":         {"type": "Uniform",    "lower": 10,    "upper": 80},
-      "phi":                 {"type": "Uniform",    "lower": -90,   "upper": 170},
-      "turnover_radius":     {"type": "Uniform",    "lower": 0.05,  "upper": 1.0},
+      "phi":                 {"type": "Uniform",    "lower": -180,   "upper": -90},
+      "turnover_radius":     {"type": "Uniform",    "lower": 0.01,  "upper": 0.5},
       "maximum_velocity":    {"type": "Uniform",    "lower": 50,    "upper": 600},
-      "velocity_dispersion": {"type": "Uniform",    "lower": 10,    "upper": 250}
+      "velocity_dispersion": {"type": "Uniform",    "lower": 10,    "upper": 200}
     },
   
     "search": {
@@ -52,6 +54,7 @@
   
     "write_cubes": true,
     "write_plots": true,
-    "n_plot_channels": 8
+    "n_plot_channels": 8,
+    "moment_mask_snr": 3.0
   }
   

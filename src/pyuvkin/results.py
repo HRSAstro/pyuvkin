@@ -255,7 +255,8 @@ def moments(cube: np.ndarray, velocities: np.ndarray, dv: float, mask: np.ndarra
 
 
 def summary_figure(products: CubeProducts, geometry, spectral, out: Path, title: str = "",
-                   n_channels: int = 12) -> Path:
+                   n_channels: int = 12, moment_mask_snr: float = 5.0,
+                   moment_mask_peak_fraction: float = 0.1) -> Path:
     """Compact overview: moments + spectrum on top, channel strips below.
 
     Channel strips are dirty data / dirty model / residual÷σ (raw residual
@@ -272,7 +273,10 @@ def summary_figure(products: CubeProducts, geometry, spectral, out: Path, title:
     d0, d1 = moments(products.dirty_data, v, dv)
     m0, m1 = moments(products.dirty_model, v, dv)
     r0, _ = moments(products.dirty_residual, v, dv)
-    mask, rms0 = bright_mask(products, spectral)
+    mask, rms0 = bright_mask(
+        products, spectral,
+        snr=moment_mask_snr, peak_fraction=moment_mask_peak_fraction,
+    )
     d1 = np.where(mask, d1, np.nan)
     m1 = np.where(mask, m1, np.nan)
 
@@ -363,23 +367,49 @@ def _show(ax, img, extent, **kw):
     return ax.imshow(np.flipud(img), origin="lower", extent=extent, **kw)
 
 
-def bright_mask(products: CubeProducts, spectral) -> tuple[np.ndarray, float]:
-    """Where the model moment-0 is bright: above 5 sigma and 10% of its peak."""
+def bright_mask(
+    products: CubeProducts,
+    spectral,
+    *,
+    snr: float = 5.0,
+    peak_fraction: float = 0.1,
+) -> tuple[np.ndarray, float]:
+    """Where the model moment-0 is bright for moment 1/2 and the aperture spectrum.
+
+    Pixels with ``m0 > max(snr * σ₀, peak_fraction * peak(m0))``; if several
+    islands remain (dirty-beam sidelobes), keep the one holding the peak.
+    ``snr`` and ``peak_fraction`` are the plot settings ``moment_mask_snr`` /
+    ``moment_mask_peak_fraction``.
+    """
     from scipy.ndimage import label
+
+    snr = float(snr)
+    peak_fraction = float(peak_fraction)
+    if snr < 0:
+        raise ValueError(f"moment_mask_snr must be >= 0, got {snr}")
+    if not 0.0 <= peak_fraction <= 1.0:
+        raise ValueError(
+            f"moment_mask_peak_fraction must be in [0, 1], got {peak_fraction}"
+        )
 
     dv = spectral.dv_kms
     m0 = products.dirty_model.sum(axis=0) * dv
     rms0 = float(np.median(products.rms)) * dv * np.sqrt(len(spectral.velocities_kms))
-    mask = m0 > max(5 * rms0, 0.1 * float(np.nanmax(m0)))
+    peak = float(np.nanmax(m0)) if np.isfinite(m0).any() else 0.0
+    threshold = max(snr * rms0, peak_fraction * peak)
+    mask = m0 > threshold
     # dirty-beam sidelobes make islands; keep the one holding the peak
     labels, n = label(mask)
     if n > 1:
-        peak = np.unravel_index(np.nanargmax(np.where(mask, m0, -np.inf)), m0.shape)
-        mask = labels == labels[peak]
+        peak_pix = np.unravel_index(np.nanargmax(np.where(mask, m0, -np.inf)), m0.shape)
+        mask = labels == labels[peak_pix]
     return mask, rms0
 
 
-def moment_maps_figure(products: CubeProducts, geometry, spectral, out: Path, title: str = "") -> Path:
+def moment_maps_figure(
+    products: CubeProducts, geometry, spectral, out: Path, title: str = "",
+    moment_mask_snr: float = 5.0, moment_mask_peak_fraction: float = 0.1,
+) -> Path:
     """Moments 0, 1, 2 of the dirty data and dirty model, and the residual
     moment 0 with its per-pixel noise. Moments 1 and 2 are read inside the
     bright mask; the residual moment-0 colour scale is in sigma."""
@@ -391,7 +421,10 @@ def moment_maps_figure(products: CubeProducts, geometry, spectral, out: Path, ti
     v = spectral.velocities_kms
     dv = spectral.dv_kms
     extent = _sky_extent(geometry)
-    mask, rms0 = bright_mask(products, spectral)
+    mask, rms0 = bright_mask(
+        products, spectral,
+        snr=moment_mask_snr, peak_fraction=moment_mask_peak_fraction,
+    )
 
     def moments3(cube):
         m0 = cube.sum(axis=0) * dv

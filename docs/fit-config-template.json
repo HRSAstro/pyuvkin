@@ -49,5 +49,7 @@
   },
   "write_cubes": true,
   "write_plots": true,
-  "n_plot_channels": 12
+  "n_plot_channels": 12,
+  "moment_mask_snr": 5.0,
+  "moment_mask_peak_fraction": 0.1
 }

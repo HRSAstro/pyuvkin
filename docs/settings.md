@@ -300,8 +300,10 @@ the bound is doing the work.
 | key               | default | meaning                                                                                                                                                                                  |
 | ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `write_cubes`     | `true`  | FITS cubes: `dirty_data`, `dirty_model`, `dirty_residual`, `residual_snr` (natural weighting, Jy/beam) and `model_cube` (Jy/pixel), with the data WCS including the `image_centre` shift |
-| `write_plots`     | `true`  | `summary.png`, `moment_maps.png`, `channel_maps.png`, `pv_diagram.png`, and `cornerplot.png` for samplers                                                                                |
-| `n_plot_channels` | `12`    | channels shown in `channel_maps.png`                                                                                                                                                     |
+| `write_plots`                  | `true`  | `summary.png`, `moment_maps.png`, `channel_maps.png`, `pv_diagram.png`, and `cornerplot.png` for samplers |
+| `n_plot_channels`              | `12`    | channels shown in `channel_maps.png`                                                                       |
+| `moment_mask_snr`              | `5`     | bright-mask cut on dirty-model moment-0: keep pixels above this many σ₀ (and see peak fraction below)      |
+| `moment_mask_peak_fraction`    | `0.1`   | also require `m0 > fraction × peak(m0)`; the mask threshold is `max(snr×σ₀, fraction×peak)`. Moment 1/2 and the aperture spectrum use this mask. |
 
 
 Always written: `input_parameters.json` (the resolved settings, data
