@@ -12,13 +12,18 @@ channels and the channel width it is the moment-0 map in Jy km/s per pixel.
 can never reach 1, because the sky changes from channel to channel, and
 pyuvimage would over-regularise against that "noise".) The map --
 primary-beam corrected, since the kinematic forward model applies the beam
-itself, and masked below an S/N threshold using pyuvimage's uncertainty map
--- is the `FreeformSB` the backends consume. It is the same idea as LensKin's
-phase-1 "pixelized" reconstruction, with pyuvimage's Gaussian-process prior
-in place of a Delaunay mesh, and without a lens.
+itself, and masked below an S/N threshold using pyuvimage's per-pixel
+uncertainty map -- is the `FreeformSB` the backends consume. It is the same
+idea as LensKin's phase-1 "pixelized" reconstruction, with pyuvimage's
+Gaussian-process prior in place of a Delaunay mesh, and without a lens.
+(pyuvimage also writes ``snr.fits`` at the restoring beam's resolution; that
+is for quoting significance, not for this pixel mask.)
 
 A map produced elsewhere (a pyuvimage ``model_pbcor.fits`` from a separate
-run, say) can be supplied with ``map_fits`` instead.
+run, say) can be supplied with ``map_fits`` instead. Pass
+``surface_brightness.pyuvimage.uncertainty`` as ``"statistical"`` (the
+default here), ``"bayesian"``, or ``"none"``; the old boolean
+``uncertainty_map`` is still accepted by pyuvimage.
 """
 
 from __future__ import annotations
@@ -37,6 +42,38 @@ logger = logging.getLogger("pyuvkin")
 
 #: pyuvimage options a pyuvkin run fixes itself and will not pass through
 _RESERVED = {"dataset", "fov", "mode", "out", "image_centre", "write"}
+
+
+def _uncertainty_mode(parameters: dict | None) -> str | None:
+    """``fit_parameters.json``'s uncertainty block is ``{mode, terms}`` since
+    Oct 2026; older runs stored a boolean ``uncertainty_map`` instead."""
+    if not parameters:
+        return None
+    unc = parameters.get("uncertainty")
+    if isinstance(unc, dict) and unc.get("mode") is not None:
+        return str(unc["mode"])
+    if "uncertainty_map" in parameters:
+        return "statistical" if parameters["uncertainty_map"] else "none"
+    return None
+
+
+def _freeform_model_image(p, *, pb_correction: bool, uncertainty_mode: str | None):
+    """Sky the freeform map is built from.
+
+    With ``uncertainty="bayesian"`` the errors belong to ``model_bayesian``
+    (apparent Jy/pixel), so that is the map we carry -- primary-beam
+    corrected when the kinematic model applies the beam itself. Otherwise the
+    usual ``model_pbcor`` / ``model_image``.
+    """
+    if uncertainty_mode == "bayesian" and getattr(p, "model_bayesian", None) is not None:
+        model = np.asarray(p.model_bayesian, float)
+        if pb_correction and p.pb is not None:
+            from pyuvimage import primary_beam as pv_pb
+            model = pv_pb.pb_correct(model, p.pb)
+        return model
+    if pb_correction and p.model_pbcor is not None:
+        return p.model_pbcor
+    return p.model_image
 
 
 def integrated_from_channel_mean(map_mean_jy: np.ndarray, spectral: SpectralAxis) -> np.ndarray:
@@ -99,7 +136,11 @@ def reconstruct_surface_brightness(
 
     kwargs = {k: v for k, v in (pyuvimage_kwargs or {}).items() if k not in _RESERVED}
     kwargs.setdefault("streaming", False)
-    kwargs.setdefault("uncertainty_map", True)
+    # pyuvimage defaults uncertainty to "none" since Oct 2026; freeform needs
+    # the map for the S/N mask and morphology_samples. Prefer the new keyword;
+    # leave an explicit uncertainty / legacy uncertainty_map alone.
+    if "uncertainty" not in kwargs and "uncertainty_map" not in kwargs:
+        kwargs["uncertainty"] = "statistical"
     logger.info(
         "freeform surface brightness: pyuvimage on the %d channels collapsed in the "
         "uv-plane, fov %.3g\" -> %s", uvd.n_chan, fov, out,
@@ -110,7 +151,8 @@ def reconstruct_surface_brightness(
         **kwargs,
     )
     p = result.products[0]
-    model = p.model_pbcor if (pb_correction and p.model_pbcor is not None) else p.model_image
+    unc_mode = _uncertainty_mode(result.parameters)
+    model = _freeform_model_image(p, pb_correction=pb_correction, uncertainty_mode=unc_mode)
     model = np.nan_to_num(np.asarray(model, float), nan=0.0)
     pixel_scale = float(result.geometry.pixel_scale)
     integrated = integrated_from_channel_mean(model, spectral)
@@ -144,6 +186,7 @@ def reconstruct_surface_brightness(
         "n_channels": int(uvd.n_chan),
         "snr_threshold": snr_threshold,
         "masked_flux_fraction": masked_fraction,
+        "uncertainty_mode": unc_mode,
         "total_flux_jy_kms": sb.total_flux,
         "pyuvimage": result.parameters,
     }

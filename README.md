@@ -184,7 +184,10 @@ per pixel; `kinms` samples it as clouds; `bbarolo` builds ring kinematics
 then rescales each sky pixel to the map. The reconstruction is written to
 `out/surface_brightness/`; a ready map can be given with `map_fits` (plus
 `uncertainty_fits` for the S/N mask) — its orientation and centre are
-checked against the data. Because the map and the kinematics come from the
+checked against the data. Freeform asks pyuvimage for
+`uncertainty="statistical"` by default (override with
+`surface_brightness.pyuvimage.uncertainty`: `none` / `statistical` /
+`bayesian`). Because the map and the kinematics come from the
 same visibilities, the kinematic errors leave out the map's uncertainty;
 `morphology_samples: N` re-fits N maps perturbed by their per-pixel 1σ and
 reports the scatter (`morphology` in `best_fit_parameters.json`, with

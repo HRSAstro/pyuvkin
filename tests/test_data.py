@@ -114,3 +114,70 @@ def test_collapse_channels_pools_re_im_noise():
     assert np.allclose(collapsed.noise.real, collapsed.noise.imag)
     # total variance conserved: 0.5*(sig_re^2 + sig_im^2) after channel mean
     assert collapsed.meta.get("noise_pooled_re_im") is True
+
+
+def test_freeform_uncertainty_mode_helpers():
+    """pyuvimage's Oct 2026 uncertainty block is {mode, terms}; bayesian
+    maps must use model_bayesian so the errors match the sky."""
+    from types import SimpleNamespace
+
+    from pyuvkin.freeform import _freeform_model_image, _uncertainty_mode
+
+    assert _uncertainty_mode({"uncertainty": {"mode": "bayesian", "terms": {}}}) == "bayesian"
+    assert _uncertainty_mode({"uncertainty_map": True}) == "statistical"
+    assert _uncertainty_mode({"uncertainty_map": False}) == "none"
+    assert _uncertainty_mode({}) is None
+
+    image = np.ones((4, 4))
+    bayes = 2.0 * image
+    pbcor = 0.5 * image
+    p = SimpleNamespace(
+        model_image=image, model_pbcor=pbcor, model_bayesian=bayes, pb=None,
+    )
+    assert np.array_equal(
+        _freeform_model_image(p, pb_correction=True, uncertainty_mode="statistical"), pbcor)
+    assert np.array_equal(
+        _freeform_model_image(p, pb_correction=True, uncertainty_mode="bayesian"), bayes)
+
+
+def test_freeform_defaults_uncertainty_statistical(monkeypatch, tmp_path):
+    """pyuvimage's run default is uncertainty=none; freeform must request
+    statistical so the S/N mask and morphology_samples have a map."""
+    from types import SimpleNamespace
+
+    from pyuvkin import freeform
+    from pyuvkin.spectral import spectral_axis
+
+    captured = {}
+
+    def fake_run(*args, **kwargs):
+        captured.update(kwargs)
+        n = 8
+        image = np.ones((n, n))
+        p = SimpleNamespace(
+            model_image=image, model_pbcor=image, model_bayesian=None,
+            uncertainty=0.2 * image, pb=None,
+        )
+        return SimpleNamespace(
+            products=[p],
+            geometry=SimpleNamespace(pixel_scale=0.1),
+            parameters={"uncertainty": {"mode": "statistical", "terms": {}}},
+        )
+
+    monkeypatch.setattr("pyuvimage.run", fake_run)
+    uvd, _ = mock.simulate_disc(n_vis=40, n_chan=3, sigma_jy=1e-3, seed=3)
+    spectral = spectral_axis(uvd.frequencies, reference_frequency_ghz=230.0)
+    sb, rec = freeform.reconstruct_surface_brightness(
+        uvd, fov=2.0, spectral=spectral, out=tmp_path / "sb",
+    )
+    assert captured.get("uncertainty") == "statistical"
+    assert "uncertainty_map" not in captured
+    assert rec["uncertainty_mode"] == "statistical"
+    assert sb.uncertainty_jykms is not None
+    # an explicit override is left alone
+    captured.clear()
+    freeform.reconstruct_surface_brightness(
+        uvd, fov=2.0, spectral=spectral, out=tmp_path / "sb2",
+        pyuvimage_kwargs={"uncertainty": "none"},
+    )
+    assert captured.get("uncertainty") == "none"

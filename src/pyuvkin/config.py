@@ -63,8 +63,10 @@ DEFAULTS: dict[str, Any] = {
         "map_fits": None,          # a Jy/pixel/channel or Jy km/s map (pyuvimage model_pbcor.fits), or null
         "uncertainty_fits": None,  # its 1-sigma map (pyuvimage uncertainty.fits); needed for the S/N mask
         "map_units": "jy_per_pixel_per_channel",  # or jy_kms_per_pixel
-        "snr_threshold": 0.5,      # mask map pixels below this many sigma
-        "pyuvimage": {},           # extra keyword arguments to pyuvimage.run for the reconstruction
+        "snr_threshold": 0.5,      # mask map pixels below this many sigma (model / uncertainty)
+        # extras to pyuvimage.run; freeform defaults uncertainty="statistical"
+        # (none|statistical|bayesian). Legacy uncertainty_map bool still works.
+        "pyuvimage": {},
         # the map is built from the same data the kinematics are fitted to, so
         # the kinematic errors leave out the map's uncertainty; this many
         # perturbed maps are re-fitted (L-BFGS from the best fit) to measure it
